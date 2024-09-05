@@ -9,7 +9,7 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/XV6_os_shell/sh",
+			"program": "${workspaceFolder}/sh",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",

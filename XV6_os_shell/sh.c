@@ -425,6 +425,15 @@ parseblock(char **ps, char *es)
   return cmd;
 }
 
+// 1 function look for block to parse
+// 2 function creaate execcmd struct
+// 3 function look for redirections and add previous execcmd as subcmd if redirection is found
+// 4 while there is no end of block pipe expander or semicolon, look for next string to put to argv
+// 4a add string to argv
+// 4b check if there is too many args in argv
+// 4c look for redirections and add previous execcmd as subcmd if redirection is found
+// 5 function put 0 terminate argv and eargv tables
+// 6 return execcmd struct
 struct s_cmd*
 parseexec(char **ps, char *es)
 {
@@ -504,3 +513,5 @@ nulterminate(struct s_cmd *cmd)
   }
   return cmd;
 }
+
+//echo tav >> tak.txt | ls > ls
