@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/16 20:57:09 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/17 00:14:37 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,6 @@ void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);
 
 void				malloc_int_array(int **destination, int size);
+int					do_clear(void);
 
 #endif

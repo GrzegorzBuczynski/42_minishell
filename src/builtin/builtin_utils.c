@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:04:01 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/12 19:23:55 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:17:49 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	is_builtin_done(char **argv, t_data *minishell)
 		return (1);
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		ret = ft_echo(argv);
+	else if (ft_strcmp(argv[0], "clear") == 0)
+		return (do_clear());
 	else if (ft_strcmp(argv[0], "env") == 0)
 	{
 		if (!minishell->envlist)
