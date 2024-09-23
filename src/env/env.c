@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:13:40 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/22 16:37:29 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:31:29 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_env	*environment_new_node(char *key, char *value)
 	if (!new_node)
 		return (NULL);
 	new_node->key = ft_strdup(key);
-	new_node->value = ft_strdup(value);
+	if (!value)
+		new_node->value = NULL;
+	else
+		new_node->value = ft_strdup(value);
 	new_node->next = NULL;
 	return (new_node);
 }
