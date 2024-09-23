@@ -1,5 +1,6 @@
 # Ignore object files, shared libraries, and executables
 *.o
+*/*/*.o
 *.a
 *.so
 *.out
