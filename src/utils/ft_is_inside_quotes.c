@@ -1,8 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is_inside_quotes.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/23 17:08:32 by gbuczyns          #+#    #+#             */
+/*   Updated: 2024/09/23 17:09:24 by gbuczyns         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
+#include "../../inc/minishell.h"
 
 void	update_quote_flags(char c, bool *in_single_quote, bool *in_double_quote)
 {
@@ -56,22 +64,4 @@ bool	ft_is_inside_quotes(char *stack, char *needle, char token1, char token2)
 		p++;
 	}
 	return (false);
-}
-
-int	main(void)
-{
-	char	*stack;
-	char	*needle;
-
-	stack = "To jest 'przykład' testu \"needle\" w cudzysłowie.";
-	needle = stack + 27;
-	if (ft_is_inside_quotes(stack, needle, '\"', 0))
-	{
-		printf("'%s' znajduje się w obrębie cudzysłowów.\n", needle);
-	}
-	else
-	{
-		printf("'%s' nie znajduje się w obrębie cudzysłowów.\n", needle);
-	}
-	return (0);
 }

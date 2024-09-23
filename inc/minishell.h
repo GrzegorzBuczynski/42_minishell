@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/22 15:55:14 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:38:30 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@
 # define NO 0
 # define true 1
 # define false 0
+# define NOT_SET -1
 # ifndef EXIT_SUCCESS
-# define EXIT_SUCCESS 0
-# define EXIT_FAILURE -1
+#  define EXIT_SUCCESS 0
+#  define EXIT_FAILURE -1
 # endif
 
 # define FILE_CONTROL_G 0
@@ -119,7 +120,7 @@ void				runcmd(struct s_cmd *cmd, t_data *minishell);
 void				parsecmd(t_data *minishell);
 t_cmd				*parseline(char **ps, char *es);
 t_cmd				*parsepipe(char **ps, char *es);
-t_cmd				*parseexec(char **ps);
+t_cmd				*parseexec(char **ps, t_data *minishell);
 t_cmd				*parseblock(char **ps, char *es);
 t_cmd				*parseredirs(t_cmd *sub_cmd, char **ps, char *es);
 pid_t				fork1(void);
@@ -149,7 +150,7 @@ int					execute(t_data *minishell);
 void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);
 char				*ft_substring(const char *start, const char *end);
-void				get_argv(t_cmd *cmd, char **ps);
+char				**get_argv_for_single_cmd(char **ps);
 void				advance_to_end_of_token(char **s, char *es);
 
 void				init_cmd_args(t_cmd *cmd);
@@ -162,10 +163,16 @@ size_t				count_env_vars(t_env *node);
 t_env				**collect_env_vars(t_env *node, size_t count);
 void				sort_env_vars(t_env **env_array, size_t count);
 void				do_redirect(t_cmd *cmd, t_data *minishell);
-void				remove_quotes(char **str);
+void				remove_quotess(char **str);
 void				handle_quotes_dollar(char **argv, t_data *minishell);
 void				init_cmd_argv(t_cmd *cmd);
 void				append_to_argv(t_cmd *cmd, char *line);
 int					is_builtin(t_cmd *cmd);
+char				*copy_without_quotes(char *s);
+bool				ft_is_inside_quotes(char *stack, char *needle, char token1,
+						char token2);
+char				**get_argv_blocks_in_quote(char **ps);
+char				**remove_argv_quotes(char **argv);
+char				**expand_variables(char **argv, t_data *minishell);
 
 #endif

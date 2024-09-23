@@ -6,13 +6,13 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 17:44:36 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:36:56 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	remove_quotes(char **str)
+void	remove_quotess(char **str)
 {
 	int	len;
 
@@ -25,6 +25,92 @@ void	remove_quotes(char **str)
 		ft_memmove(*str, *str + 1, len - 2);
 		(*str)[len - 2] = '\0';
 	}
+}
+
+char	*remove_quotes(char *s)
+{
+	char	*result;
+	int		wait_for;
+	int		i;
+
+	result = (char *)ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!result)
+		return (NULL);
+	wait_for = NOT_SET;
+	i = 0;
+	while (*s)
+	{
+		if (*s == '\'' && wait_for == NOT_SET)
+			wait_for = '\'';
+		else if (*s == '\"' && wait_for == NOT_SET)
+			wait_for = '\"';
+		else if (*s == wait_for)
+			wait_for = NOT_SET;
+		else
+		{
+			result[i] = *s;
+			i++;
+		}
+		s++;
+	}
+	return (result);
+}
+
+char	**remove_argv_quotes(char **argv)
+{
+	int	i;
+
+	if (!argv)
+		return (NULL);
+	i = 0;
+	while (argv[i])
+	{
+		argv[i] = remove_quotes(argv[i]);
+		i++;
+	}
+	return (argv);
+}
+
+void	expand_variable(char **str, t_data *minishell)
+{
+	char	*value;
+	char	*key;
+	char	*tmp;
+	char	*tmp2;
+
+	if (!str || !*str)
+		return ;
+	key = ft_strchr(*str, '$');
+	if (!key)
+		return ;
+	tmp = ft_strdup(key + 1);
+	if (!tmp)
+		return ;
+	tmp2 = ft_strchr(tmp, ' ');
+	if (tmp2)
+		*tmp2 = '\0';
+	value = ft_get_envlst_val(tmp, minishell);
+	if (value)
+	{
+		*key = '\0';
+		*str = ft_strjoin(*str, value);
+	}
+	free(tmp);
+}
+
+char	**expand_variables(char **argv, t_data *minishell)
+{
+	int	i;
+
+	if (!argv)
+		return (NULL);
+	i = 0;
+	while (argv[i])
+	{
+		expand_variable(&argv[i], minishell);
+		i++;
+	}
+	return (argv);
 }
 
 void	ft_expand_dollar(char **argv, t_data *minishell)
@@ -64,12 +150,12 @@ void	handle_quotes_dollar(char **argv, t_data *minishell)
 	{
 		if (argv[i][0] == '"' && argv[i][ft_strlen(argv[i]) - 1] == '"')
 		{
-			remove_quotes(&argv[i]);
+			remove_quotess(&argv[i]);
 			ft_expand_dollar(&argv[i], minishell);
 		}
 		else if (argv[i][0] == '\'' && argv[i][ft_strlen(argv[i]) - 1] == '\'')
 		{
-			remove_quotes(&argv[i]);
+			remove_quotess(&argv[i]);
 		}
 		else if (ft_strchr(argv[i], '$'))
 		{
@@ -103,7 +189,7 @@ char	*ft_expand_dollarp(char *argv, t_data *minishell)
 void	handle_quotes_dollar(char *argv, t_data *minishell)
 {
 	int	i;
-	int j;
+	int	j;
 
 	if (!argv)
 		return ;
@@ -113,8 +199,6 @@ void	handle_quotes_dollar(char *argv, t_data *minishell)
 	{
 		if (argv[i] == '"')
 			while(argv[j + i] != '"')
-				
-
 	}
 }
 /
@@ -152,12 +236,12 @@ void	handle_quotes_dollar(char **argv, t_data *minishell)
 	{
 		if (argv[i][0] == '"' && argv[i][ft_strlen(argv[i]) - 1] == '"')
 		{
-			remove_quotes(&argv[i]);
+			remove_quotess(&argv[i]);
 			ft_expand_dollar(&argv[i], minishell);
 		}
 		else if (argv[i][0] == '\'' && argv[i][ft_strlen(argv[i]) - 1] == '\'')
 		{
-			remove_quotes(&argv[i]);
+			remove_quotess(&argv[i]);
 		}
 		else if (ft_strchr(argv[i], '$'))
 		{
@@ -191,13 +275,11 @@ int	is_in_quotes(char *str, char *c)
 
 int	is_in_quotes(char *str, char *c)
 {
-	char 	*current;
+	char	*current;
 	char	*token_ahead;
 	char	*token_behind;
 
 	current = c;
-	
-	
 }
 
 

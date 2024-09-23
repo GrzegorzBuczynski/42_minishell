@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/21 23:43:01 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:39:02 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,41 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 	return (ret);
 }
 
-void	get_argv(t_cmd *cmd, char **ps)
+/* 
+** Function returns array of strings 
+** stops converting when it reaches "<>|)&;"
+*/
+char	**get_argv_for_single_cmd(char **ps)
 {
+	char	*str;
+	char	**argv;
+
+	// char	*temp;
 	while (!peek(ps, "<>|)&;") && **ps != 0)
-		cmd->argv = ft_append_argv(cmd->argv, get_string(ps));
+	{
+		str = get_string(ps);
+		argv = ft_append_argv(argv, str);
+		free(str);
+	}
+	return (argv);
 }
+
+char	**get_argv_blocks_in_quote(char **ps)
+{
+	char	*str;
+	char	**argv;
+
+	// char	*temp;
+	while (*ps && **ps)
+	{
+		str = get_string(ps);
+		argv = ft_append_argv(argv, str);
+		free(str);
+	}
+	return (argv);
+}
+
+
+
+// expand_variable(&str, minishell);
+// temp = copy_without_quotes(str);
