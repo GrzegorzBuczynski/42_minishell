@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 19:06:23 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:08:25 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	**get_argv_blocks_in_quote(char **ps)
 	char	*str;
 	char	**argv;
 
-	// char	*temp;
 	while (*ps && **ps)
 	{
 		str = get_string(ps);
@@ -107,6 +106,3 @@ char	**get_argv_blocks_in_quote(char **ps)
 	}
 	return (argv);
 }
-
-// temp = copy_without_quotes(str);
-// expand_variable(&str, minishell);

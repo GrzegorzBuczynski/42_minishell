@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:31:05 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 18:58:40 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:17:35 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**ft_append_argv(char **argv, char *line)
 	i = 0;
 	while (argv && argv[i])
 		i++;
-	new_argv = malloc(sizeof(char *) * (i + 2));
+	new_argv = ft_calloc(sizeof(char *) * (i + 2), 1);
 	if (new_argv == NULL)
 		panic("malloc");
 	i = 0;

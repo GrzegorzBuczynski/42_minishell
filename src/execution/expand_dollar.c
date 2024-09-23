@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 18:36:56 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:23:55 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	**expand_variables(char **argv, t_data *minishell)
 	i = 0;
 	while (argv[i])
 	{
-		expand_variable(&argv[i], minishell);
+		ft_expand_dollar(&argv[i], minishell);
 		i++;
 	}
 	return (argv);
