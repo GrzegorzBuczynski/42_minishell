@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:14:02 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/11 18:36:18 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:51:57 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,10 @@ int	ft_pwd(char **argv)
 {
 	char	*path;
 
-	if (argv[1])
-	{
-		// syntax error
-		printf("too many arguments\n");
-		return (3);
-	}
+	(void)argv;
 	path = getcwd(NULL, 0);
 	if (!path)
 	{
-		// memory error
 		printf("CWD error\n");
 		return (2);
 	}

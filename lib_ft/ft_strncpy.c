@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:30:12 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/04 17:39:28 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:21:36 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* 
+** The strncpy() function copies at most num characters from the string src to
+** dest. If num is less than the length of src, a null character is not appended
+** to dest. If num is greater than the length of src, the destination is padded
+** with null characters.
+ */
 char	*ft_strncpy(char *dest, char *src, int num)
 {
 	int	i;

@@ -9,7 +9,7 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/XV6_os_shell/sh",
+			"program": "${workspaceFolder}/test",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
@@ -29,7 +29,6 @@
 				},
 				{"text": "-gdb-set follow-fork-mode child"}
 			]
-
 		}
 
 	]

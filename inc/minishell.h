@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/17 00:14:37 by ja               ###   ########.fr       */
+/*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/09/22 15:55:14 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 # include "../lib_ft/libft.h"
 # include "cmd.h"
-# include "parsing.h"
-# include "tokens.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -30,16 +29,13 @@
 # define PROMPT "MDshell > "
 # define YES 1
 # define NO 0
-# define FERROR 0
-# define FSUCCESS 1
-# define PERROR -1
-# define PSUCCESS 0
+# define true 1
+# define false 0
+# ifndef EXIT_SUCCESS
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE -1
+# endif
 
-// DRBUG_FIELD
-// DELETE ME befor release
-//========================================================================================//
-# include "../lib_ft_printf/ft_printf.h"
-//========================================================================================//
 # define FILE_CONTROL_G 0
 
 # ifndef FILE_CONTROL_G
@@ -67,13 +63,13 @@ typedef struct s_llist
 
 typedef struct s_data
 {
-	char			*input;
 	int				**pipe_argv;
-	char			*environment;
-	char			**envir;
-	int				*pids;
 	int				exit_status;
-	int				num_of_cmds;
+	int				number_of_commands;
+	char			*input;
+	char			*last_cmd;
+	char			**envir;
+	char			*environment;
 	t_env			*envlist;
 	t_cmd			**commands;
 	struct termios	terminal;
@@ -94,22 +90,13 @@ void				environment_free_list(t_env *head);
 
 void				minishell_free(t_data *minishell, int flag);
 
-t_tokens			*convert_input_to_tokens(t_data *minishell);
-
 // tester functions
 void				print_environment(t_env *node);
-
-// tokens
-void				init_tokens(t_data *minishell);
 
 //	new potential libft function
 char				*ft_strncpy(char *dest, char *src, int num);
 void				ft_skip_whitespace(char **s);
-bool				ft_is_whitespace(char c);
-
-t_command			*parse_tokens(t_tokens *tokens);
-
-int					check_syntax(t_tokens *tokens);
+char				*get_string(char **ps);
 int					md_cd(char *path, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
 						t_data *minishell);
@@ -117,51 +104,68 @@ char				*ft_get_envlst_val(char *key, t_data *minishell);
 void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
-int					peek(char **ps, char *es, char *toks);
+int					peek(char **ps, char *toks);
 void				panic(char *s);
 int					gettoken(char **ps, char *es, char **q, char **eq);
+char				*get_word(char **ps);
 
 // execution
-t_cmd				*ft_init_exec_cmd(void);
-t_cmd				*redircmd(t_cmd *subcmd, char *file, char *efile, int mode,
-						int fd);
+t_cmd				*ft_init_cmd(int type);
+t_cmd				*redircmd(t_cmd *subcmd, char *file, int mode, int fd);
 t_cmd				*pipecmd(t_cmd *left, t_cmd *right);
 t_cmd				*listcmd(t_cmd *left, t_cmd *right);
 t_cmd				*backcmd(t_cmd *subcmd);
-int					runcmd(struct s_cmd *cmd, t_data *minishell);
+void				runcmd(struct s_cmd *cmd, t_data *minishell);
 void				parsecmd(t_data *minishell);
 t_cmd				*parseline(char **ps, char *es);
 t_cmd				*parsepipe(char **ps, char *es);
-t_cmd				*parseexec(char **ps, char *es);
+t_cmd				*parseexec(char **ps);
 t_cmd				*parseblock(char **ps, char *es);
-t_cmd				*parseredirs(t_cmd *cmd, char **ps, char *es);
+t_cmd				*parseredirs(t_cmd *sub_cmd, char **ps, char *es);
 pid_t				fork1(void);
 void				do_exec(t_cmd *cmd, t_data *minishell);
 void				do_list(t_cmd *cmd, t_data *minishell);
 void				do_back(t_cmd *cmd, t_data *minishell);
-int					is_builtin_done(char **argv, t_data *minishell);
-void				ft_expand_dolar(char **argv, t_data *minishell);
+int					run_builtin_cmd(char **argv, t_data *minishell);
+void				ft_expand_dollar(char **argv, t_data *minishell);
 void				do_redirect(t_cmd *cmd, t_data *minishell);
 int					ft_echo(char **argv);
 char				**get_key_and_value(char *argument);
 int					ft_unset(char **argv, t_data *minishell);
 int					ft_export(char **argv, t_data *minishell);
 int					ft_pwd(char **argv);
-t_cmd				*here_doc_cmd(t_cmd *subcmd, char *q, char *eq);
-void				take_input(t_heredoc_cmd *cmd, char *token);
+t_cmd				*here_doc_cmd(t_cmd *cmd, char *token);
+void				do_here_doc(t_cmd *cmd, t_data *minishell);
+void				take_input(t_cmd *cmd, char *token);
 int					ft_exit(void);
 void				handle_exec_error(const char *msg, const char *arg);
 void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
-char				*find_executable_path(t_execcmd *ecmd, char **paths);
+char				*find_executable_path(t_cmd *ecmd, char **paths);
 char				**environment_list_to_array(t_env *environment);
 void				make_forks(t_data *minishell);
 void				create_pipes(t_data *minishell);
-void				run_with_pipes(t_data *minishell);
+int					execute(t_data *minishell);
 void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);
+char				*ft_substring(const char *start, const char *end);
+void				get_argv(t_cmd *cmd, char **ps);
+void				advance_to_end_of_token(char **s, char *es);
 
-void				malloc_int_array(int **destination, int size);
-int					do_clear(void);
+void				init_cmd_args(t_cmd *cmd);
+void				add_argument(t_cmd *cmd, char *q, char *eq, int *argc);
+void				print_environment_sorted(t_env *node);
+void				sort_env_vars(t_env **env_array, size_t count);
+
+void				print_sorted_env_vars(t_env **env_array, size_t count);
+size_t				count_env_vars(t_env *node);
+t_env				**collect_env_vars(t_env *node, size_t count);
+void				sort_env_vars(t_env **env_array, size_t count);
+void				do_redirect(t_cmd *cmd, t_data *minishell);
+void				remove_quotes(char **str);
+void				handle_quotes_dollar(char **argv, t_data *minishell);
+void				init_cmd_argv(t_cmd *cmd);
+void				append_to_argv(t_cmd *cmd, char *line);
+int					is_builtin(t_cmd *cmd);
 
 #endif

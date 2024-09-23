@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/11 19:27:15 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:30:35 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*construct_full_path(const char *base_path, const char *cmd)
 	base_len = ft_strlen(base_path);
 	cmd_len = ft_strlen(cmd);
 	total_len = base_len + 1 + cmd_len + 1;
-
 	full_path = malloc(total_len);
 	if (full_path == NULL)
 		return (NULL);
@@ -54,17 +53,15 @@ char	*construct_full_path(const char *base_path, const char *cmd)
 
 char	*find_binary_path(t_cmd *cmd, char **paths)
 {
-	int			i;
-	char		*full_path;
-	t_execcmd	*ecmd;
+	int		i;
+	char	*full_path;
 
-	ecmd = (t_execcmd *)cmd;
-	if (ecmd == NULL || ecmd->argv[0] == NULL || paths == NULL)
+	if (cmd == NULL || cmd->argv[0] == NULL || paths == NULL)
 		return (NULL);
 	i = 0;
 	while (paths[i] != NULL)
 	{
-		full_path = construct_full_path(paths[i], ecmd->argv[0]);
+		full_path = construct_full_path(paths[i], cmd->argv[0]);
 		if (full_path == NULL)
 			return (NULL);
 		if (access(full_path, X_OK) == 0)
@@ -95,7 +92,7 @@ char	**retrieve_paths(void)
 	return (paths);
 }
 
-char	*find_executable_path(t_execcmd *ecmd, char **paths)
+char	*find_executable_path(t_cmd *ecmd, char **paths)
 {
 	char	*binary_path;
 
