@@ -38,17 +38,13 @@ bash output = (exit_code ->0 user ->gbuczyns home -> /nfs/homes/gbuczyns)
 bash output = (0HELLO)
 [0;33mTest  22: ✅[38;5;244m pwd 
 [0m[0;33mTest  23: ✅[38;5;244m pwd oi 
-[0m[0;33mTest  24: ❌[38;5;244m export hello 
-[0mmini exit code = 139
-bash exit code = 0
-[0;33mTest  25: ✅[38;5;244m export HELLO=123 
+[0m[0;33mTest  24: ✅[38;5;244m export hello 
+[0m[0;33mTest  25: ✅[38;5;244m export HELLO=123 
 [0m[0;33mTest  26: ✅[38;5;244m export A- 
 [0m[0;33mTest  27: ✅[38;5;244m export HELLO=123 A 
 [0m[0;33mTest  28: ✅[38;5;244m export HELLO="123 A-" 
-[0m[0;33mTest  29: ❌[38;5;244m export hello world 
-[0mmini exit code = 139
-bash exit code = 0
-[0;33mTest  30: ✅[38;5;244m export HELLO-=123 
+[0m[0;33mTest  29: ✅[38;5;244m export hello world 
+[0m[0;33mTest  30: ✅[38;5;244m export HELLO-=123 
 [0m[0;33mTest  31: ✅[38;5;244m export = 
 [0m[0;33mTest  32: ✅[38;5;244m export 123 
 [0m[0;33mTest  33: ✅[38;5;244m unset 
@@ -148,9 +144,9 @@ bash output = (hi hello world 42)
 [0mmini output = (open)
 bash output = (hi hello world 42)
 [0;33mTest  69: ✅[38;5;244m echo <"./test_files/infile_big" | cat "./test_files/infile" 
-[0m[0;33mTest  70: ✅⚠️ [38;5;244m echo <"./test_files/infile_big" | echo <"./test_files/infile" 
-[0mmini error = ()
-bash error = ( Broken pipe)
+[0m[0;33mTest  70: ❌[38;5;244m echo <"./test_files/infile_big" | echo <"./test_files/infile" 
+[0mmini output = (open)
+bash output = ()
 [0;33mTest  71: ❌[38;5;244m echo hi | cat <"./test_files/infile" 
 [0mmini output = (open)
 bash output = (hi hello world 42)
@@ -921,5 +917,5 @@ bash error = ( command not found)
 bash exit code = 127
 mini error = ( README.md)
 bash error = ( command not found)
-[0;35m[1m68/146
+[0;35m[1m69/146
 [0m😭 😭 😭

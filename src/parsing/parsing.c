@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 19:29:55 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:33:49 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,13 @@ t_cmd	*parseexec(char **ps, t_data *minishell)
 	ret_cmd->argv = get_argv_for_single_cmd(ps);
 	ret_cmd->argv = expand_variables(ret_cmd->argv, minishell);
 	ret_cmd->argv = remove_argv_quotes(ret_cmd->argv);
-	if (ret_cmd->argv[1] != NULL)
-		printf("argv[0]: %s\n argv[1]: %s\n", ret_cmd->argv[0],
-			ret_cmd->argv[1]);
 	return (ret_cmd);
 }
 
+/*
+	if (ret_cmd->argv[1] != NULL)
+		printf("argv[0]: %s\n argv[1]: %s\n", ret_cmd->argv[0],
+			ret_cmd->argv[1]); */
 t_cmd	*parseredirs(t_cmd *sub_cmd, char **ps, char *es)
 {
 	int		tok;
