@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/19 18:32:35 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:42:42 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	print_sorted_env_vars(t_env **env_array, size_t count)
 	i = 0;
 	while (i < count)
 	{
-		printf("%s=%s\n", env_array[i]->key, env_array[i]->value);
+		if (env_array[i]->value)
+			printf("%s=%s\n", env_array[i]->key, env_array[i]->value);
+		else
+			printf("%s\n", env_array[i]->key);
 		i++;
 	}
 }

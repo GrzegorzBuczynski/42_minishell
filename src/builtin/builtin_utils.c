@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:04:01 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 00:15:38 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:46:33 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	run_builtin_cmd(char **argv, t_data *minishell)
 		return (1);
 	}
 	else if (ft_strcmp(argv[0], "export") == 0)
-		ret = ft_export(argv, minishell);
+		ret = ft_export(argv[1], minishell);
 	else if (ft_strcmp(argv[0], "pwd") == 0)
 		ret = ft_pwd(argv);
 	else if (ft_strcmp(argv[0], "unset") == 0)
 		ret = ft_unset(argv, minishell);
 	else if (ft_strcmp(argv[0], "exit") == 0)
-		ret = ft_exit();
+		ret = ft_exit(argv);
 	return (ret);
 }
 

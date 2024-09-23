@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 18:34:03 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:47:51 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_cmd	*parseexec(char **ps, t_data *minishell)
 	t_cmd	*ret_cmd;
 
 	ret_cmd = ft_init_cmd(EXEC);
-	ret_cmd->argv = get_argv_for_single_cmd(ret_cmd->argv, ps);
+	ret_cmd->argv = get_argv_for_single_cmd(ps);
 	ret_cmd->argv = expand_variables(ret_cmd->argv, minishell);
 	ret_cmd->argv = remove_argv_quotes(ret_cmd->argv);
 	return (ret_cmd);

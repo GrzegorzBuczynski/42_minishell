@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/23 18:38:30 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:46:46 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,12 @@ void				do_redirect(t_cmd *cmd, t_data *minishell);
 int					ft_echo(char **argv);
 char				**get_key_and_value(char *argument);
 int					ft_unset(char **argv, t_data *minishell);
-int					ft_export(char **argv, t_data *minishell);
+int					ft_export(char *argv, t_data *minishell);
 int					ft_pwd(char **argv);
 t_cmd				*here_doc_cmd(t_cmd *cmd, char *token);
 void				do_here_doc(t_cmd *cmd, t_data *minishell);
 void				take_input(t_cmd *cmd, char *token);
-int					ft_exit(void);
+int					ft_exit(char **args);
 void				handle_exec_error(const char *msg, const char *arg);
 void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
@@ -174,5 +174,6 @@ bool				ft_is_inside_quotes(char *stack, char *needle, char token1,
 char				**get_argv_blocks_in_quote(char **ps);
 char				**remove_argv_quotes(char **argv);
 char				**expand_variables(char **argv, t_data *minishell);
+bool				is_absolute_or_relative_path(const char *cmd);
 
 #endif

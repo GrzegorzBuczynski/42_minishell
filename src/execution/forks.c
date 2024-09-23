@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 14:25:20 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:51:35 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	wait_for_children(int commands, int *status, t_data *minishell)
 	int	i;
 
 	i = 0;
+	(void)minishell;
 	while (i < commands)
 	{
 		waitpid(-1, status, 0);
-		if (WIFEXITED(*status))
-			minishell->exit_status = WEXITSTATUS(*status);
+		// update exit status
 		i++;
 	}
 }
