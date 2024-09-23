@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 18:39:02 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:43:52 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 	return (ret);
 }
 
-/* 
-** Function returns array of strings 
+/*
+** Function returns array of strings
 ** stops converting when it reaches "<>|)&;"
 */
 char	**get_argv_for_single_cmd(char **ps)
@@ -108,7 +108,5 @@ char	**get_argv_blocks_in_quote(char **ps)
 	return (argv);
 }
 
-
-
-// expand_variable(&str, minishell);
 // temp = copy_without_quotes(str);
+// expand_variable(&str, minishell);
