@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/20 18:01:18 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:05:03 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*ft_init_cmd(int type)
 {
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(*cmd));
+	cmd = ft_calloc(sizeof(*cmd), 1);
 	ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = type;
 	return ((t_cmd *)cmd);

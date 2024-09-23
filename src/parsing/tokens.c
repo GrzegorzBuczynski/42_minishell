@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 18:43:52 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:06:23 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**get_argv_for_single_cmd(char **ps)
 	char	*str;
 	char	**argv;
 
-	// char	*temp;
+	argv = NULL;
 	while (!peek(ps, "<>|)&;") && **ps != 0)
 	{
 		str = get_string(ps);
