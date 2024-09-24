@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/23 18:46:46 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:19:41 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data
 }					t_data;
 
 // Validate_input
-bool				ft_input_is_valid(char *input_str);
+bool				is_valid_input(const char *input);
 
 void				minishell_loop(t_data *minishell);
 

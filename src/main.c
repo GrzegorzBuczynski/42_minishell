@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 14:34:28 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:29:41 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ void	minishell_loop(t_data *minishell)
 		}
 		if (minishell->input)
 			add_history(minishell->input);
+		if (!is_valid_input(minishell->input))
+		{
+			reset_minishell(minishell);
+			minishell->exit_status = 1;
+			ft_putstr_fd("minishell: No such file or directory\n", 2);
+			// free
+			continue ;
+		}
 		alloc_mem_for_commands(minishell);
 		parsecmd(minishell);
 		execute(minishell);
