@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/24 21:44:27 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/24 22:27:08 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,6 @@ char				**expand_variables(char **argv, t_data *minishell);
 bool				is_absolute_or_relative_path(const char *cmd);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
+void				set_last_exit_code(t_data *minishell);
 
 #endif

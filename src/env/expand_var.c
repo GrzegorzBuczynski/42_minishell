@@ -1,10 +1,8 @@
 
 
-
-
 #include "../../inc/minishell.h"
 
-char	*get_var_name(char *input, int *i);
+char		*get_var_name(char *input, int *i);
 
 static int	add_another_space(int i, int quotes, char *input)
 {
@@ -13,7 +11,7 @@ static int	add_another_space(int i, int quotes, char *input)
 		return (1);
 	else if (((input[i] == '<' && input[i + 1] != '<') || (input[i] == '>'
 				&& input[i + 1] != '>')) && input[i + 1] != ' ' && input[i
-			+ 1] != '\0' && quotes == NOT_SET)
+		+ 1] != '\0' && quotes == NOT_SET)
 		return (1);
 	return (0);
 }
@@ -31,11 +29,9 @@ static int	add_space(int i, int quotes, char *input)
 
 bool	do_copy_var(int quotes, char *input, int i)
 {
-	return ((input[i] == '$' && quotes != '\'' && input[i + 1] != ' '
-			&& input[i + 1] != '\"' && input[i + 1] != '+'
-			&& input[i + 1] != ':'
-			&& input[i + 1] != '/' && input[i + 1] != '='
-			&& input[i + 1] != '.'
+	return ((input[i] == '$' && quotes != '\'' && input[i + 1] != ' ' && input[i
+			+ 1] != '\"' && input[i + 1] != '+' && input[i + 1] != ':'
+			&& input[i + 1] != '/' && input[i + 1] != '=' && input[i + 1] != '.'
 			&& input[i + 1] != ',' && input[i + 1] != '\0'));
 }
 
@@ -143,7 +139,6 @@ char	*get_var_name(char *input, int *i)
 	return (name);
 }
 
-
 int	count_length(char *input, t_data *minishell, int *length)
 {
 	bool	is_in_quotes;
@@ -157,13 +152,16 @@ int	count_length(char *input, t_data *minishell, int *length)
 		if (input[i] == '\'')
 			is_in_quotes = !is_in_quotes;
 		if (input[i] == '$' && !is_in_quotes && input[i + 1] != ' ' && input[i
-				+ 1] != '\"' && input[i + 1] != '\0')
+			+ 1] != '\"' && input[i + 1] != '\0')
 		{
 			i++;
 			name = get_var_name(input, &i);
 			if (!name)
 				return (error);
-			*length += ft_strlen(ft_get_var_value(name, minishell)) + 1;
+			if (*name == '?')
+				*length += ft_strlen(ft_itoa(minishell->exit_status));
+			else
+				*length += ft_strlen(ft_get_var_value(name, minishell)) + 1;
 			free(name);
 		}
 		else
@@ -171,7 +169,6 @@ int	count_length(char *input, t_data *minishell, int *length)
 	}
 	return (*length);
 }
-
 
 char	*replace_var(char *input, t_data *minishell)
 {
@@ -188,4 +185,26 @@ char	*replace_var(char *input, t_data *minishell)
 	if (!replace_var_loop(input, minishell, result, 0) || !result)
 		return (free(result), NULL);
 	return (result);
+}
+
+void		set_last_exit_code(t_data *minishell)
+{
+	t_env *envlst;
+	char *value;
+
+	envlst = minishell->envlist;
+	while (envlst)
+	{
+		if (!ft_strcmp("?", envlst->key))
+		{
+			value = ft_itoa(minishell->exit_status);
+			if (value)
+			{
+				free(envlst->value);
+				envlst->value = value;
+			}
+			return ;
+		}
+		envlst = envlst->next;
+	}
 }

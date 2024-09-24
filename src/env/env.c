@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:13:40 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/23 19:31:29 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/24 22:22:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	init_environment(t_env **environment, char **env)
 		}
 		i++;
 	}
+	key = ft_strndup("?", 1);
+	value = ft_strdup("0");
+	environment_new_node_end(environment, key, value);
+	free(key);
+	free(value);
 }
 
 void	environment_free_list(t_env *head)

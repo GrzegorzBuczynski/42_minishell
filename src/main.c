@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/24 21:32:54 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/24 22:31:02 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	reset_minishell(t_data *minishell)
 	minishell->pipe_argv = NULL;
 	minishell->number_of_commands = 0;
 	minishell->commands = NULL;
+	
 }
 
 void	minishell_loop(t_data *minishell)
@@ -60,6 +61,7 @@ void	minishell_loop(t_data *minishell)
 		alloc_mem_for_commands(minishell);
 		parsecmd(minishell);
 		execute(minishell);
+		set_last_exit_code(minishell);
 		// free
 		reset_minishell(minishell);
 	}
