@@ -46,6 +46,8 @@ SRCS =	src/main.c \
 		src/parsing/parsing_utils.c\
 		src/parsing/parsing.c \
 		src/parsing/tokens.c \
+		src/utils/ft_strstr.c \
+		src/env/expand_var.c
 
 OBJS = $(SRCS:.c=.o)
 

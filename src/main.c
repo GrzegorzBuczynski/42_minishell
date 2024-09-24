@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/24 18:29:41 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:32:54 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	minishell_loop(t_data *minishell)
 		}
 		if (minishell->input)
 			add_history(minishell->input);
+		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_valid_input(minishell->input))
 		{
 			reset_minishell(minishell);

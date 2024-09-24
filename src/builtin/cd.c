@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:15:20 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 15:26:24 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:44:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	ft_cd_home(t_data *minishell)
 	char	*home;
 
 	ft_update_env_list("OLDPWD",
-		ft_get_envlst_val("PWD", minishell), false, minishell);
-	home = ft_get_envlst_val("HOME", minishell);
+		ft_get_var_value("PWD", minishell), false, minishell);
+	home = ft_get_var_value("HOME", minishell);
 	if (!home)
 		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
 	if (chdir(home) == true)
@@ -51,6 +51,6 @@ int	md_cd(char *path, t_data *minishell)
 	if (chdir(path) != true)
 		return (ft_cd_err_msg(path));
 	ft_update_env_list("OLDPWD",
-		ft_get_envlst_val("PWD", minishell), false, minishell);
+		ft_get_var_value("PWD", minishell), false, minishell);
 	return (ft_change_pwd(minishell));
 }

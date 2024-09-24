@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/24 18:19:41 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:44:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define NO 0
 # define true 1
 # define false 0
+# define error -1
 # define NOT_SET -1
 # ifndef EXIT_SUCCESS
 #  define EXIT_SUCCESS 0
@@ -101,7 +102,7 @@ char				*get_string(char **ps);
 int					md_cd(char *path, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
 						t_data *minishell);
-char				*ft_get_envlst_val(char *key, t_data *minishell);
+char				*ft_get_var_value(char *key, t_data *minishell);
 void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
@@ -175,5 +176,7 @@ char				**get_argv_blocks_in_quote(char **ps);
 char				**remove_argv_quotes(char **argv);
 char				**expand_variables(char **argv, t_data *minishell);
 bool				is_absolute_or_relative_path(const char *cmd);
+char				*ft_strstr(const char *haystack, const char *needle);
+char				*replace_var(char *input, t_data *minishell);
 
 #endif

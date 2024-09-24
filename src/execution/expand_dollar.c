@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/24 18:03:50 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:46:31 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	expand_variable(char **str, t_data *minishell)
 	tmp2 = ft_strchr(tmp, ' ');
 	if (tmp2)
 		*tmp2 = '\0';
-	value = ft_get_envlst_val(tmp, minishell);
+	value = ft_get_var_value(tmp, minishell);
 	if (value)
 	{
 		*key = '\0';
@@ -119,7 +119,7 @@ void	ft_expand_dollar(char **argv, t_data *minishell)
 
 	if (!argv || !*argv)
 		return ;
-	if (ft_strncmp(*argv, "$?", 2) == 0)
+	if (ft_strstr(*argv, "$?") != 0)
 	{
 		value = ft_itoa(minishell->exit_status);
 		if (value)
@@ -128,9 +128,10 @@ void	ft_expand_dollar(char **argv, t_data *minishell)
 			*argv = value;
 		}
 	}
-	else if (*argv[0] == '$')
+	else if (ft_strchr(*argv, '$') && !ft_is_inside_quotes(*argv,
+			ft_strchr(*argv, '$'), '\'', 0))
 	{
-		value = ft_get_envlst_val(*argv + 1, minishell);
+		value = ft_get_var_value(ft_strchr(*argv, '$') + 1, minishell);
 		if (value)
 		{
 			free(*argv);
@@ -180,7 +181,7 @@ char	*ft_expand_dollarp(char *argv, t_data *minishell)
 	}
 	else if (argv[0] == '$')
 	{
-		value = ft_get_envlst_val(argv + 1, minishell);
+		value = ft_get_var_value(argv + 1, minishell);
 		if (value)
 			return(value);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:18:13 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/19 19:14:32 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:44:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	ft_env_entry_exists(char *key, t_data *minishell)
 	return (false);
 }
 
-char	*ft_get_envlst_val(char *key, t_data *minishell)
+char	*ft_get_var_value(char *key, t_data *minishell)
 {
 	t_env	*envlst;
 
@@ -88,3 +88,4 @@ void	ft_envlstadd_back(t_env *new, t_data *minishell)
 		curr = curr->next;
 	curr->next = new;
 }
+
