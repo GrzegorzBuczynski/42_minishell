@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/25 17:21:05 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:10:59 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void				print_environment(t_env *node);
 char				*ft_strncpy(char *dest, char *src, int num);
 void				ft_skip_whitespace(char **s);
 char				*get_string(char **ps);
-int					md_cd(char *path, t_data *minishell);
+int					md_cd(char **argv, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
 						t_data *minishell);
 char				*ft_get_var_value(char *key, t_data *minishell);

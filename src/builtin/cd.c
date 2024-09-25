@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:15:20 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/24 21:44:27 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/25 19:27:35 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	ft_cd_home(t_data *minishell)
 {
 	char	*home;
 
-	ft_update_env_list("OLDPWD",
-		ft_get_var_value("PWD", minishell), false, minishell);
+	ft_update_env_list("OLDPWD", ft_get_var_value("PWD", minishell), false,
+		minishell);
 	home = ft_get_var_value("HOME", minishell);
 	if (!home)
 		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
@@ -44,13 +44,27 @@ static int	ft_cd_err_msg(char *err_msg)
 	return (1);
 }
 
-int	md_cd(char *path, t_data *minishell)
+int	md_cd(char **argv, t_data *minishell)
 {
-	if (!path)
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	if (i > 2)
+	{
+		ft_putstr_fd(" too many arguments\n", 2);
+		minishell->exit_status = 1;
+		return (1);
+	}
+	if (!argv[1])
 		return (ft_cd_home(minishell));
-	if (chdir(path) != true)
-		return (ft_cd_err_msg(path));
-	ft_update_env_list("OLDPWD",
-		ft_get_var_value("PWD", minishell), false, minishell);
+	if (chdir(argv[1]) == error)
+	{
+		minishell->exit_status = 1;
+		return (ft_cd_err_msg(argv[1]));
+	}
+	ft_update_env_list("OLDPWD", ft_get_var_value("PWD", minishell), false,
+		minishell);
 	return (ft_change_pwd(minishell));
 }

@@ -48,17 +48,9 @@
 [0m[0;33mTest  37: ✅[38;5;244m unset PATH 
 [0m[0;33mTest  38: ✅[38;5;244m unset SHELL 
 [0m[0;33mTest  39: ✅[38;5;244m cd $PWD 
-[0m[0;33mTest  40: ❌[38;5;244m cd $PWD hi 
-[0mmini exit code = 0
-bash exit code = 1
-mini error = ()
-bash error = ( too many arguments)
-[0;33mTest  41: ❌[38;5;244m cd 123123 
-[0mmini exit code = 0
-bash exit code = 1
-mini error = ()
-bash error = ( No such file or directory)
-[0;33mTest  42: ✅[38;5;244m exit 123 
+[0m[0;33mTest  40: ✅[38;5;244m cd $PWD hi 
+[0m[0;33mTest  41: ✅[38;5;244m cd 123123 
+[0m[0;33mTest  42: ✅[38;5;244m exit 123 
 [0m[0;33mTest  43: ✅[38;5;244m exit 298 
 [0m[0;33mTest  44: ✅[38;5;244m exit +100 
 [0m[0;33mTest  45: ✅[38;5;244m exit "+100" 
@@ -133,12 +125,16 @@ bash error = ( No such file or directory)
 [0mmini output = (open)
 bash output = (hi hello world 42)
 [0;33mTest  68: ❌[38;5;244m echo <"./test_files/infile_big" | cat <"./test_files/infile" 
-[0mmini output = (open)
+[0mmini output = ()
 bash output = (hi hello world 42)
 [0;33mTest  69: ✅[38;5;244m echo <"./test_files/infile_big" | cat "./test_files/infile" 
 [0m[0;33mTest  70: ❌[38;5;244m echo <"./test_files/infile_big" | echo <"./test_files/infile" 
 [0mmini output = (open)
 bash output = ()
+mini exit code = open
+bash exit code = 0
+mini error = ()
+bash error = ( Broken pipe)
 [0;33mTest  71: ❌[38;5;244m echo hi | cat <"./test_files/infile" 
 [0mmini output = (open)
 bash output = (hi hello world 42)
@@ -168,7 +164,7 @@ bash error = ( No such file or directory)
 [0mmini error = ()
 bash error = ( No such file or directory)
 [0;33mTest  79: ❌[38;5;244m cat <missing | cat <"./test_files/infile" 
-[0mmini output = (open)
+[0mmini output = ()
 bash output = (hi hello world 42)
 mini error = ()
 bash error = ( No such file or directory)
@@ -908,5 +904,5 @@ bash error = ( command not found)
 bash exit code = 127
 mini error = ( README.md)
 bash error = ( command not found)
-[0;35m[1m73/146
+[0;35m[1m75/146
 [0m😭 😭 😭
