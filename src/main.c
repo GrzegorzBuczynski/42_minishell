@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 16:50:52 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:55:32 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input)
 			add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
-		if (!is_valid_input(minishell->input))
+		if (!is_input_valid(minishell->input))
 		{
 			// set exit status according to what failed during validation
 			free(minishell->input);
+			minishell->exit_status = 0;
+			set_last_exit_code(minishell);
 			continue ;
 		}
 		alloc_mem_for_commands(minishell);
 		parsecmd(minishell);
-		execute(minishell);
+		if (*(minishell->commands))
+			execute(minishell);
 		set_last_exit_code(minishell);
 		// free
 		reset_minishell(minishell);

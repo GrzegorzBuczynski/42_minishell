@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 16:02:45 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:37:40 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	char	**paths;
 	char	*binary_path;
 
+	if (cmd->argv == NULL)
+		return ;
 	if (cmd->argv[0] == NULL)
 		return ;
 	if (run_builtin_cmd(cmd->argv, minishell))

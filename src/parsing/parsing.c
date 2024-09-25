@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/24 21:46:47 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/25 17:46:05 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	alloc_mem_for_commands(t_data *minishell)
 			pipe_count++;
 		input++;
 	}
-	minishell->commands = (t_cmd **)malloc(sizeof(t_cmd *) * (pipe_count + 2));
+	minishell->commands = (t_cmd **)calloc(sizeof(t_cmd *) * (pipe_count + 2), 1);
 	if (minishell->commands == NULL)
 		panic("malloc");
 	minishell->commands[pipe_count + 1] = NULL;
@@ -75,6 +75,11 @@ t_cmd	*parseexec(char **ps, t_data *minishell)
 	(void)minishell;
 	ret_cmd = ft_init_cmd(EXEC);
 	ret_cmd->argv = get_argv_for_single_cmd(ps);
+	if (ret_cmd->argv == NULL)
+	{
+		free(ret_cmd);
+		return (NULL);
+	}
 	// ret_cmd->argv = expand_variables(ret_cmd->argv, minishell);
 	ret_cmd->argv = remove_argv_quotes(ret_cmd->argv);
 	return (ret_cmd);
