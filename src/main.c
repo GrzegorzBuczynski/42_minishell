@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 16:47:14 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:50:52 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input)
 			add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
-		// if (!is_valid_input(minishell->input))
-		// {
-		// 	reset_minishell(minishell);
-		// 	minishell->exit_status = 1;
-		// 	ft_putstr_fd("minishell: No such file or directory\n", 2);
-		// 	// free
-		// 	continue ;
-		// }
+		if (!is_valid_input(minishell->input))
+		{
+			// set exit status according to what failed during validation
+			free(minishell->input);
+			continue ;
+		}
 		alloc_mem_for_commands(minishell);
 		parsecmd(minishell);
 		execute(minishell);
