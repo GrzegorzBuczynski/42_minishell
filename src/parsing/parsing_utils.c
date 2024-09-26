@@ -6,14 +6,14 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/21 23:08:44 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:21:47 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 /*
-** Function skip whitespaces and moves *ps pointer to the next 
+** Function skip whitespaces and moves *ps pointer to the next
 ** character like in the tokens string.
 ** Returns 1 if the character is in the toks string, 0 otherwise.
 */
@@ -114,8 +114,5 @@ char	*get_string(char **ps)
 	if (*ps == NULL || **ps == '\0')
 		return (NULL);
 	ft_skip_whitespace(ps);
-	if (**ps == '"' || **ps == '\'')
-		return (get_block(ps));
-	else
-		return (get_word(ps));
+	return (get_word(ps));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/26 16:18:33 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:38:26 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,22 @@ void	wait_for_children(int commands, int *status, t_data *minishell)
 	}
 }
 
-void	fork_and_run_command(t_data *minishell, int i)
+void	wait_for_processes(t_data *minishell, pid_t last_pid)
+{
+	int	status;
+	int	i;
+
+	status = 0;
+	i = minishell->number_of_commands;
+	while (i > 0)
+	{
+		if (waitpid(0, &status, 0) == last_pid)
+			minishell->exit_status = WEXITSTATUS(status);
+		i--;
+	}
+}
+
+int	fork_and_run_command(t_data *minishell, int i)
 {
 	int		pid;
 	int		**pipe_argv;
@@ -63,7 +78,6 @@ void	fork_and_run_command(t_data *minishell, int i)
 		setup_pipes(pipe_argv, i, commands);
 		close_pipes(pipe_argv, commands);
 		runcmd(cmd, minishell);
-		minishell->exit_status = 1;
 		exit(0);
 	}
 	else if (pid < 0)
@@ -71,21 +85,22 @@ void	fork_and_run_command(t_data *minishell, int i)
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
+	return (pid);
 }
 
 void	make_forks(t_data *minishell)
 {
-	int	i;
-	int	**pipe_argv;
-	int	commands;
-	int	status;
+	int		i;
+	int		**pipe_argv;
+	int		commands;
+	pid_t	last_pid;
 
 	commands = minishell->number_of_commands;
 	pipe_argv = minishell->pipe_argv;
 	i = 0;
 	while (i < commands)
 	{
-		fork_and_run_command(minishell, i);
+		last_pid = fork_and_run_command(minishell, i);
 		if (i != commands - 1)
 			close(pipe_argv[i][1]);
 		if (i != 0)
@@ -93,5 +108,5 @@ void	make_forks(t_data *minishell)
 		i++;
 	}
 	close_pipes(pipe_argv, commands);
-	wait_for_children(commands, &status, minishell);
+	wait_for_processes(minishell, last_pid);
 }

@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 17:37:40 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:42:45 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,10 @@ void	execute_process(char *binary_path, t_cmd *cmd, t_data *minishell)
 	char	**envp;
 
 	envp = environment_list_to_array(minishell->envlist);
-	if (fork1() == 0)
-	{
-		execve(binary_path, cmd->argv, envp);
-		handle_exec_error("execve failed for: ", binary_path);
-		free(envp);
-		exit(EXIT_FAILURE);
-	}
-	wait(0);
+	execve(binary_path, cmd->argv, envp);
+	handle_exec_error("execve failed for: ", binary_path);
 	free(envp);
+	exit(EXIT_FAILURE);
 }
 
 void	do_exec(t_cmd *cmd, t_data *minishell)
@@ -78,11 +73,12 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	if (cmd->argv[0] == NULL)
 		return ;
 	if (run_builtin_cmd(cmd->argv, minishell))
-		return ;
+		exit(0);
 	paths = retrieve_paths();
 	binary_path = find_executable_path(cmd, paths);
 	execute_process(binary_path, cmd, minishell);
 	clean_up(binary_path, paths);
+	exit(1);
 }
 
 void	runcmd(t_cmd *cmd, t_data *minishell)

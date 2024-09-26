@@ -1,0 +1,2 @@
+,
+				{"text": "-gdb-set follow-fork-mode child"}
