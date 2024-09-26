@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:13:40 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/24 22:22:27 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/26 16:11:19 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	print_environment(t_env *node)
 	current = node;
 	while (current != NULL)
 	{
-		printf("%s=%s\n", current->key, current->value);
+		if (!(*(current->key) == '?'))
+			printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}
 }
