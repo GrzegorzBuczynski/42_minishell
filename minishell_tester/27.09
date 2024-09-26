@@ -69,9 +69,7 @@
 [0m[0;31m———————————— redirects
 [0;33mTest  57: ✅[38;5;244m grep hi <./test_files/infile 
 [0m[0;33mTest  58: ❌[38;5;244m grep hi "<infile" <         ./test_files/infile 
-[0mmini output = (./test_files/infile:hi)
-bash output = ()
-mini exit code = 0
+[0mmini exit code = 0
 bash exit code = 2
 [0;33mTest  59: ❌[38;5;244m echo hi < ./test_files/infile bye bye 
 [0mmini output = ()

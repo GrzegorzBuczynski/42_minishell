@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/26 18:13:26 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:35:25 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,14 +131,14 @@ char	*get_string(char **ps)
 			s++;
 			while (s && *s && *s != quote)
 				s++;
-			if (*s == quote)
-				s++;
 		}
-		s++;
+		if (*s == quote)
+			s++;
+		else
+			s++;
 	}
 	length = s - start;
 	ret = ft_strndup(start, length);
-
 	*ps = s;
 	return (ret);
 }
