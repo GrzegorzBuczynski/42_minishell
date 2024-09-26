@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 17:35:29 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:55:26 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ char	**get_argv_for_single_cmd(char **ps)
 		str = get_string(ps);
 		if (!str)
 		{
-			// free(str);
 			break ;
 		}
 		argv = ft_append_argv(argv, str);

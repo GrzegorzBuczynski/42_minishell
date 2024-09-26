@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/26 17:21:47 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:13:26 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,34 @@ char	*get_word(char **ps)
  */
 char	*get_string(char **ps)
 {
+	char	*s;
+	char	*ret;
+	size_t	length;
+	char	*start;
+	int		quote;
+
+	length = 0;
 	if (*ps == NULL || **ps == '\0')
 		return (NULL);
 	ft_skip_whitespace(ps);
-	return (get_word(ps));
+	s = *ps;
+	start = s;
+	while (s && *s && !ft_iswhitespace(*s))
+	{
+		if (*s == '\'' || *s == '\"')
+		{
+			quote = *s;
+			s++;
+			while (s && *s && *s != quote)
+				s++;
+			if (*s == quote)
+				s++;
+		}
+		s++;
+	}
+	length = s - start;
+	ret = ft_strndup(start, length);
+
+	*ps = s;
+	return (ret);
 }
