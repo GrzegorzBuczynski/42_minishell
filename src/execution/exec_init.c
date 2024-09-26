@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 00:05:54 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:25:50 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,70 @@ t_cmd	*backcmd(t_cmd *subcmd)
 	cmd->type = BACK;
 	cmd->sub_cmd = subcmd;
 	return ((t_cmd *)cmd);
+}
+
+
+
+int handle_input_redirection(t_data *minishell, char *file)
+{
+    if (access(file, F_OK | R_OK) != 0) // Check if file exists and is readable
+    {
+        ft_putstr_fd("minishell: ", STDERR_FILENO);
+        ft_putstr_fd(file, STDERR_FILENO);
+        ft_putstr_fd(": No such file or permission denied\n", STDERR_FILENO);
+        minishell->exit_status = 1; // Update exit status
+        return -1;
+    }
+    return open(file, O_RDONLY); // Return file descriptor
+}
+
+int handle_output_redirection(t_data *minishell, char *file, int mode)
+{
+    int flags = O_WRONLY | O_CREAT | mode; // Mode can be O_TRUNC or O_APPEND
+    int fd = open(file, flags, 0644); // Open file with write permissions
+
+    if (fd < 0)
+    {
+        ft_putstr_fd("minishell: ", STDERR_FILENO);
+        ft_putstr_fd(file, STDERR_FILENO);
+        ft_putstr_fd(": Cannot open or create file\n", STDERR_FILENO);
+        minishell->exit_status = 1; // Update exit status
+        return -1;
+    }
+    return fd; // Return file descriptor
+}
+
+
+t_cmd *inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell)
+{
+    t_cmd *cmd;
+
+    cmd = malloc(sizeof(*cmd));
+    if (!cmd)
+        return NULL;
+    ft_memset(cmd, 0, sizeof(*cmd));
+
+    cmd->type = REDIR;
+    cmd->sub_cmd = subcmd;
+    cmd->file = file;
+
+    if (mode == O_RDONLY) // Input redirection
+    {
+        cmd->fd = handle_input_redirection(minishell, file);
+    }
+    else // Output redirection
+    {
+        cmd->fd = handle_output_redirection(minishell, file, mode);
+    }
+
+    cmd->mode = mode;
+
+    if (cmd->fd == -1)
+    {
+        // If fd is -1, return NULL indicating an error occurred
+        free(cmd);
+        return NULL;
+    }
+
+    return cmd;
 }

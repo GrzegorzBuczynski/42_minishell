@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 17:46:05 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:26:43 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	parsecmd(t_data *minishell)
 	es = minishell->input + ft_strlen(minishell->input);
 	while (ps <= es)
 	{
-		cmd = parseredirs(cmd, &ps, es);
+		cmd = parseredirs(cmd, &ps, es, minishell);
 		if (cmd)
 			cmd->sub_cmd = parseexec(&ps, minishell);
 		else
 		{
 			cmd = parseexec(&ps, minishell);
-			temp = parseredirs(cmd, &ps, es);
+			temp = parseredirs(cmd, &ps, es, minishell);
 			if (temp)
 				cmd = temp;
 		}
@@ -89,7 +89,7 @@ t_cmd	*parseexec(char **ps, t_data *minishell)
 	if (ret_cmd->argv[1] != NULL)
 		printf("argv[0]: %s\n argv[1]: %s\n", ret_cmd->argv[0],
 			ret_cmd->argv[1]); */
-t_cmd	*parseredirs(t_cmd *sub_cmd, char **ps, char *es)
+t_cmd	*parseredirs(t_cmd *sub_cmd, char **ps, char *es, t_data *minishell)
 {
 	int		tok;
 	t_cmd	*ret_cmd;
@@ -105,7 +105,7 @@ t_cmd	*parseredirs(t_cmd *sub_cmd, char **ps, char *es)
 		if (file == NULL)
 			panic("missing file for redirection");
 		if (tok == '<')
-			ret_cmd = redircmd(sub_cmd, file, O_RDONLY, 0);
+			ret_cmd = inputcmd(sub_cmd, file, O_RDONLY, minishell);
 		else if (tok == '>')
 			ret_cmd = redircmd(sub_cmd, file, O_CREAT | O_WRONLY | O_TRUNC, 1);
 		else if (tok == '+')
