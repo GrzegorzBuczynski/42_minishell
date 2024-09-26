@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/26 19:27:16 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 00:48:23 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void				do_redirect(t_cmd *cmd, t_data *minishell);
 void				remove_quotess(char **str);
 void				handle_quotes_dollar(char **argv, t_data *minishell);
 void				init_cmd_argv(t_cmd *cmd);
-void				append_to_argv(t_cmd *cmd, char *line);
+
 int					is_builtin(t_cmd *cmd);
 char				*copy_without_quotes(char *s);
 bool				ft_is_inside_quotes(char *stack, char *needle, char token1,
