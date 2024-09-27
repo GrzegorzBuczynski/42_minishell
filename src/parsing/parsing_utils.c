@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 21:05:47 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:04:56 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ char	*get_word(char **ps)
 	return (ret);
 }
 
+int	is_redirection(char s)
+{
+	if (s == '<' || s == '>' || s == '|' || s == ';')
+		return (1);
+	return (0);
+}
+
 /*
  * Returns a string from the input string.
  * The string can be a block or a word.
@@ -124,7 +131,7 @@ char	*get_string(char **ps)
 	ft_skip_whitespace(ps);
 	s = *ps;
 	start = s;
-	while (s && *s && !ft_iswhitespace(*s))
+	while (s && *s && !ft_iswhitespace(*s) ) //&& !is_redirection(*s)
 	{
 		if (*s == '\'' || *s == '\"')
 		{

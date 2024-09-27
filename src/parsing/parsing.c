@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 21:45:12 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:11:54 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,13 @@ void	parsecmd(t_data *minishell)
 		else if (token == '|')
 		{
 			if (current)
+			{
+				exec_cmd->argv = remove_argv_quotes(exec_cmd->argv);
 				current->sub_cmd = exec_cmd;
+			}
 			else
 			{
+				exec_cmd->argv = remove_argv_quotes(exec_cmd->argv);
 				minishell->commands[i] = exec_cmd;
 				minishell->number_of_commands++;
 			}
@@ -134,6 +138,7 @@ void	parsecmd(t_data *minishell)
 	}
 	if (!current)
 	{
+		exec_cmd->argv = remove_argv_quotes(exec_cmd->argv);
 		minishell->commands[i] = exec_cmd;
 		minishell->number_of_commands++;
 	}
@@ -162,7 +167,7 @@ t_cmd	*parseredirs(int tok, char **ps, t_data *minishell)
 
 	ret_cmd = NULL;
 	file = NULL;
-	file = get_word(ps);
+	file = get_string(ps);
 	if (file == NULL)
 		panic("missing file for redirection");
 	if (tok == '<')
