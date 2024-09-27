@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 21:39:31 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:45:12 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,19 @@ void	parsecmd(t_data *minishell)
 			if (current)
 				current->sub_cmd = exec_cmd;
 			else
+			{
 				minishell->commands[i] = exec_cmd;
-			minishell->number_of_commands++;
+				minishell->number_of_commands++;
+			}
 			// red_cmd = NULL;
 			i++;
 		}
 	}
-		if (!current)
-			{minishell->commands[i] = exec_cmd;
-			minishell->number_of_commands++;}
+	if (!current)
+	{
+		minishell->commands[i] = exec_cmd;
+		minishell->number_of_commands++;
+	}
 }
 
 t_cmd	*parseexec(char *str, t_cmd *exec_cmd)
