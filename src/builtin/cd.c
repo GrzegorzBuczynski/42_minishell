@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:15:20 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 19:27:35 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:23:48 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	md_cd(char **argv, t_data *minishell)
 	}
 	if (!argv[1])
 		return (ft_cd_home(minishell));
-	if (chdir(argv[1]) == error)
+	if (chdir(argv[1]) == ERROR)
 	{
 		minishell->exit_status = 1;
 		return (ft_cd_err_msg(argv[1]));

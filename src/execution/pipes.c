@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 00:00:40 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:59:30 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,22 @@ void	create_pipes(t_data *minishell)
 int	execute(t_data *minishell)
 {
 	int	commands;
+	pid_t	last_pid;
 
 	commands = minishell->number_of_commands;
 	if (commands == 0)
 		return (1);
-	if (commands == 1 && is_builtin(*(minishell->commands)) && minishell->commands[0]->type == EXEC)
+	if (commands == 1 && is_builtin(*(minishell->commands))
+		&& minishell->commands[0]->type == EXEC)
 	{
 		return (run_builtin_cmd(minishell->commands[0]->argv, minishell));
 	}
 	else if (commands == 1)
 	{
-		if (fork1() == 0)
+		last_pid = fork1();
+		if (last_pid == 0)
 			runcmd(minishell->commands[0], minishell);
-		wait(NULL);
+		wait_for_processes(minishell, last_pid);
 	}
 	else
 	{

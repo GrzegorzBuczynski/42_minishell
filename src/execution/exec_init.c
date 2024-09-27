@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 01:31:21 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/27 15:05:06 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_cmd	*backcmd(t_cmd *subcmd)
 	return ((t_cmd *)cmd);
 }
 
-int	handle_input_redirection(t_data *minishell, char *file)
+int	read_file_access(t_data *minishell, char *file)
 {
 	if (access(file, F_OK | R_OK) != 0) // Check if file exists and is readable
 	{
@@ -57,9 +57,9 @@ int	handle_input_redirection(t_data *minishell, char *file)
 		ft_putstr_fd(file, STDERR_FILENO);
 		ft_putstr_fd(": No such file or permission denied\n", STDERR_FILENO);
 		minishell->exit_status = 1; // Update exit status
-		return (-1);
+		return (false);
 	}
-	return (open(file, O_RDONLY)); // Return file descriptor
+	return (true);
 }
 
 int	handle_output_redirection(t_data *minishell, char *file, int mode)
@@ -89,7 +89,14 @@ t_cmd	*inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell)
 	cmd->sub_cmd = subcmd;
 	cmd->file = file;
 	cmd->fd = 0;
-    handle_input_redirection(minishell, file);
 	cmd->mode = mode;
+    if(!read_file_access(minishell, file))
+	{
+		free(subcmd);
+		subcmd = NULL;
+		free(cmd);
+		minishell->exit_status = 2;
+		return (NULL);
+	}
 	return (cmd);
 }

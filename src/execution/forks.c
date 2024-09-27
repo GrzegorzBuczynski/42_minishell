@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/26 17:38:26 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:01:21 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,6 @@ static void	close_pipes(int **pipe_argv, int commands)
 	}
 }
 
-void	wait_for_children(int commands, int *status, t_data *minishell)
-{
-	int	i;
-
-	i = 0;
-	(void)minishell;
-	while (i < commands)
-	{
-		waitpid(-1, status, 0);
-		// update exit status
-		i++;
-	}
-}
 
 void	wait_for_processes(t_data *minishell, pid_t last_pid)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/27 00:48:23 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/27 15:00:05 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define NO 0
 # define true 1
 # define false 0
-# define error -1
+# define ERROR -1
 # define NOT_SET -1
 # ifndef EXIT_SUCCESS
 #  define EXIT_SUCCESS 0
@@ -123,7 +123,8 @@ t_cmd				*parseline(char **ps, char *es);
 t_cmd				*parsepipe(char **ps, char *es);
 t_cmd				*parseexec(char **ps, t_data *minishell);
 t_cmd				*parseblock(char **ps, char *es);
-t_cmd				*parseredirs(t_cmd *sub_cmd, char **ps, char *es, t_data *minishell);
+t_cmd				*parseredirs(t_cmd *sub_cmd, char **ps, char *es,
+						t_data *minishell);
 pid_t				fork1(void);
 void				do_exec(t_cmd *cmd, t_data *minishell);
 void				do_list(t_cmd *cmd, t_data *minishell);
@@ -179,5 +180,8 @@ bool				is_absolute_or_relative_path(const char *cmd);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
-t_cmd *inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell);
+t_cmd				*inputcmd(t_cmd *subcmd, char *file, int mode,
+						t_data *minishell);
+void				wait_for_processes(t_data *minishell, pid_t last_pid);
+
 #endif

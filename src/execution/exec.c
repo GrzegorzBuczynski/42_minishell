@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/26 17:42:45 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:02:28 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,12 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 {
 	int	fd;
 
-	if (fork1() == 0)
-	{
-		close(rcmd->fd);
-		fd = open(rcmd->file, rcmd->mode, 0644);
-		if (fd < 0)
-			panic("open");
-		if (fork1() == 0)
-		{
-			runcmd(rcmd->sub_cmd, minishell);
-			exit(0);
-		}
-		wait(0);
-		close(fd);
-		exit(0);
-	}
+	close(rcmd->fd);
+	fd = open(rcmd->file, rcmd->mode, 0644);
+	if (fd < 0)
+		panic("open");
+	runcmd(rcmd->sub_cmd, minishell);
+	exit(0);
 }
 
 void	run_in_background_or_list(t_cmd *cmd, t_data *minishell)

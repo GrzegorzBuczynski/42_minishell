@@ -157,7 +157,7 @@ int	count_length(char *input, t_data *minishell, int *length)
 			i++;
 			name = get_var_name(input, &i);
 			if (!name)
-				return (error);
+				return (ERROR);
 			if (*name == '?')
 				*length += ft_strlen(ft_itoa(minishell->exit_status));
 			else
