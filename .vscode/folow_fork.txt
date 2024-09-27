@@ -1,2 +1,6 @@
 ,
 				{"text": "-gdb-set follow-fork-mode child"}
+
+
+							"cwd": "${fileDirname}",
+										"cwd": "${workspaceFolder}",

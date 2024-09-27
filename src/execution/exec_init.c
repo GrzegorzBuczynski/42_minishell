@@ -6,20 +6,20 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 15:31:30 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:34:57 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_cmd	*redircmd(t_cmd *subcmd, char *file, int mode, int fd)
+t_cmd	*redircmd(char *file, int mode, int fd)
 {
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(*cmd));
 	ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = REDIR;
-	cmd->sub_cmd = subcmd;
+	cmd->sub_cmd = NULL;
 	cmd->file = file; /// file is the name of the file to redirect to
 	cmd->mode = mode;
 	cmd->fd = fd;
@@ -51,14 +51,27 @@ t_cmd	*backcmd(t_cmd *subcmd)
 
 int	read_file_access(t_data *minishell, char *file)
 {
-	if (access(file, F_OK | R_OK) != 0) // Check if file exists and is readable
+	char	cwd[1024];
+
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(file, STDERR_FILENO);
-		ft_putstr_fd(": No such file or permission denied\n", STDERR_FILENO);
-		minishell->exit_status = 1; // Update exit status
+		printf("Current working dir: %s\n", cwd);
+	}
+	if (access(file, F_OK | R_OK) != 0)
+	{
+		perror("access error");
+		(void)minishell;
 		return (false);
 	}
+	// if (access(file, F_OK | R_OK) != 0)
+		// Check if file exists and is readable
+	// {
+	// 	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	// 	ft_putstr_fd(file, STDERR_FILENO);
+	// 	ft_putstr_fd(": No such file or permission denied\n", STDERR_FILENO);
+	// 	minishell->exit_status = 1; // Update exit status
+	// 	return (false);
+	// }
 	return (true);
 }
 
@@ -77,7 +90,7 @@ int	handle_output_redirection(t_data *minishell, char *file, int mode)
 	return (fd); // Return file descriptor
 }
 
-t_cmd	*inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell)
+t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
 {
 	t_cmd	*cmd;
 
@@ -86,11 +99,11 @@ t_cmd	*inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell)
 		return (NULL);
 	// ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = REDIR;
-	cmd->sub_cmd = subcmd;
+	cmd->sub_cmd = NULL;
 	cmd->file = file;
 	cmd->fd = 0;
 	cmd->mode = mode;
-    if(!read_file_access(minishell, file))
+	if (!read_file_access(minishell, file))
 	{
 		free(cmd);
 		minishell->exit_status = 2;

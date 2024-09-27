@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 01:35:25 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/27 21:05:47 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*get_word(char **ps)
 	size_t	length;
 	char	*start;
 
+	ft_skip_whitespace(ps);
 	s = *ps;
 	length = 0;
 	start = s;

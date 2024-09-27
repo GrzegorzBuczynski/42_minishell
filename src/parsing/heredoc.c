@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/22 00:09:02 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:28:01 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	take_input(t_cmd *cmd, char *token)
 	free(token);
 }
 
-t_cmd	*here_doc_cmd(t_cmd *sub_cmd, char *token)
+t_cmd	*here_doc_cmd(char *token)
 {
 	t_cmd	*cmd;
 
 	cmd = ft_init_cmd(HERE_DOC);
-	cmd->sub_cmd = sub_cmd;
+	cmd->sub_cmd = NULL;
 	take_input(cmd, token);
 	return (cmd);
 }

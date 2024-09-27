@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/27 15:00:05 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:33:21 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,17 @@ char				*get_word(char **ps);
 
 // execution
 t_cmd				*ft_init_cmd(int type);
-t_cmd				*redircmd(t_cmd *subcmd, char *file, int mode, int fd);
+t_cmd				*redircmd(char *file, int mode, int fd);
 t_cmd				*pipecmd(t_cmd *left, t_cmd *right);
 t_cmd				*listcmd(t_cmd *left, t_cmd *right);
 t_cmd				*backcmd(t_cmd *subcmd);
 void				runcmd(struct s_cmd *cmd, t_data *minishell);
 void				parsecmd(t_data *minishell);
 t_cmd				*parseline(char **ps, char *es);
-t_cmd				*parsepipe(char **ps, char *es);
-t_cmd				*parseexec(char **ps, t_data *minishell);
 t_cmd				*parseblock(char **ps, char *es);
-t_cmd				*parseredirs(t_cmd *sub_cmd, char **ps, char *es,
-						t_data *minishell);
+t_cmd				*parseredirs(int tok, char **ps, t_data *minishell);
+t_cmd				*parseexec(char *str, t_cmd *exec_cmd);
+
 pid_t				fork1(void);
 void				do_exec(t_cmd *cmd, t_data *minishell);
 void				do_list(t_cmd *cmd, t_data *minishell);
@@ -137,7 +136,7 @@ char				**get_key_and_value(char *argument);
 int					ft_unset(char **argv, t_data *minishell);
 int					ft_export(char *argv, t_data *minishell);
 int					ft_pwd(char **argv);
-t_cmd				*here_doc_cmd(t_cmd *cmd, char *token);
+t_cmd				*here_doc_cmd(char *token);
 void				do_here_doc(t_cmd *cmd, t_data *minishell);
 void				take_input(t_cmd *cmd, char *token);
 int					ft_exit(char **args);
@@ -180,8 +179,7 @@ bool				is_absolute_or_relative_path(const char *cmd);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
-t_cmd				*inputcmd(t_cmd *subcmd, char *file, int mode,
-						t_data *minishell);
+t_cmd				*inputcmd(char *file, int mode, t_data *minishell);
 void				wait_for_processes(t_data *minishell, pid_t last_pid);
 
 #endif

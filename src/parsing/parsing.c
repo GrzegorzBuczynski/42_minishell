@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 15:04:43 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:39:31 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,93 +25,149 @@ void	alloc_mem_for_commands(t_data *minishell)
 			pipe_count++;
 		input++;
 	}
-	minishell->commands = (t_cmd **)calloc(sizeof(t_cmd *) * (pipe_count + 2), 1);
+	minishell->commands = (t_cmd **)calloc(sizeof(t_cmd *) * (pipe_count + 2),
+			1);
 	if (minishell->commands == NULL)
 		panic("malloc");
 	minishell->commands[pipe_count + 1] = NULL;
 }
 
+int	is_redirect(char *str)
+{
+	if (ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">") == 0 || ft_strcmp(str,
+			">>") == 0 || ft_strcmp(str, "<<") == 0)
+		return (1);
+	return (0);
+}
+
+int	is_pipe(char *str)
+{
+	if (ft_strcmp(str, "|") == 0)
+		return (1);
+	return (0);
+}
+
+int	get_token(char **ps)
+{
+	ft_skip_whitespace(ps);
+	if (!strncmp(*ps, "<<", 2))
+	{
+		*ps += 2;
+		return ('-');
+	}
+	else if (!strncmp(*ps, ">>", 2))
+	{
+		*ps += 2;
+		return ('+');
+	}
+	else if (!strncmp(*ps, ">", 1))
+	{
+		*ps += 1;
+		return ('>');
+	}
+	else if (!strncmp(*ps, "<", 1))
+	{
+		*ps += 1;
+		return ('<');
+	}
+	else if (!strncmp(*ps, "|", 1))
+	{
+		*ps += 1;
+		return ('|');
+	}
+	else
+		return ('a');
+}
+
 void	parsecmd(t_data *minishell)
 {
 	int		i;
-	t_cmd	*cmd;
-	t_cmd	*temp;
+	t_cmd	*exec_cmd;
+	t_cmd	*red_cmd;
+	t_cmd	*current;
 	char	*es;
 	char	*ps;
+	int		token;
 
 	i = 0;
-	cmd = NULL;
-	temp = NULL;
+	exec_cmd = ft_init_cmd(EXEC);
+	current = NULL;
+	red_cmd = NULL;
 	ps = minishell->input;
 	es = minishell->input + ft_strlen(minishell->input);
-	while (ps <= es)
+	while (ps <= es && *ps)
 	{
-		cmd = parseredirs(cmd, &ps, es, minishell);
-		if (cmd)
-			cmd->sub_cmd = parseexec(&ps, minishell);
-		else
+		token = get_token(&ps);
+		if (token == 'a')
 		{
-			cmd = parseexec(&ps, minishell);
-			temp = parseredirs(cmd, &ps, es, minishell);
-			if (temp)
-				cmd = temp;
+			parseexec(get_string(&ps), exec_cmd);
 		}
-		if (cmd)
+		else if (token == '<' || token == '>' || token == '+' || token == '-')
 		{
-			// handle_quotes_dollar(cmd->argv, minishell);
-			minishell->commands[i] = cmd;
+			red_cmd = parseredirs(token, &ps, minishell);
+			if (!current)
+			{
+				current = red_cmd;
+				minishell->commands[i] = red_cmd;
+				minishell->number_of_commands++;
+				red_cmd = NULL;
+			}
+			else
+			{
+				current->sub_cmd = red_cmd;
+				current = red_cmd;
+				red_cmd = NULL;
+			}
+		}
+		else if (token == '|')
+		{
+			if (current)
+				current->sub_cmd = exec_cmd;
+			else
+				minishell->commands[i] = exec_cmd;
 			minishell->number_of_commands++;
+			// red_cmd = NULL;
+			i++;
 		}
-		peek(&ps, "|");
-		ps++;
-		i++;
 	}
+		if (!current)
+			{minishell->commands[i] = exec_cmd;
+			minishell->number_of_commands++;}
 }
 
-t_cmd	*parseexec(char **ps, t_data *minishell)
+t_cmd	*parseexec(char *str, t_cmd *exec_cmd)
 {
-	t_cmd	*ret_cmd;
+	char	**argv;
 
-	(void)minishell;
-	ret_cmd = ft_init_cmd(EXEC);
-	ret_cmd->argv = get_argv_for_single_cmd(ps);
-	if (ret_cmd->argv == NULL)
-	{
-		free(ret_cmd);
-		return (NULL);
-	}
-	// ret_cmd->argv = expand_variables(ret_cmd->argv, minishell);
-	ret_cmd->argv = remove_argv_quotes(ret_cmd->argv);
-	return (ret_cmd);
+	argv = exec_cmd->argv;
+	exec_cmd->argv = ft_append_argv(argv, str);
+	free(str);
+	str = NULL;
+	// exec_cmd->argv = remove_argv_quotes(argv); //remove in str
+	return (exec_cmd);
 }
 
 /*
 	if (ret_cmd->argv[1] != NULL)
 		printf("argv[0]: %s\n argv[1]: %s\n", ret_cmd->argv[0],
 			ret_cmd->argv[1]); */
-t_cmd	*parseredirs(t_cmd *sub_cmd, char **ps, char *es, t_data *minishell)
+t_cmd	*parseredirs(int tok, char **ps, t_data *minishell)
 {
-	int		tok;
 	t_cmd	*ret_cmd;
 	char	*file;
 
 	ret_cmd = NULL;
-	tok = 0;
 	file = NULL;
-	while (peek(ps, "<>"))
-	{
-		tok = gettoken(ps, es, 0, 0);
-		file = get_word(ps);
-		if (file == NULL)
-			panic("missing file for redirection");
-		if (tok == '<')
-			ret_cmd = inputcmd(sub_cmd, file, O_RDONLY, minishell);
-		else if (tok == '>')
-			ret_cmd = redircmd(sub_cmd, file, O_CREAT | O_WRONLY | O_TRUNC, 1);
-		else if (tok == '+')
-			ret_cmd = redircmd(sub_cmd, file, O_WRONLY | O_CREAT | O_APPEND, 1);
-		else if (tok == '-')
-			ret_cmd = here_doc_cmd(sub_cmd, file);
-	}
+	file = get_word(ps);
+	if (file == NULL)
+		panic("missing file for redirection");
+	if (tok == '<')
+		ret_cmd = inputcmd(file, O_RDONLY, minishell);
+	else if (tok == '>')
+		ret_cmd = redircmd(file, O_CREAT | O_WRONLY | O_TRUNC, 1);
+	else if (tok == '+')
+		ret_cmd = redircmd(file, O_WRONLY | O_CREAT | O_APPEND, 1);
+	else if (tok == '-')
+		ret_cmd = here_doc_cmd(file);
 	return (ret_cmd);
 }
