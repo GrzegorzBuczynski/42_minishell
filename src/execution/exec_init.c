@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 15:05:06 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:31:30 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ t_cmd	*inputcmd(t_cmd *subcmd, char *file, int mode, t_data *minishell)
 	cmd->mode = mode;
     if(!read_file_access(minishell, file))
 	{
-		free(subcmd);
-		subcmd = NULL;
 		free(cmd);
 		minishell->exit_status = 2;
 		return (NULL);
