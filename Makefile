@@ -41,10 +41,10 @@ SRCS =	src/main.c \
 		src/garbage_colector/minishell_free.c \
 		src/parsing/argv_utils.c \
 		src/parsing/heredoc.c \
-		src/parsing/parsing_init.c\
-		src/parsing/parsing_utils2.c \
 		src/parsing/parsing_utils1.c\
+		src/parsing/parsing_utils2.c \
 		src/parsing/parsing_utils3.c \
+		src/parsing/parsing_utils4.c\
 		src/parsing/parsing.c \
 		src/parsing/tokens.c \
 		src/utils/ft_strstr.c \

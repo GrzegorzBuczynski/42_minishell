@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 14:59:30 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:41:05 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,23 @@ void	create_pipes(t_data *minishell)
 
 int	execute(t_data *minishell)
 {
-	int	commands;
-	pid_t	last_pid;
+	t_cmd	*cmd;
 
-	commands = minishell->number_of_commands;
-	if (commands == 0)
-		return (1);
-	if (commands == 1 && is_builtin(*(minishell->commands))
-		&& minishell->commands[0]->type == EXEC)
+	if (minishell->pipe_cmd)
 	{
-		return (run_builtin_cmd(minishell->commands[0]->argv, minishell));
+		cmd = minishell->pipe_cmd;
+		run_cmd(cmd, minishell);
 	}
-	else if (commands == 1)
+	else if (minishell->redir_cmd)
 	{
-		last_pid = fork1();
-		if (last_pid == 0)
-			runcmd(minishell->commands[0], minishell);
-		wait_for_processes(minishell, last_pid);
+		cmd = minishell->redir_cmd;
+		run_cmd(cmd, minishell);
+	}
+	else if (minishell->exec_cmd)
+	{
+		cmd = minishell->exec_cmd;
+		run_cmd(cmd, minishell);
 	}
 	else
-	{
-		create_pipes(minishell);
-		make_forks(minishell);
-	}
-	return (0);
+		perror("No command to execute");
 }
