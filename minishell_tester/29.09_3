@@ -1,0 +1,198 @@
+[0;31m🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+                                                                                             
+ ██    ██ █ ██    █ █ █████ █   █ █████ █     █       ██████ █████ █████ ██████ █████ █████  
+ ███  ███ █ ███   █ █ █     █   █ █     █     █         ██   █     █       ██   █     █   ██ 
+ █ ████ █ █ █ ██  █ █ █████ █████ ████  █     █         ██   ████  █████   ██   ████  █████  
+ █  ██  █ █ █  ██ █ █     █ █   █ █     █     █         ██   █         █   ██   █     █   ██ 
+ █      █ █ █   ███ █ █████ █   █ █████ █████ █████     ██   █████ █████   ██   █████ █   ██ 
+                                                                                             
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+                                                                                              
+[0;31m———————————— builtins
+[0;33mTest   1: ❌[38;5;244m echo hello world 
+[0mmini exit code = hello world echo 0 exit
+bash exit code = 0
+[0;33mTest   2: ❌[38;5;244m echo "hello world" 
+[0mmini output = ("hello world")
+bash output = (hello world)
+mini exit code = "hello world" echo 0 exit
+bash exit code = 0
+[0;33mTest   3: ❌[38;5;244m echo 'hello world' 
+[0mmini output = ('hello world')
+bash output = (hello world)
+mini exit code = 'hello world' echo 0 exit
+bash exit code = 0
+[0;33mTest   4: ❌[38;5;244m echo hello'world' 
+[0mmini output = (hello'world')
+bash output = (helloworld)
+mini exit code = hello'world' echo 0 exit
+bash exit code = 0
+[0;33mTest   5: ❌[38;5;244m echo hello""world 
+[0mmini output = (hello""world)
+bash output = (helloworld)
+mini exit code = hello""world echo 0 exit
+bash exit code = 0
+[0;33mTest   6: ❌[38;5;244m echo '' 
+[0mmini output = ('')
+bash output = ()
+mini exit code = '' echo 0 exit
+bash exit code = 0
+[0;33mTest   7: ❌[38;5;244m echo "$PWD" 
+[0mmini output = ("/nfs/homes/gbuczyns/Documents/CommonCore/level_4/2024_09_19_minishell/minishell_tester")
+bash output = (/nfs/homes/gbuczyns/Documents/CommonCore/level_4/2024_09_19_minishell/minishell_tester)
+mini exit code = "/nfs/homes/gbuczyns/Documents/CommonCore/level_4/2024_09_19_minishell/minishell_tester" echo 0 exit
+bash exit code = 0
+[0;33mTest   8: ❌[38;5;244m echo '$PWD' 
+[0mmini output = ('$PWD')
+bash output = ($PWD)
+mini exit code = '$PWD' echo 0 exit
+bash exit code = 0
+[0;33mTest   9: ❌[38;5;244m echo "aspas ->'" 
+[0mmini output = ("aspas ->'")
+bash output = (aspas ->')
+mini exit code = "aspas ->'" echo 0 exit
+bash exit code = 0
+[0;33mTest  10: ❌[38;5;244m echo "aspas -> ' " 
+[0mmini output = ("aspas -> ' ")
+bash output = (aspas -> ' )
+mini exit code = "aspas -> ' " echo 0 exit
+bash exit code = 0
+[0;33mTest  11: ❌[38;5;244m echo 'aspas ->"' 
+[0mmini output = ('aspas ->"')
+bash output = (aspas ->")
+mini exit code = 'aspas ->"' echo 0 exit
+bash exit code = 0
+[0;33mTest  12: ❌[38;5;244m echo 'aspas -> " ' 
+[0mmini output = ('aspas -> " ')
+bash output = (aspas -> " )
+mini exit code = 'aspas -> " ' echo 0 exit
+bash exit code = 0
+[0;33mTest  13: ❌[38;5;244m echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<" 
+[0mmini output = ("> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<")
+bash output = (> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<)
+mini exit code = "> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<" echo 0 exit
+bash exit code = 0
+[0;33mTest  14: ❌[38;5;244m echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<' 
+[0mmini output = ('> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<')
+bash output = (> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<)
+mini exit code = '> >> < " ' "' ' " '" $HOME" $HOME' $? user ->$USER home -> $HOME" $? user ->$USER home -> $HOME' $USER home -> $HOME" $USER home -> $HOME' 29.09_3 bash_outfiles bash.supp bonus bonus_bonus builtins extras local.supp loop.out manual_tests mini_outfiles os_specific outfiles pipes README.md redirects syntax test_0 tester test_files wildcards ? [ ] | ; [ ] || && ( ) & # $ <<' echo 0 exit
+bash exit code = 0
+[0;33mTest  15: ❌[38;5;244m echo "exit_code ->$? user ->$USER home -> $HOME" 
+[0mmini output = ("exit_code ->0 user ->gbuczyns home -> /nfs/homes/gbuczyns")
+bash output = (exit_code ->0 user ->gbuczyns home -> /nfs/homes/gbuczyns)
+mini exit code = "exit_code ->0 user ->gbuczyns home -> /nfs/homes/gbuczyns" echo 0 exit
+bash exit code = 0
+[0;33mTest  16: ❌[38;5;244m echo 'exit_code ->$? user ->$USER home -> $HOME' 
+[0mmini output = ('exit_code ->$? user ->$USER home -> $HOME')
+bash output = (exit_code ->$? user ->$USER home -> $HOME)
+mini exit code = 'exit_code ->$? user ->$USER home -> $HOME' echo 0 exit
+bash exit code = 0
+[0;33mTest  17: ❌[38;5;244m echo "$" 
+[0mmini output = ("$")
+bash output = ($)
+mini exit code = "$" echo 0 exit
+bash exit code = 0
+[0;33mTest  18: ❌[38;5;244m echo '$' 
+[0mmini output = ('$')
+bash output = ($)
+mini exit code = '$' echo 0 exit
+bash exit code = 0
+[0;33mTest  19: ❌[38;5;244m echo $ 
+[0mmini exit code = $ echo 0 exit
+bash exit code = 0
+[0;33mTest  20: ❌[38;5;244m echo $? 
+[0mmini exit code = 0 echo 0 exit
+bash exit code = 0
+[0;33mTest  21: ❌[38;5;244m echo $?HELLO 
+[0mmini exit code = 0HELLO echo 0 exit
+bash exit code = 0
+[0;33mTest  22: ❌[38;5;244m pwd 
+[0mmini exit code = /nfs/homes/gbuczyns/Documents/CommonCore/level_4/2024_09_19_minishell/minishell_tester
+bash exit code = 0
+[0;33mTest  23: ❌[38;5;244m pwd oi 
+[0mmini exit code = /nfs/homes/gbuczyns/Documents/CommonCore/level_4/2024_09_19_minishell/minishell_tester
+bash exit code = 0
+[0;33mTest  24: ❌[38;5;244m export hello 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  25: ❌[38;5;244m export HELLO=123 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  26: ❌[38;5;244m export A- 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  27: ❌[38;5;244m export HELLO=123 A 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  28: ❌[38;5;244m export HELLO="123 A-" 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  29: ❌[38;5;244m export hello world 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  30: ❌[38;5;244m export HELLO-=123 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  31: ❌[38;5;244m export = 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  32: ❌[38;5;244m export 123 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  33: ❌[38;5;244m unset 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  34: ❌[38;5;244m unset HELLO 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  35: ❌[38;5;244m unset HELLO1 HELLO2 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  36: ❌[38;5;244m unset HOME 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  37: ❌[38;5;244m unset PATH 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  38: ❌[38;5;244m unset SHELL 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  39: ❌[38;5;244m cd $PWD 
+[0mmini exit code =
+bash exit code = 0
+[0;33mTest  40: ❌[38;5;244m cd $PWD hi 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  41: ❌[38;5;244m cd 123123 
+[0mmini exit code =
+bash exit code = 1
+[0;33mTest  42: ✅[38;5;244m exit 123 
+[0m[0;33mTest  43: ✅[38;5;244m exit 298 
+[0m[0;33mTest  44: ✅[38;5;244m exit +100 
+[0m[0;33mTest  45: ❌[38;5;244m exit "+100" 
+[0mmini exit code = 2
+bash exit code = 100
+mini error = ( numeric argument required)
+bash error = ()
+[0;33mTest  46: ❌[38;5;244m exit +"100" 
+[0mmini exit code = 2
+bash exit code = 100
+mini error = ( numeric argument required)
+bash error = ()
+[0;33mTest  47: ✅[38;5;244m exit -100 
+[0m[0;33mTest  48: ❌[38;5;244m exit "-100" 
+[0mmini exit code = 2
+bash exit code = 156
+mini error = ( numeric argument required)
+bash error = ()
+[0;33mTest  49: ❌[38;5;244m exit -"100" 
+[0mmini exit code = 2
+bash exit code = 156
+mini error = ( numeric argument required)
+bash error = ()
+[0;33mTest  50: ✅[38;5;244m exit hello 
+[0m[0;33mTest  51: ✅[38;5;244m exit 42 world 
+[0m[0;33mTest  52: ❌[38;5;244m  
+[0mmini exit code = 0 exit
+bash exit code = 0
+[0;31m———————————— pipes

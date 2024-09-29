@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:59:22 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 22:14:21 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,24 @@ int	execute(t_data *minishell)
 	}
 	else if (minishell->redir_cmd)
 	{
-		cmd = minishell->redir_cmd;
-		runcmd(cmd, minishell);
-		cmd = minishell->exec_cmd;
-		runcmd(cmd, minishell);
+		last_pid = fork1();
+		if (last_pid == 0)
+		{
+			cmd = minishell->redir_cmd;
+			runcmd(cmd, minishell);
+			cmd = minishell->exec_cmd;
+			runcmd(cmd, minishell);
+		}
+		wait_for_processes(minishell, last_pid);
 	}
 	else if (minishell->exec_cmd)
 	{
 		cmd = minishell->exec_cmd;
 		if (is_builtin(cmd))
-			return (run_builtin_cmd(minishell->commands[0]->argv, minishell));
+		{
+			run_builtin_cmd(cmd->argv, minishell);
+			return (0);
+		}
 		else
 		{
 			last_pid = fork1();
