@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 20:51:37 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:59:22 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	create_pipes(t_cmd *cmd, t_data *minishell)
 int	execute(t_data *minishell)
 {
 	t_cmd	*cmd;
+	pid_t	last_pid;
 
 	if (minishell->pipe_cmd)
 	{
@@ -69,12 +70,20 @@ int	execute(t_data *minishell)
 	else if (minishell->exec_cmd)
 	{
 		cmd = minishell->exec_cmd;
-		runcmd(cmd, minishell);
+		if (is_builtin(cmd))
+			return (run_builtin_cmd(minishell->commands[0]->argv, minishell));
+		else
+		{
+			last_pid = fork1();
+			if (last_pid == 0)
+				runcmd(minishell->commands[0], minishell);
+		}
+		wait_for_processes(minishell, last_pid);
 	}
 	else
 	{
 		perror("No command to execute");
-		return (EXIT_FAILURE);	
+		return (EXIT_FAILURE);
 	}
 	return (0);
 }

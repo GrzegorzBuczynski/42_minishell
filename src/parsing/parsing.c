@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:12:51 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:32:54 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ void	parsecmd(t_data *minishell)
 		parse_exec(&ps, minishell);
 		parse_redir(&ps, minishell);
 		parse_pipe(&ps, minishell);
+	}
+	if (minishell->error)
+	{
+		// free_global(minishell);
+		minishell->exit_status = 2;
 	}
 	setup_fork(minishell);
 }

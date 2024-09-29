@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/29 20:37:54 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:33:05 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_data
 	t_cmd			*redir_cmd;
 	t_cmd			*exec_cmd;
 	t_cmd			*pipe_cmd;
+	int				error;
 }					t_data;
 
 // Validate_input

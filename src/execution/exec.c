@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 20:42:32 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:54:09 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 		return ;
 	if (run_builtin_cmd(cmd->argv, minishell))
 		exit(0);
+	// if(minishell->redir_cmd || minishell->pipe_cmd)
 	paths = retrieve_paths();
 	binary_path = find_executable_path(cmd, paths);
 	execute_process(binary_path, cmd, minishell);

@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:15:27 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:35:15 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	read_file_access(t_data *minishell, char *file)
 		return (false);
 	}
 	// if (access(file, F_OK | R_OK) != 0)
-		// Check if file exists and is readable
+	// Check if file exists and is readable
 	// {
 	// 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	// 	ft_putstr_fd(file, STDERR_FILENO);
@@ -84,8 +84,17 @@ t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
 	cmd->mode = mode;
 	if (!read_file_access(minishell, file))
 	{
-		free(cmd);
-		minishell->exit_status = 2;
+		if (cmd)
+			free(cmd);
+		if (file)
+			free(file);
+		if (minishell->exec_cmd)
+			free(minishell->exec_cmd);
+		if (minishell->redir_cmd)
+			free(minishell->redir_cmd);
+				// free the command add function to free the commands
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
 		return (NULL);
 	}
 	return (cmd);
@@ -105,5 +114,3 @@ int	handle_output_redirection(t_data *minishell, char *file, int mode)
 	}
 	return (fd); // Return file descriptor
 }
-
-

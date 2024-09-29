@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:31:24 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:36:18 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	reset_minishell(t_data *minishell)
 	minishell->pipe_argv = NULL;
 	minishell->number_of_commands = 0;
 	minishell->commands = NULL;
-	
 }
 
 void	minishell_loop(t_data *minishell)
@@ -59,8 +58,7 @@ void	minishell_loop(t_data *minishell)
 			continue ;
 		}
 		parsecmd(minishell);
-		if (*(minishell->commands))
-			execute(minishell);
+		execute(minishell);
 		set_last_exit_code(minishell);
 		// free
 		reset_minishell(minishell);
@@ -77,14 +75,15 @@ void	init_minishell(t_data *minishell, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data	minishell;
+	t_data	*minishell;
 
 	(void)argc;
 	(void)argv;
 	(void)env;
+	minishell = (t_data *)ft_calloc(sizeof(t_data), 1);
 	signal(SIGINT, handle_sigint);
-	init_minishell(&minishell, env);
-	init_environment(&minishell.envlist, minishell.envir);
-	minishell_loop(&minishell);
+	init_minishell(minishell, env);
+	init_environment(&(minishell->envlist), minishell->envir);
+	minishell_loop(minishell);
 	return (0);
 }
