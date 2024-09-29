@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/29 19:30:47 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:37:54 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
 char				*find_executable_path(t_cmd *ecmd, char **paths);
 char				**environment_list_to_array(t_env *environment);
-void				make_forks(t_data *minishell);
-void				create_pipes(t_data *minishell);
+void				make_forks(t_cmd *cmd, t_data *minishell);
+void				create_pipes(t_cmd *cmd, t_data *minishell);
 int					execute(t_data *minishell);
 // void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);

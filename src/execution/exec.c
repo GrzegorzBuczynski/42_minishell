@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 14:02:28 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:42:32 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	exit(1);
 }
 
+void	do_pipe(t_cmd *cmd, t_data *minishell)
+{
+	create_pipes(cmd, minishell);
+	make_forks(cmd, minishell);
+}
+
 void	runcmd(t_cmd *cmd, t_data *minishell)
 {
 	if (cmd == 0)
@@ -80,6 +86,8 @@ void	runcmd(t_cmd *cmd, t_data *minishell)
 		exit(1);
 	if (cmd->type == EXEC)
 		do_exec(cmd, minishell);
+	else if (cmd->type == PIPE)
+		do_pipe(cmd, minishell);
 	else if (cmd->type == REDIR)
 		do_redirect(cmd, minishell);
 	else if (cmd->type == LIST || cmd->type == BACK)

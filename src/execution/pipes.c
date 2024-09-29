@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:52:36 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:33:23 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,31 @@ pid_t	fork1(void)
 	return (pid);
 }
 
-void	create_pipes(t_data *minishell)
+void	create_pipes(t_cmd *cmd, t_data *minishell)
 {
-	int	i;
-	int	pipes;
+	int		i;
+	int		pipes;
+	t_cmd	*current;
 
 	i = 0;
-	pipes = minishell->number_of_commands - 1;
-	minishell->pipe_argv = (int **)malloc(sizeof(int *) * pipes);
+	pipes = 0;
+	current = cmd;
+	while (current)
+	{
+		i++;
+		current = current->sub_cmd;
+	}
+	minishell->pipe_argv = (int **)calloc(sizeof(int *) * i, 1);
 	if (minishell->pipe_argv == NULL)
 		panic("malloc");
-	while (i < pipes)
+	while (pipes < i)
 	{
-		minishell->pipe_argv[i] = (int *)malloc(2 * sizeof(int));
+		minishell->pipe_argv[i] = (int *)calloc(2 * sizeof(int), 1);
 		if (minishell->pipe_argv[i] == NULL)
 			panic("malloc");
 		if (pipe(minishell->pipe_argv[i]) == -1)
 			panic("pipe");
-		i++;
+		pipes++;
 	}
 }
 
