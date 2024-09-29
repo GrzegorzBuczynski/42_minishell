@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:28:58 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:49:08 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	parse_pipe(char **ps, t_data *minishell)
 			current = current->sub_cmd;
 		current->exec_cmd = minishell->exec_cmd;
 		current->redir_cmd = minishell->redir_cmd;
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
 	}
 }
 

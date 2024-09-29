@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:41:05 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:52:36 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,19 @@ int	execute(t_data *minishell)
 	if (minishell->pipe_cmd)
 	{
 		cmd = minishell->pipe_cmd;
-		run_cmd(cmd, minishell);
+		runcmd(cmd, minishell);
 	}
 	else if (minishell->redir_cmd)
 	{
 		cmd = minishell->redir_cmd;
-		run_cmd(cmd, minishell);
+		runcmd(cmd, minishell);
+		cmd = minishell->exec_cmd;
+		runcmd(cmd, minishell);
 	}
 	else if (minishell->exec_cmd)
 	{
 		cmd = minishell->exec_cmd;
-		run_cmd(cmd, minishell);
+		runcmd(cmd, minishell);
 	}
 	else
 		perror("No command to execute");
