@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 21:34:57 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:11:48 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,6 @@ int	read_file_access(t_data *minishell, char *file)
 {
 	char	cwd[1024];
 
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		printf("Current working dir: %s\n", cwd);
-	}
 	if (access(file, F_OK | R_OK) != 0)
 	{
 		perror("access error");
@@ -73,21 +69,6 @@ int	read_file_access(t_data *minishell, char *file)
 	// 	return (false);
 	// }
 	return (true);
-}
-
-int	handle_output_redirection(t_data *minishell, char *file, int mode)
-{
-	int flags = O_WRONLY | O_CREAT | mode; // Mode can be O_TRUNC or O_APPEND
-	int fd = open(file, flags, 0644);      // Open file with write permissions
-	if (fd < 0)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(file, STDERR_FILENO);
-		ft_putstr_fd(": Cannot open or create file\n", STDERR_FILENO);
-		minishell->exit_status = 1; // Update exit status
-		return (-1);
-	}
-	return (fd); // Return file descriptor
 }
 
 t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
@@ -111,3 +92,20 @@ t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
 	}
 	return (cmd);
 }
+
+int	handle_output_redirection(t_data *minishell, char *file, int mode)
+{
+	int flags = O_WRONLY | O_CREAT | mode; // Mode can be O_TRUNC or O_APPEND
+	int fd = open(file, flags, 0644);      // Open file with write permissions
+	if (fd < 0)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(file, STDERR_FILENO);
+		ft_putstr_fd(": Cannot open or create file\n", STDERR_FILENO);
+		minishell->exit_status = 1; // Update exit status
+		return (-1);
+	}
+	return (fd); // Return file descriptor
+}
+
+

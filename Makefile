@@ -29,7 +29,6 @@ SRCS =	src/main.c \
 		src/utils/ft_is_inside_quotes.c \
 		src/execution/pipes.c \
 		src/execution/forks.c \
-		src/execution/exec_init.c \
 		src/execution/exec.c \
 		src/execution/find_bin_cmd.c \
 		src/execution/find_bin_cmd_utils.c \
@@ -43,7 +42,8 @@ SRCS =	src/main.c \
 		src/parsing/argv_utils.c \
 		src/parsing/heredoc.c \
 		src/parsing/parsing_init.c\
-		src/parsing/parsing_utils.c\
+		src/parsing/parsing_utils2.c \
+		src/parsing/parsing_utils1.c\
 		src/parsing/parsing.c \
 		src/parsing/tokens.c \
 		src/utils/ft_strstr.c \
