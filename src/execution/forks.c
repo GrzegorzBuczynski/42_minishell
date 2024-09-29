@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 20:49:48 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:04:07 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	fork_and_run_command(t_cmd *cmd, t_data *minishell, int i)
 
 	current = cmd;
 	pipe_argv = minishell->pipe_argv;
-	// commands = minishell->number_of_commands;
+	commands = minishell->number_of_commands;
 	// cmd = minishell->commands[i];
 	pid = fork();
 	if (pid == 0)
 	{
 		setup_pipes(pipe_argv, i, commands);
-		close_pipes(pipe_argv, commands);
+		close_pipes(pipe_argv, current);
 		if (cmd->redir_cmd)
 			runcmd(cmd->redir_cmd, minishell);
 		runcmd(cmd->exec_cmd, minishell);
@@ -90,6 +90,7 @@ void	make_forks(t_cmd *cmd, t_data *minishell)
 	i = 0;
 	current = cmd;
 	last_pid = fork_and_run_command(current, minishell, i);
+	pipe_argv = minishell->pipe_argv;
 	if (!(current->sub_cmd))
 		close(pipe_argv[i][1]);
 	if (i != 0)

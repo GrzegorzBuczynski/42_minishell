@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 20:33:23 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:51:37 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,9 @@ int	execute(t_data *minishell)
 		runcmd(cmd, minishell);
 	}
 	else
+	{
 		perror("No command to execute");
+		return (EXIT_FAILURE);	
+	}
+	return (0);
 }
