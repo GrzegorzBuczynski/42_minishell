@@ -44,6 +44,7 @@ SRCS =	src/main.c \
 		src/parsing/parsing_init.c\
 		src/parsing/parsing_utils2.c \
 		src/parsing/parsing_utils1.c\
+		src/parsing/parsing_utils3.c \
 		src/parsing/parsing.c \
 		src/parsing/tokens.c \
 		src/utils/ft_strstr.c \

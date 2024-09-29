@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_init.c                                        :+:      :+:    :+:   */
+/*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:11:48 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:15:27 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_cmd	*backcmd(t_cmd *subcmd)
 
 int	read_file_access(t_data *minishell, char *file)
 {
-	char	cwd[1024];
-
 	if (access(file, F_OK | R_OK) != 0)
 	{
 		perror("access error");

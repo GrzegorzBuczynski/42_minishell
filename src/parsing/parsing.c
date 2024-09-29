@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:07:57 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:28:58 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	parse_exec(char **ps, t_data *minishell)
 {
-	if (!is_redirect(*ps) && !is_pipe(*ps))
+	ft_skip_whitespace(ps);
+	if (!is_redirection(*ps) && !is_pipe(*ps))
 	{
 		if (minishell->exec_cmd == NULL)
 			minishell->exec_cmd = ft_init_cmd(EXEC);
@@ -26,11 +27,10 @@ void	parse_exec(char **ps, t_data *minishell)
 void	parse_redir(char **ps, t_data *minishell)
 {
 	t_cmd	*current;
-	int		token;
 	t_cmd	*ret_cmd;
 
-	token = get_token(ps);
-	if (is_redirection(ps))
+	ft_skip_whitespace(ps);
+	if (is_redirection(*ps))
 	{
 		ret_cmd = get_redir_cmd(ps, minishell);
 		if (minishell->redir_cmd == NULL)
@@ -49,6 +49,7 @@ void	parse_pipe(char **ps, t_data *minishell)
 {
 	t_cmd	*current;
 
+	ft_skip_whitespace(ps);
 	if (is_pipe(*ps))
 	{
 		if (minishell->pipe_cmd == NULL)
@@ -109,38 +110,6 @@ void	parsecmd(t_data *minishell)
 // 	if (ft_strcmp(str, "|") == 0)
 // 		return (1);
 // 	return (0);
-// }
-
-// int	get_token(char **ps)
-// {
-// 	ft_skip_whitespace(ps);
-// 	if (!strncmp(*ps, "<<", 2))
-// 	{
-// 		*ps += 2;
-// 		return ('-');
-// 	}
-// 	else if (!strncmp(*ps, ">>", 2))
-// 	{
-// 		*ps += 2;
-// 		return ('+');
-// 	}
-// 	else if (!strncmp(*ps, ">", 1))
-// 	{
-// 		*ps += 1;
-// 		return ('>');
-// 	}
-// 	else if (!strncmp(*ps, "<", 1))
-// 	{
-// 		*ps += 1;
-// 		return ('<');
-// 	}
-// 	else if (!strncmp(*ps, "|", 1))
-// 	{
-// 		*ps += 1;
-// 		return ('|');
-// 	}
-// 	else
-// 		return ('a');
 // }
 
 // void	parsecmd(t_data *minishell)

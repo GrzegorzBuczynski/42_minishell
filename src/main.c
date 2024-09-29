@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 21:31:31 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:31:24 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	minishell_loop(t_data *minishell)
 			set_last_exit_code(minishell);
 			continue ;
 		}
-		alloc_mem_for_commands(minishell);
 		parsecmd(minishell);
 		if (*(minishell->commands))
 			execute(minishell);

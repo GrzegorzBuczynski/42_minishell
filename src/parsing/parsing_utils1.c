@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:11:41 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:32:37 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	is_redirection(char **s)
+int	is_redirection(char *s)
 {
-	ft_skip_whitespace(s);
-	if (!strncmp(*s, "<<", 2))
+	if (!strncmp(s, "<<", 2))
 		return ('-');
-	else if (!strncmp(*s, ">>", 2))
+	else if (!strncmp(s, ">>", 2))
 		return ('+');
-	else if (!strncmp(*s, ">", 1))
+	else if (!strncmp(s, ">", 1))
 		return ('>');
-	else if (!strncmp(*s, "<", 1))
+	else if (!strncmp(s, "<", 1))
 		return ('<');
 	return (0);
 }
 
-int	is_pipe(char **s)
+int	is_pipe(char *s)
 {
-	ft_skip_whitespace(s);
-	if (!strncmp(*s, "|", 1))
-	{
-		*s += 1;
+	if (!strncmp(s, "|", 1))
 		return ('|');
-	}
 	return (0);
 }
 
@@ -66,6 +61,37 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 	return (ret_cmd);
 }
 
+int	get_token(char **ps)
+{
+	ft_skip_whitespace(ps);
+	if (!strncmp(*ps, "<<", 2))
+	{
+		*ps += 2;
+		return ('-');
+	}
+	else if (!strncmp(*ps, ">>", 2))
+	{
+		*ps += 2;
+		return ('+');
+	}
+	else if (!strncmp(*ps, ">", 1))
+	{
+		*ps += 1;
+		return ('>');
+	}
+	else if (!strncmp(*ps, "<", 1))
+	{
+		*ps += 1;
+		return ('<');
+	}
+	else if (!strncmp(*ps, "|", 1))
+	{
+		*ps += 1;
+		return ('|');
+	}
+	else
+		return ('a');
+}
 
 /*
 ** Function skip whitespaces and moves *ps pointer to the next
@@ -83,27 +109,13 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 // 	return (*s && strchr(toks, *s));
 // }
 
-
-
 // void	advance_to_end_of_token(char **s, char *es)
 // {
 // 	while (*s < es && !strchr(" \t\r\n\v", **s) && !strchr("<|>&;()", **s))
 // 		(*s)++;
 // }
 
-// char	*ft_substring(const char *start, const char *end)
-// {
-// 	size_t	length;
-// 	char	*result;
 
-// 	length = end - start;
-// 	result = malloc(length + 1);
-// 	if (result == NULL)
-// 		return (NULL);
-// 	strncpy(result, start, length);
-// 	result[length] = '\0';
-// 	return (result);
-// }
 
 // char	*get_block(char **ps)
 // {
@@ -155,42 +167,4 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 // 	return (ret);
 // }
 
-// /*
-//  * Returns a string from the input string.
-//  * The string can be a block or a word.
-//  * A block is a string between two quotes.
-//  * A word is a string between two whitespaces.
-//  */
-// char	*get_string(char **ps)
-// {
-// 	char	*s;
-// 	char	*ret;
-// 	size_t	length;
-// 	char	*start;
-// 	int		quote;
 
-// 	length = 0;
-// 	if (*ps == NULL || **ps == '\0')
-// 		return (NULL);
-// 	ft_skip_whitespace(ps);
-// 	s = *ps;
-// 	start = s;
-// 	while (s && *s && !ft_iswhitespace(*s) ) //&& !is_redirection(*s)
-// 	{
-// 		if (*s == '\'' || *s == '\"')
-// 		{
-// 			quote = *s;
-// 			s++;
-// 			while (s && *s && *s != quote)
-// 				s++;
-// 		}
-// 		if (*s == quote)
-// 			s++;
-// 		else
-// 			s++;
-// 	}
-// 	length = s - start;
-// 	ret = ft_strndup(start, length);
-// 	*ps = s;
-// 	return (ret);
-// }

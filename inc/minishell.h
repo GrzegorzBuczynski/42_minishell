@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/29 19:05:42 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:30:47 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void				ft_envlstadd_back(t_env *new, t_data *minishell);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 int					peek(char **ps, char *toks);
 void				panic(char *s);
-int					gettoken(char **ps, char *es, char **q, char **eq);
+int					get_token(char **ps);
 char				*get_word(char **ps);
 
 // execution
@@ -124,9 +124,9 @@ void				runcmd(struct s_cmd *cmd, t_data *minishell);
 void				parsecmd(t_data *minishell);
 t_cmd				*parseline(char **ps, char *es);
 t_cmd				*parseblock(char **ps, char *es);
-int					is_redirection(char **s);
+int					is_redirection(char *s);
 t_cmd				*get_redir_cmd(char **ps, t_data *minishell);
-int					is_pipe(char **s);
+int					is_pipe(char *s);
 t_cmd				*parseexec(char *str, t_cmd *exec_cmd);
 
 pid_t				fork1(void);
@@ -153,7 +153,7 @@ char				**environment_list_to_array(t_env *environment);
 void				make_forks(t_data *minishell);
 void				create_pipes(t_data *minishell);
 int					execute(t_data *minishell);
-void				alloc_mem_for_commands(t_data *minishell);
+// void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);
 char				*ft_substring(const char *start, const char *end);
 char				**get_argv_for_single_cmd(char **ps);
