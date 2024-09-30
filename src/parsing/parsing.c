@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 21:04:52 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,81 +45,72 @@ void	parse_redir(char **ps, t_data *minishell)
 	}
 }
 
-void	parse_pipe(char **ps, t_data *minishell)
+void	append_fork_cmd(t_data *minishell, t_cmd *ret_cmd)
 {
 	t_cmd	*current;
 
-	current = NULL;
+	if (minishell->fork_cmd == NULL)
+	{
+		minishell->fork_cmd = ret_cmd;
+	}
+	else
+	{
+		current = minishell->fork_cmd;
+		while (current->sub_cmd)
+			current = current->sub_cmd;
+		current->sub_cmd = ret_cmd;
+	}
+}
+
+void	parse_fork(char **ps, t_data *minishell)
+{
+	t_cmd	*ret_cmd;
+
 	ft_skip_whitespace(ps);
 	if (is_pipe(*ps))
 	{
 		*ps = *ps + 1;
-		
-		// create new fork command
-		// dequote exec argv
-		// add redir command to fork command
-		// add exec command to fork command
-		// append fork command to forks command
-		if (minishell->fork_cmd == NULL)
-		{
-			minishell->fork_cmd = ft_init_cmd(PIPE);
-			current = minishell->fork_cmd;
-		}
-		else
-		{
-			current = minishell->fork_cmd;
-			while (current->sub_cmd)
-				current = current->sub_cmd;
-			current->sub_cmd = ft_init_cmd(PIPE);
-			current = current->sub_cmd;
-		}
-		current->exec_cmd = minishell->exec_cmd;
-		current->redir_cmd = minishell->redir_cmd;
+		ret_cmd = ft_init_cmd(FORK);
+		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
+		ret_cmd->redir_cmd = minishell->redir_cmd;
+		ret_cmd->exec_cmd = minishell->exec_cmd;
 		minishell->exec_cmd = NULL;
 		minishell->redir_cmd = NULL;
+		append_fork_cmd(minishell, ret_cmd);
 	}
 }
 
-void	setup_fork(t_data *minishell)
+void	add_last_fork(t_data *minishell)
 {
 	t_cmd	*current;
 
 	if (minishell->fork_cmd)
 	{
-		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
-		current = minishell->fork_cmd;
-		while (current->sub_cmd)
-			current = current->sub_cmd;
-		current->sub_cmd = ft_init_cmd(PIPE);
-		current = current->sub_cmd;
+		current = ft_init_cmd(FORK);
 		current->exec_cmd = minishell->exec_cmd;
 		current->redir_cmd = minishell->redir_cmd;
 		minishell->exec_cmd = NULL;
 		minishell->redir_cmd = NULL;
+		append_fork_cmd(minishell, current);
 	}
 }
 
-void	setup_redirection(t_data *minishell)
-{
-	t_cmd	*current;
-
-	if (minishell->redir_cmd)
-	{
-		if (!minishell->exec_cmd)
-			perror("syntax error");
-		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
-		current = minishell->redir_cmd;
-		while (current->sub_cmd)
-			current = current->sub_cmd;
-		current->sub_cmd = minishell->exec_cmd;
-		minishell->exec_cmd = NULL;
-	}
-}
-
-void	setup_exec(t_data *minishell)
+void	dequote_exec(t_data *minishell)
 {
 	if (minishell->exec_cmd)
 		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
+}
+
+void	free_syntax_error(t_data *minishell)
+{
+	if (minishell->error)
+	{
+		minishell->exit_status = 1;
+		minishell->error = 0;
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
+		minishell->fork_cmd = NULL;
+	}
 }
 
 void	parsecmd(t_data *minishell)
@@ -131,20 +122,11 @@ void	parsecmd(t_data *minishell)
 	{
 		parse_exec(&ps, minishell);
 		parse_redir(&ps, minishell);
-		parse_pipe(&ps, minishell);
+		parse_fork(&ps, minishell);
 	}
-	if (minishell->error)
-	{
-		// free_global(minishell);
-		minishell->exit_status = 1;
-		minishell->error = 0;
-		minishell->exec_cmd = NULL;
-		minishell->redir_cmd = NULL;
-		minishell->fork_cmd = NULL;
-	}
-	setup_redirection(minishell);
-	setup_fork(minishell);
-	setup_exec(minishell);
+	free_syntax_error(minishell);
+	dequote_exec(minishell);
+	add_last_fork(minishell);
 }
 
 // void	alloc_mem_for_commands(t_data *minishell)
@@ -194,7 +176,7 @@ void	parsecmd(t_data *minishell)
 // 		// state = parse_block(&ps, state, minishell);
 // 		parse_exec(&ps, minishell);
 // 		parse_redir(&ps, minishell);
-// 		parse_pipe(&ps,  minishell);
+// 		parse_fork(&ps,  minishell);
 // 	}
 // }
 

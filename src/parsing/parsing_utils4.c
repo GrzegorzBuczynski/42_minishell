@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_init.c                                     :+:      :+:    :+:   */
+/*   parsing_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/23 19:05:03 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 21:01:22 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_cmd	*ft_init_cmd(int type)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(sizeof(*cmd), 1);
-	ft_memset(cmd, 0, sizeof(*cmd));
+	if (!cmd)
+		panic("malloc");
 	cmd->type = type;
 	return ((t_cmd *)cmd);
 }

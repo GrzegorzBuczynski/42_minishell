@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 19:11:20 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 21:32:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 	fd = open(rcmd->file, rcmd->mode, 0644);
 	if (fd < 0)
 		panic("open");
-	runcmd(rcmd->sub_cmd, minishell);
-	exit(0);
+	if (rcmd->sub_cmd)
+		runcmd(rcmd->sub_cmd, minishell);
 }
 
 void	run_in_background_or_list(t_cmd *cmd, t_data *minishell)
@@ -43,7 +43,7 @@ void	run_in_background_or_list(t_cmd *cmd, t_data *minishell)
 	}
 }
 
-void	execute_process(char *binary_path, t_cmd *cmd, t_data *minishell)
+void	execute_binary(char *binary_path, t_cmd *cmd, t_data *minishell)
 {
 	char	**envp;
 
@@ -69,16 +69,20 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	// if(minishell->redir_cmd || minishell->pipe_cmd)
 	paths = retrieve_paths();
 	binary_path = find_executable_path(cmd, paths);
-	execute_process(binary_path, cmd, minishell);
+	execute_binary(binary_path, cmd, minishell);
 	clean_up(binary_path, paths);
 	exit(1);
 }
 
-void	do_pipe(t_cmd *cmd, t_data *minishell)
+int	exec_with_pipes(t_data *minishell)
 {
-	create_pipes(cmd, minishell);
-	make_forks(cmd, minishell);
-	
+	if (minishell->fork_cmd)
+	{
+		create_pipes(minishell->fork_cmd, minishell);
+		make_forks(minishell->fork_cmd, minishell);
+		return (1);
+	}
+	return (0);
 }
 
 void	runcmd(t_cmd *cmd, t_data *minishell)
@@ -98,4 +102,57 @@ void	runcmd(t_cmd *cmd, t_data *minishell)
 	else
 		exit(1);
 	return ;
+}
+
+int	exec_with_redirects(t_data *minishell)
+{
+	pid_t	last_pid;
+
+	if (minishell->redir_cmd)
+	{
+		last_pid = fork1();
+		if (last_pid == 0)
+		{
+			runcmd(minishell->redir_cmd, minishell);
+			runcmd(minishell->exec_cmd, minishell);
+		}
+		wait_for_processes(minishell, last_pid);
+		return (1);
+	}
+	return (0);
+}
+
+int	exec_exec_cmd(t_data *minishell)
+{
+	pid_t	last_pid;
+	t_cmd	*cmd;
+
+	if (minishell->exec_cmd)
+	{
+		cmd = minishell->exec_cmd;
+		if (is_builtin(cmd))
+		{
+			run_builtin_cmd(cmd->argv, minishell);
+			return (1);
+		}
+		else
+		{
+			last_pid = fork1();
+			if (last_pid == 0)
+				runcmd(minishell->commands[0], minishell);
+		}
+		wait_for_processes(minishell, last_pid);
+	}
+	return (0);
+}
+
+int	execute(t_data *minishell)
+{
+	if (exec_with_pipes(minishell))
+		return (0);
+	else if (exec_with_redirects(minishell))
+		return (0);
+	else if (exec_exec_cmd(minishell))
+		return (0);
+	return (0);
 }

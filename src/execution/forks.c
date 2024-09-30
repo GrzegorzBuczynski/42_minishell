@@ -6,34 +6,24 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 21:12:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	setup_pipes(int **pipe_argv, int i, t_cmd *cmd)
+pid_t	fork1(void)
 {
-	if (i != 0)
-		dup2(pipe_argv[i - 1][0], STDIN_FILENO);
-	if (cmd->sub_cmd)
-		dup2(pipe_argv[i][1], STDOUT_FILENO);
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		panic("fork");
+	return (pid);
 }
 
-static void	close_pipes(int **pipe_argv)
-{
-	int	i;
 
-	i = 0;
-	while (pipe_argv[i])
-	{
-		close(pipe_argv[i][0]);
-		close(pipe_argv[i][1]);
-		i++;
-	}
-}
-
-int	count_nuber_of_commands(t_cmd *cmd)
+int	count_number_of_commands(t_cmd *cmd)
 {
 	int	i;
 
@@ -54,7 +44,7 @@ void	wait_for_processes(t_data *minishell, pid_t last_pid)
 	status = 0;
 	if (minishell->fork_cmd)
 	{
-		i = count_nuber_of_commands(minishell->fork_cmd);
+		i = count_number_of_commands(minishell->fork_cmd);
 		while (i > 0)
 		{
 			if (waitpid(0, &status, 0) == last_pid)

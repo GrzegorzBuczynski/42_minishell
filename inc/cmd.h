@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:08:04 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:10:23 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 20:41:45 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define HERE_DOC 3
 # define INREDIR 4
 # define REDIR 5
-# define PIPE 6
+# define FORK 6
 # define LIST 7
 # define BACK 8
 

@@ -6,20 +6,31 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 21:25:46 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-pid_t	fork1(void)
+void	setup_pipes(int **pipe_argv, int i, t_cmd *cmd)
 {
-	pid_t	pid;
+	if (i != 0)
+		dup2(pipe_argv[i - 1][0], STDIN_FILENO);
+	if (cmd->sub_cmd)
+		dup2(pipe_argv[i][1], STDOUT_FILENO);
+}
 
-	pid = fork();
-	if (pid == -1)
-		panic("fork");
-	return (pid);
+void	close_pipes(int **pipe_argv)
+{
+	int	i;
+
+	i = 0;
+	while (pipe_argv[i])
+	{
+		close(pipe_argv[i][0]);
+		close(pipe_argv[i][1]);
+		i++;
+	}
 }
 
 void	create_pipes(t_cmd *cmd, t_data *minishell)
@@ -50,42 +61,3 @@ void	create_pipes(t_cmd *cmd, t_data *minishell)
 	}
 }
 
-int	execute(t_data *minishell)
-{
-	t_cmd	*cmd;
-	pid_t	last_pid;
-
-	if (minishell->fork_cmd)
-	{
-		cmd = minishell->fork_cmd;
-		do_pipe(cmd, minishell);
-
-	}
-	else if (minishell->redir_cmd)
-	{
-		last_pid = fork1();
-		if (last_pid == 0)
-		{
-			cmd = minishell->redir_cmd;
-			runcmd(cmd, minishell);
-		}
-		wait_for_processes(minishell, last_pid);
-	}
-	else if (minishell->exec_cmd)
-	{
-		cmd = minishell->exec_cmd;
-		if (is_builtin(cmd))
-		{
-			run_builtin_cmd(cmd->argv, minishell);
-			return (0);
-		}
-		else
-		{
-			last_pid = fork1();
-			if (last_pid == 0)
-				runcmd(minishell->commands[0], minishell);
-		}
-		wait_for_processes(minishell, last_pid);
-	}
-	return (0);
-}

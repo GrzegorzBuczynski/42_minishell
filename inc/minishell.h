@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 21:26:33 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,9 @@ char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
 t_cmd				*inputcmd(char *file, int mode, t_data *minishell);
 void				wait_for_processes(t_data *minishell, pid_t last_pid);
-void				do_pipe(t_cmd *cmd, t_data *minishell);
+int					exec_with_pipes(t_data *minishell);
 char				*remove_quotes(char *s);
+void				close_pipes(int **pipe_argv);
+void				setup_pipes(int **pipe_argv, int i, t_cmd *cmd);
 
 #endif
