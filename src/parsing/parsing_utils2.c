@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:35:15 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:39:20 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
 				// free the command add function to free the commands
 		minishell->exec_cmd = NULL;
 		minishell->redir_cmd = NULL;
+		minishell->exit_status = 1;
+		minishell->error = true;
 		return (NULL);
 	}
 	return (cmd);

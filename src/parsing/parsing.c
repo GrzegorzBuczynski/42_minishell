@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 19:31:34 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 19:40:16 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	parsecmd(t_data *minishell)
 
 	ps = minishell->input;
 	es = minishell->input + ft_strlen(minishell->input);
-	while (ps <= es && *ps)
+	while (ps <= es && *ps && !minishell->error)
 	{
 		parse_exec(&ps, minishell);
 		parse_redir(&ps, minishell);
