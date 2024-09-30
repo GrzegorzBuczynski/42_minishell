@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 16:06:56 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 19:31:34 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	parse_pipe(char **ps, t_data *minishell)
 	t_cmd	*current;
 
 	current = NULL;
-	minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
 	ft_skip_whitespace(ps);
 	if (is_pipe(*ps))
 	{
@@ -58,7 +57,7 @@ void	parse_pipe(char **ps, t_data *minishell)
 		if (minishell->pipe_cmd == NULL)
 		{
 			minishell->pipe_cmd = ft_init_cmd(PIPE);
-		current = minishell->pipe_cmd;
+			current = minishell->pipe_cmd;
 		}
 		else
 		{
@@ -94,6 +93,29 @@ void	setup_fork(t_data *minishell)
 	}
 }
 
+void	setup_redirection(t_data *minishell)
+{
+	t_cmd	*current;
+
+	if (minishell->redir_cmd)
+	{
+		if (!minishell->exec_cmd)
+			perror("syntax error");
+		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
+		current = minishell->redir_cmd;
+		while (current->sub_cmd)
+			current = current->sub_cmd;
+		current->sub_cmd = minishell->exec_cmd;
+		minishell->exec_cmd = NULL;
+	}
+}
+
+void	setup_exec(t_data *minishell)
+{
+	if (minishell->exec_cmd)
+		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
+}
+
 void	parsecmd(t_data *minishell)
 {
 	char	*es;
@@ -116,7 +138,9 @@ void	parsecmd(t_data *minishell)
 		minishell->redir_cmd = NULL;
 		minishell->pipe_cmd = NULL;
 	}
+	setup_redirection(minishell);
 	setup_fork(minishell);
+	setup_exec(minishell);
 }
 
 // void	alloc_mem_for_commands(t_data *minishell)

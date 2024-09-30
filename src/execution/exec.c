@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 18:13:35 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 19:11:20 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 		return ;
 	if (cmd->argv[0] == NULL)
 		return ;
+	cmd->argv = remove_argv_quotes(cmd->argv);
 	if (run_builtin_cmd(cmd->argv, minishell))
 		exit(0);
 	// if(minishell->redir_cmd || minishell->pipe_cmd)
