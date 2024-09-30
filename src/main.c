@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:36:18 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:13:01 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static void	reset_minishell(t_data *minishell)
 	minishell->pipe_argv = NULL;
 	minishell->number_of_commands = 0;
 	minishell->commands = NULL;
+	minishell->exec_cmd = NULL;
+	minishell->redir_cmd = NULL;
+	minishell->pipe_cmd = NULL;
 }
 
 void	minishell_loop(t_data *minishell)

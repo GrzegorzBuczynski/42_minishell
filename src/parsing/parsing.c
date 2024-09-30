@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:32:54 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:22:34 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,15 @@ void	parsecmd(t_data *minishell)
 		parse_redir(&ps, minishell);
 		parse_pipe(&ps, minishell);
 	}
+	minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
 	if (minishell->error)
 	{
 		// free_global(minishell);
 		minishell->exit_status = 2;
+		minishell->error = 0;
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
+		minishell->pipe_cmd = NULL;
 	}
 	setup_fork(minishell);
 }
