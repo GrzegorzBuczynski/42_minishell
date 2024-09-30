@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 21:54:09 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:13:35 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	do_pipe(t_cmd *cmd, t_data *minishell)
 {
 	create_pipes(cmd, minishell);
 	make_forks(cmd, minishell);
+	
 }
 
 void	runcmd(t_cmd *cmd, t_data *minishell)
@@ -87,8 +88,6 @@ void	runcmd(t_cmd *cmd, t_data *minishell)
 		exit(1);
 	if (cmd->type == EXEC)
 		do_exec(cmd, minishell);
-	else if (cmd->type == PIPE)
-		do_pipe(cmd, minishell);
 	else if (cmd->type == REDIR)
 		do_redirect(cmd, minishell);
 	else if (cmd->type == LIST || cmd->type == BACK)

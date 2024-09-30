@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 22:14:21 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:14:24 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@ pid_t	fork1(void)
 
 void	create_pipes(t_cmd *cmd, t_data *minishell)
 {
-	int		i;
+	int		forks;
 	int		pipes;
 	t_cmd	*current;
 
-	i = 0;
+	forks = 0;
 	pipes = 0;
 	current = cmd;
 	while (current)
 	{
-		i++;
+		forks++;
 		current = current->sub_cmd;
 	}
-	minishell->pipe_argv = (int **)calloc(sizeof(int *) * i, 1);
+	minishell->pipe_argv = (int **)ft_calloc(sizeof(int *) * forks, 1);
 	if (minishell->pipe_argv == NULL)
 		panic("malloc");
-	while (pipes < i)
+	while (pipes < forks - 1)
 	{
-		minishell->pipe_argv[i] = (int *)calloc(2 * sizeof(int), 1);
-		if (minishell->pipe_argv[i] == NULL)
+		minishell->pipe_argv[pipes] = (int *)ft_calloc(2 * sizeof(int), 1);
+		if (minishell->pipe_argv[pipes] == NULL)
 			panic("malloc");
-		if (pipe(minishell->pipe_argv[i]) == -1)
+		if (pipe(minishell->pipe_argv[pipes]) == -1)
 			panic("pipe");
 		pipes++;
 	}
@@ -58,7 +58,8 @@ int	execute(t_data *minishell)
 	if (minishell->pipe_cmd)
 	{
 		cmd = minishell->pipe_cmd;
-		runcmd(cmd, minishell);
+		do_pipe(cmd, minishell);
+
 	}
 	else if (minishell->redir_cmd)
 	{

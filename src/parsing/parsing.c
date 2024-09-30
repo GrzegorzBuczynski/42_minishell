@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 15:22:34 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 16:06:56 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,25 @@ void	parse_pipe(char **ps, t_data *minishell)
 {
 	t_cmd	*current;
 
+	current = NULL;
+	minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
 	ft_skip_whitespace(ps);
 	if (is_pipe(*ps))
 	{
+		*ps = *ps + 1;
 		if (minishell->pipe_cmd == NULL)
+		{
 			minishell->pipe_cmd = ft_init_cmd(PIPE);
 		current = minishell->pipe_cmd;
-		while (current->sub_cmd)
+		}
+		else
+		{
+			current = minishell->pipe_cmd;
+			while (current->sub_cmd)
+				current = current->sub_cmd;
+			current->sub_cmd = ft_init_cmd(PIPE);
 			current = current->sub_cmd;
+		}
 		current->exec_cmd = minishell->exec_cmd;
 		current->redir_cmd = minishell->redir_cmd;
 		minishell->exec_cmd = NULL;
@@ -70,6 +81,7 @@ void	setup_fork(t_data *minishell)
 
 	if (minishell->pipe_cmd)
 	{
+		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
 		current = minishell->pipe_cmd;
 		while (current->sub_cmd)
 			current = current->sub_cmd;
@@ -95,7 +107,6 @@ void	parsecmd(t_data *minishell)
 		parse_redir(&ps, minishell);
 		parse_pipe(&ps, minishell);
 	}
-	minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
 	if (minishell->error)
 	{
 		// free_global(minishell);
