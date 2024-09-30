@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 18:40:49 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:16:43 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	close_pipes(int **pipe_argv)
 	}
 }
 
-int count_nuber_of_commands(t_cmd *cmd)
+int	count_nuber_of_commands(t_cmd *cmd)
 {
 	int	i;
 
@@ -52,12 +52,21 @@ void	wait_for_processes(t_data *minishell, pid_t last_pid)
 	int	i;
 
 	status = 0;
-	i = count_nuber_of_commands(minishell->pipe_cmd);
-	while (i > 0)
+	if (minishell->pipe_cmd)
 	{
-		if (waitpid(0, &status, 0) == last_pid)
-			minishell->exit_status = WEXITSTATUS(status);
-		i--;
+		i = count_nuber_of_commands(minishell->pipe_cmd);
+		while (i > 0)
+		{
+			if (waitpid(0, &status, 0) == last_pid)
+				minishell->exit_status = WEXITSTATUS(status);
+			i--;
+		}
+	}
+	else if(last_pid != 0)
+	{
+		waitpid(0, &status, 0);
+		minishell->exit_status = WEXITSTATUS(status);
+		return ;
 	}
 }
 

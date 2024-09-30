@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 19:40:16 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:22:34 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	parsecmd(t_data *minishell)
 	if (minishell->error)
 	{
 		// free_global(minishell);
-		minishell->exit_status = 2;
+		minishell->exit_status = 1;
 		minishell->error = 0;
 		minishell->exec_cmd = NULL;
 		minishell->redir_cmd = NULL;

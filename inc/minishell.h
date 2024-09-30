@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/30 18:15:35 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:21:40 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,6 @@ void				set_last_exit_code(t_data *minishell);
 t_cmd				*inputcmd(char *file, int mode, t_data *minishell);
 void				wait_for_processes(t_data *minishell, pid_t last_pid);
 void				do_pipe(t_cmd *cmd, t_data *minishell);
+char				*remove_quotes(char *s);
 
 #endif

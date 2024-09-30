@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 18:14:24 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:03:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	execute(t_data *minishell)
 		{
 			cmd = minishell->redir_cmd;
 			runcmd(cmd, minishell);
-			cmd = minishell->exec_cmd;
-			runcmd(cmd, minishell);
 		}
 		wait_for_processes(minishell, last_pid);
 	}
@@ -88,11 +86,6 @@ int	execute(t_data *minishell)
 				runcmd(minishell->commands[0], minishell);
 		}
 		wait_for_processes(minishell, last_pid);
-	}
-	else
-	{
-		perror("No command to execute");
-		return (EXIT_FAILURE);
 	}
 	return (0);
 }

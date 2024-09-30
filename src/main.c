@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 15:13:01 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:18:15 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input)
 			add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
-		if (!is_input_valid(minishell->input))
-		{
-			// set exit status according to what failed during validation
-			free(minishell->input);
-			minishell->exit_status = 0;
-			set_last_exit_code(minishell);
-			continue ;
-		}
+		// if (!is_input_valid(minishell->input))
+		// {
+		// 	// set exit status according to what failed during validation
+		// 	free(minishell->input);
+		// 	minishell->exit_status = 0;
+		// 	set_last_exit_code(minishell);
+		// 	continue ;
+		// }
 		parsecmd(minishell);
 		execute(minishell);
 		set_last_exit_code(minishell);

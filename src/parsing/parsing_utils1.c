@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:32:37 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/09/30 20:19:52 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 	ret_cmd = NULL;
 	file = NULL;
 	file = get_string(ps);
+	file = remove_quotes(file);
 	if (file == NULL)
 		panic("missing file for redirection");
 	if (tok == '<')
