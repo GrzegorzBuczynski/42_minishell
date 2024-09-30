@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/30 20:21:40 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data
 	struct termios	terminal;
 	t_cmd			*redir_cmd;
 	t_cmd			*exec_cmd;
-	t_cmd			*pipe_cmd;
+	t_cmd			*fork_cmd;
 	int				error;
 }					t_data;
 

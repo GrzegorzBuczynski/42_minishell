@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:22:34 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,20 @@ void	parse_pipe(char **ps, t_data *minishell)
 	if (is_pipe(*ps))
 	{
 		*ps = *ps + 1;
-		if (minishell->pipe_cmd == NULL)
+		
+		// create new fork command
+		// dequote exec argv
+		// add redir command to fork command
+		// add exec command to fork command
+		// append fork command to forks command
+		if (minishell->fork_cmd == NULL)
 		{
-			minishell->pipe_cmd = ft_init_cmd(PIPE);
-			current = minishell->pipe_cmd;
+			minishell->fork_cmd = ft_init_cmd(PIPE);
+			current = minishell->fork_cmd;
 		}
 		else
 		{
-			current = minishell->pipe_cmd;
+			current = minishell->fork_cmd;
 			while (current->sub_cmd)
 				current = current->sub_cmd;
 			current->sub_cmd = ft_init_cmd(PIPE);
@@ -78,10 +84,10 @@ void	setup_fork(t_data *minishell)
 {
 	t_cmd	*current;
 
-	if (minishell->pipe_cmd)
+	if (minishell->fork_cmd)
 	{
 		minishell->exec_cmd->argv = remove_argv_quotes(minishell->exec_cmd->argv);
-		current = minishell->pipe_cmd;
+		current = minishell->fork_cmd;
 		while (current->sub_cmd)
 			current = current->sub_cmd;
 		current->sub_cmd = ft_init_cmd(PIPE);
@@ -118,12 +124,10 @@ void	setup_exec(t_data *minishell)
 
 void	parsecmd(t_data *minishell)
 {
-	char	*es;
 	char	*ps;
 
 	ps = minishell->input;
-	es = minishell->input + ft_strlen(minishell->input);
-	while (ps <= es && *ps && !minishell->error)
+	while (*ps && !minishell->error)
 	{
 		parse_exec(&ps, minishell);
 		parse_redir(&ps, minishell);
@@ -136,7 +140,7 @@ void	parsecmd(t_data *minishell)
 		minishell->error = 0;
 		minishell->exec_cmd = NULL;
 		minishell->redir_cmd = NULL;
-		minishell->pipe_cmd = NULL;
+		minishell->fork_cmd = NULL;
 	}
 	setup_redirection(minishell);
 	setup_fork(minishell);

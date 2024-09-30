@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:03:27 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	execute(t_data *minishell)
 	t_cmd	*cmd;
 	pid_t	last_pid;
 
-	if (minishell->pipe_cmd)
+	if (minishell->fork_cmd)
 	{
-		cmd = minishell->pipe_cmd;
+		cmd = minishell->fork_cmd;
 		do_pipe(cmd, minishell);
 
 	}

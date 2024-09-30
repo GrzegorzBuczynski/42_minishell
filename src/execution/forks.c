@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:16:43 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	wait_for_processes(t_data *minishell, pid_t last_pid)
 	int	i;
 
 	status = 0;
-	if (minishell->pipe_cmd)
+	if (minishell->fork_cmd)
 	{
-		i = count_nuber_of_commands(minishell->pipe_cmd);
+		i = count_nuber_of_commands(minishell->fork_cmd);
 		while (i > 0)
 		{
 			if (waitpid(0, &status, 0) == last_pid)

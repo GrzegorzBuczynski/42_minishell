@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:18:15 by ja               ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	reset_minishell(t_data *minishell)
 	minishell->commands = NULL;
 	minishell->exec_cmd = NULL;
 	minishell->redir_cmd = NULL;
-	minishell->pipe_cmd = NULL;
+	minishell->fork_cmd = NULL;
 }
 
 void	minishell_loop(t_data *minishell)
