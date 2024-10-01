@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 21:14:19 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:37:10 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_cmd	*backcmd(t_cmd *subcmd)
 
 
 
-t_cmd	*inputcmd(char *file, int mode)
+t_cmd	*inputcmd(char *file)
 {
 	t_cmd	*cmd;
 
@@ -63,7 +63,7 @@ t_cmd	*inputcmd(char *file, int mode)
 	cmd->sub_cmd = NULL;
 	cmd->file = file;
 	cmd->fd = 0;
-	cmd->mode = mode;
+	cmd->mode = O_RDONLY;
 	return (cmd);
 }
 

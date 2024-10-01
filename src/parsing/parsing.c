@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 17:53:38 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:39:12 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parse_redir(char **ps, t_data *minishell)
 	ft_skip_whitespace(ps);
 	if (is_redirection(*ps))
 	{
-		ret_cmd = get_redir_cmd(ps, minishell);
+		ret_cmd = get_redir_cmd(ps);
 		if (minishell->redir_cmd == NULL)
 			minishell->redir_cmd = ret_cmd;
 		else

@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 17:47:46 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:38:47 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_skip_whitespace(char **s)
 		(*s)++;
 }
 
-t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
+t_cmd	*get_redir_cmd(char **ps)
 {
 	t_cmd	*ret_cmd;
 	char	*file;
@@ -52,7 +52,7 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 	if (file == NULL)
 		panic("missing file for redirection");
 	if (tok == '<')
-		ret_cmd = inputcmd(file, O_RDONLY, minishell, ps);
+		ret_cmd = inputcmd(file);
 	else if (tok == '>')
 		ret_cmd = redircmd(file, O_CREAT | O_WRONLY | O_TRUNC, 1);
 	else if (tok == '+')
