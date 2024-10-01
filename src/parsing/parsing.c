@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 21:04:52 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 17:53:38 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	parse_redir(char **ps, t_data *minishell)
 	t_cmd	*current;
 	t_cmd	*ret_cmd;
 
+	current = NULL;
+	ret_cmd = NULL;
 	ft_skip_whitespace(ps);
 	if (is_redirection(*ps))
 	{
@@ -117,8 +119,10 @@ void	parsecmd(t_data *minishell)
 {
 	char	*ps;
 
+	if(!minishell->input)
+		return ;
 	ps = minishell->input;
-	while (*ps && !minishell->error)
+	while (ps && *ps && !minishell->error)
 	{
 		parse_exec(&ps, minishell);
 		parse_redir(&ps, minishell);

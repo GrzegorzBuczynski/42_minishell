@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:19:52 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 17:47:46 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_redirection(char *s)
 
 int	is_pipe(char *s)
 {
-	if (!strncmp(s, "|", 1))
+	if (s && !strncmp(s, "|", 1))
 		return ('|');
 	return (0);
 }
@@ -52,7 +52,7 @@ t_cmd	*get_redir_cmd(char **ps, t_data *minishell)
 	if (file == NULL)
 		panic("missing file for redirection");
 	if (tok == '<')
-		ret_cmd = inputcmd(file, O_RDONLY, minishell);
+		ret_cmd = inputcmd(file, O_RDONLY, minishell, ps);
 	else if (tok == '>')
 		ret_cmd = redircmd(file, O_CREAT | O_WRONLY | O_TRUNC, 1);
 	else if (tok == '+')

@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:07:48 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 17:40:51 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	read_file_access(t_data *minishell, char *file)
 	return (true);
 }
 
-t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
+
+
+t_cmd	*inputcmd(char *file, int mode, t_data *minishell, char **ps)
 {
 	t_cmd	*cmd;
 
@@ -84,6 +86,7 @@ t_cmd	*inputcmd(char *file, int mode, t_data *minishell)
 	cmd->mode = mode;
 	if (!read_file_access(minishell, file))
 	{
+		*ps = NULL;
 		if (cmd)
 			free(cmd);
 		if (file)
