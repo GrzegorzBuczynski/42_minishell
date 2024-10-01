@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 17:40:51 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:14:19 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,9 @@ t_cmd	*backcmd(t_cmd *subcmd)
 	return ((t_cmd *)cmd);
 }
 
-int	read_file_access(t_data *minishell, char *file)
-{
-	if (access(file, F_OK | R_OK) != 0)
-	{
-		perror("access error");
-		(void)minishell;
-		return (false);
-	}
-	// if (access(file, F_OK | R_OK) != 0)
-	// Check if file exists and is readable
-	// {
-	// 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	// 	ft_putstr_fd(file, STDERR_FILENO);
-	// 	ft_putstr_fd(": No such file or permission denied\n", STDERR_FILENO);
-	// 	minishell->exit_status = 1; // Update exit status
-	// 	return (false);
-	// }
-	return (true);
-}
 
 
-
-t_cmd	*inputcmd(char *file, int mode, t_data *minishell, char **ps)
+t_cmd	*inputcmd(char *file, int mode)
 {
 	t_cmd	*cmd;
 
@@ -84,23 +64,6 @@ t_cmd	*inputcmd(char *file, int mode, t_data *minishell, char **ps)
 	cmd->file = file;
 	cmd->fd = 0;
 	cmd->mode = mode;
-	if (!read_file_access(minishell, file))
-	{
-		*ps = NULL;
-		if (cmd)
-			free(cmd);
-		if (file)
-			free(file);
-		if (minishell->exec_cmd)
-			free(minishell->exec_cmd);
-		if (minishell->redir_cmd)
-			free(minishell->redir_cmd);
-				// free the command add function to free the commands
-		minishell->exec_cmd = NULL;
-		minishell->redir_cmd = NULL;
-		minishell->error = true;
-		return (NULL);
-	}
 	return (cmd);
 }
 

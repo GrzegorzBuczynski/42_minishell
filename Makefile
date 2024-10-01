@@ -30,6 +30,7 @@ SRCS =	src/main.c \
 		src/execution/pipes.c \
 		src/execution/forks.c \
 		src/execution/exec.c \
+		src/execution/exec_utils.c \
 		src/execution/find_bin_cmd.c \
 		src/execution/find_bin_cmd_utils.c \
 		src/execution/expand_dollar.c \

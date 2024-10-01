@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 21:32:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:20:47 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 {
 	int	fd;
 
+	read_file_access(rcmd->file, rcmd->mode);
 	close(rcmd->fd);
 	fd = open(rcmd->file, rcmd->mode, 0644);
 	if (fd < 0)

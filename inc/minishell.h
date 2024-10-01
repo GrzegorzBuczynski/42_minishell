@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/01 17:41:19 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/01 21:20:32 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,12 @@ bool				is_absolute_or_relative_path(const char *cmd);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
-t_cmd				*inputcmd(char *file, int mode, t_data *minishell, char **ps);
+t_cmd				*inputcmd(char *file, int mode);
 void				wait_for_processes(t_data *minishell, pid_t last_pid);
 int					exec_with_pipes(t_data *minishell);
 char				*remove_quotes(char *s);
 void				close_pipes(int **pipe_argv);
 void				setup_pipes(int **pipe_argv, int i, t_cmd *cmd);
+void				read_file_access(char *file, int mode);
 
 #endif
