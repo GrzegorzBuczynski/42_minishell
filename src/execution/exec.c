@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:18:47 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:38:28 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	if (cmd->argv[0] == NULL)
 		return ;
 	cmd->argv = remove_argv_quotes(cmd->argv);
+	if (!ft_strncmp(cmd->argv[0], "./minishell", 11))
+		rise_level(minishell);
 	if (run_builtin_cmd(cmd->argv, minishell))
 		exit(0);
 	execute_binary(cmd, minishell);

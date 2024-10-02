@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:37:33 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 19:42:16 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:44:18 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,24 @@ int	replace_var_loop(char *input, t_data *minishell, char *result, int i)
 int	count_length(char *input, t_data *minishell, int *length)
 {
 	bool	is_in_quotes;
-	char	*name;
 	int		i;
 
-	i = 0;
 	is_in_quotes = false;
+	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '\'')
-			is_in_quotes = !is_in_quotes;
+		is_in_quotes = toggle_quotes_state(is_in_quotes, input[i]);
 		if (input[i] == '$' && !is_in_quotes && input[i + 1] != ' ' && input[i
 				+ 1] != '\"' && input[i + 1] != '\0')
 		{
-			i++;
-			name = get_var_name(input, &i);
-			if (!name)
+			if (handle_variable_expansion(input, &i, minishell,
+					length) == ERROR)
 				return (ERROR);
-			if (*name == '?')
-				*length += ft_strlen(ft_itoa(minishell->exit_status));
-			else
-				*length += ft_strlen(ft_get_var_value(name, minishell)) + 1;
-			free(name);
 		}
 		else
+		{
 			check_for_spaces(input, length, &i, is_in_quotes);
+		}
 	}
 	return (*length);
 }

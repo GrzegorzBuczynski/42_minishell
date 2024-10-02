@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_dollar.c                                    :+:      :+:    :+:   */
+/*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:14:01 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:39:49 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,19 @@ char	**remove_argv_quotes(char **argv)
 		i++;
 	}
 	return (argv);
+}
+
+void	rise_level(t_data *minishell)
+{
+	char	*level;
+	char	*new_level;
+
+	level = ft_get_var_value("SHLVL", minishell);
+	if (level == NULL)
+		return ;
+	new_level = ft_itoa(ft_atoi(level) + 1);
+	if (new_level == NULL)
+		return ;
+	ft_update_env_list("SHLVL", new_level, YES, minishell);
+	free(new_level);
 }

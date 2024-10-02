@@ -6,14 +6,13 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:42:35 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 19:52:15 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:45:41 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	check_for_spaces(char *input, int *length, int *i,
-		bool is_in_quotes)
+void	check_for_spaces(char *input, int *length, int *i, bool is_in_quotes)
 {
 	if (*i > 0 && input[*i] == '|' && input[*i - 1] != ' ' && !is_in_quotes)
 		(*length)++;
@@ -66,4 +65,28 @@ char	*get_var_name(char *input, int *i)
 		return (NULL);
 	*i += ft_strlen(name);
 	return (name);
+}
+
+bool	toggle_quotes_state(bool is_in_quotes, char current_char)
+{
+	if (current_char == '\'')
+		is_in_quotes = !is_in_quotes;
+	return (is_in_quotes);
+}
+
+int	handle_variable_expansion(char *input, int *i, t_data *minishell,
+		int *length)
+{
+	char	*name;
+
+	(*i)++;
+	name = get_var_name(input, i);
+	if (!name)
+		return (ERROR);
+	if (*name == '?')
+		*length += ft_strlen(ft_itoa(minishell->exit_status));
+	else
+		*length += ft_strlen(ft_get_var_value(name, minishell)) + 1;
+	free(name);
+	return (1);
 }

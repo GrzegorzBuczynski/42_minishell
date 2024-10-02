@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:11:48 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:37:05 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,14 @@ int	get_token(char **ps)
 {
 	ft_skip_whitespace(ps);
 	if (!strncmp(*ps, "<<", 2))
-	{
-		*ps += 2;
-		return ('-');
-	}
-	else if (!strncmp(*ps, ">>", 2))
-	{
-		*ps += 2;
-		return ('+');
-	}
-	else if (!strncmp(*ps, ">", 1))
-	{
-		*ps += 1;
-		return ('>');
-	}
-	else if (!strncmp(*ps, "<", 1))
-	{
-		*ps += 1;
-		return ('<');
-	}
-	else if (!strncmp(*ps, "|", 1))
-	{
-		*ps += 1;
-		return ('|');
-	}
-	else
-		return ('a');
+		return (*ps += 2, '-');
+	if (!strncmp(*ps, ">>", 2))
+		return (*ps += 2, '+');
+	if (!strncmp(*ps, ">", 1))
+		return (*ps += 1, '>');
+	if (!strncmp(*ps, "<", 1))
+		return (*ps += 1, '<');
+	if (!strncmp(*ps, "|", 1))
+		return (*ps += 1, '|');
+	return ('a');
 }

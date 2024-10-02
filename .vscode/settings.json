@@ -8,6 +8,8 @@
 		"features.h": "c",
 		"cdefs.h": "c",
 		"minishell2.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"unistd.h": "c",
+		"history.h": "c"
 	}
 }

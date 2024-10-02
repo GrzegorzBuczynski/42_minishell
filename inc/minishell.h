@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 20:30:27 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:45:16 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define PROMPT "MDshell > "
 # define YES 1
 # define NO 0
-# define TUE 1
+# define TRUE 1
 # define FALSE 0
 # define ERROR -1
 # define NOT_SET -1
@@ -163,7 +163,6 @@ void				init_cmd_argv(t_cmd *cmd);
 
 int					is_builtin(t_cmd *cmd);
 char				**remove_argv_quotes(char **argv);
-char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
 t_cmd				*inputcmd(char *file);
@@ -189,5 +188,8 @@ void				free_syntax_error(t_data *minishell);
 void				append_fork_cmd(t_data *minishell, t_cmd *ret_cmd);
 void				dequote_exec(t_data *minishell);
 void				add_last_fork(t_data *minishell);
-
+void				rise_level(t_data *minishell);
+bool				toggle_quotes_state(bool is_in_quotes, char current_char);
+int					handle_variable_expansion(char *input, int *i,
+						t_data *minishell, int *length);
 #endif

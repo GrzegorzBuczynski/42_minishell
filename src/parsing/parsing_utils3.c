@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:30:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:30:40 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:49:08 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ char	*ft_substring(const char *start, const char *end)
 	return (result);
 }
 
+char	*skip_quotes(char *s, int quote)
+{
+	while (*s && *s != quote)
+		s++;
+	if (*s == quote)
+		s++;
+	return (s);
+}
+
 /*
  * Returns a string from the input string.
  * The string can be a block or a word.
@@ -40,23 +49,18 @@ char	*get_string(char **ps)
 	char	*start;
 	int		quote;
 
-	length = 0;
 	if (*ps == NULL || **ps == '\0')
 		return (NULL);
 	ft_skip_whitespace(ps);
 	s = *ps;
 	start = s;
-	while (s && *s && !ft_iswhitespace(*s))
+	while (*s && !ft_iswhitespace(*s))
 	{
 		if (*s == '\'' || *s == '\"')
 		{
-			quote = *s;
-			s++;
-			while (s && *s && *s != quote)
-				s++;
+			quote = *s++;
+			s = skip_quotes(s, quote);
 		}
-		if (*s == quote)
-			s++;
 		else
 			s++;
 	}

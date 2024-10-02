@@ -48,7 +48,6 @@ SRCS =	src/main.c \
 		src/parsing/parsing_utils3.c \
 		src/parsing/parsing_utils4.c\
 		src/parsing/parsing.c \
-		src/utils/ft_strstr.c \
 		src/env/expand_var.c \
 		src/env/expand_var_utils.c \
 		src/env/expand_var_utils2.c
