@@ -144,12 +144,8 @@
 [0m[0;33mTest 131: ✅[38;5;244m cat <minishell.h|ls 
 [0m[0;31m———————————— extras
 [0;33mTest 132: ✅[38;5;244m  
-[0m[0;33mTest 133: ❌[38;5;244m $PWD 
-[0mmini exit code = 0
-bash exit code = 126
-mini error = ()
-bash error = ( Is a directory)
-[0;33mTest 134: ❌[38;5;244m $EMPTY 
+[0m[0;33mTest 133: ✅[38;5;244m $PWD 
+[0m[0;33mTest 134: ❌[38;5;244m $EMPTY 
 [0mmini exit code = 139
 bash exit code = 0
 [0;33mTest 135: ❌[38;5;244m $EMPTY echo hi 
@@ -157,60 +153,44 @@ bash exit code = 0
 bash output = (hi)
 mini exit code = 139
 bash exit code = 0
-[0;33mTest 136: ❌[38;5;244m ./test_files/invalid_permission 
-[0mmini exit code = 0
-bash exit code = 126
-mini error = ()
-bash error = ( Permission denied)
-[0;33mTest 137: ❌[38;5;244m ./missing.out 
-[0mmini exit code = 0
+[0;33mTest 136: ✅[38;5;244m ./test_files/invalid_permission 
+[0m[0;33mTest 137: ✅[38;5;244m ./missing.out 
+[0m[0;33mTest 138: ❌[38;5;244m missing.out 
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
-bash error = ( No such file or directory)
-[0;33mTest 138: ❌[38;5;244m missing.out 
-[0mmini exit code = 0
-bash exit code = 127
-mini error = ()
+mini error = ( missing.out)
 bash error = ( command not found)
 [0;33mTest 139: ❌[38;5;244m "aaa" 
-[0mmini exit code = 0
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
+mini error = ( "aaa")
 bash error = ( command not found)
 [0;33mTest 140: ❌[38;5;244m test_files 
-[0mmini exit code = 0
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
+mini error = ( test_files)
 bash error = ( command not found)
-[0;33mTest 141: ❌[38;5;244m ./test_files 
-[0mmini exit code = 0
-bash exit code = 126
-mini error = ()
-bash error = ( Is a directory)
-[0;33mTest 142: ❌[38;5;244m /test_files 
-[0mmini exit code = 0
+[0;33mTest 141: ✅[38;5;244m ./test_files 
+[0m[0;33mTest 142: ✅[38;5;244m /test_files 
+[0m[0;33mTest 143: ❌[38;5;244m minishell.h 
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
-bash error = ( No such file or directory)
-[0;33mTest 143: ❌[38;5;244m minishell.h 
-[0mmini exit code = 0
-bash exit code = 127
-mini error = ()
+mini error = ( minishell.h)
 bash error = ( command not found)
 [0;33mTest 144: ❌[38;5;244m $ 
-[0mmini exit code = 0
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
+mini error = ( $)
 bash error = ( command not found)
 [0;33mTest 145: ❌[38;5;244m $? 
-[0mmini exit code = 0
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
+mini error = ( 0)
 bash error = ( command not found)
 [0;33mTest 146: ❌[38;5;244m README.md 
-[0mmini exit code = 0
+[0mmini exit code = 1
 bash exit code = 127
-mini error = ()
+mini error = ( README.md)
 bash error = ( command not found)
-[0;35m[1m132/146
+[0;35m[1m137/146
 [0m😭 😭 😭
