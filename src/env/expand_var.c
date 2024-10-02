@@ -1,58 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_var.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/02 19:37:33 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/10/02 19:42:16 by ssuchane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-char		*get_var_name(char *input, int *i);
-
-static int	add_another_space(int i, int quotes, char *input)
-{
-	if (input[i] == '|' && input[i + 1] != ' ' && input[i + 1] != '\0'
-		&& quotes == NOT_SET)
-		return (1);
-	else if (((input[i] == '<' && input[i + 1] != '<') || (input[i] == '>'
-				&& input[i + 1] != '>')) && input[i + 1] != ' ' && input[i
-		+ 1] != '\0' && quotes == NOT_SET)
-		return (1);
-	return (0);
-}
-
-static int	add_space(int i, int quotes, char *input)
-{
-	if (i > 0 && input[i] == '|' && input[i - 1] != ' ' && quotes == NOT_SET)
-		return (1);
-	else if (i > 0 && ((input[i] == '>' && input[i - 1] != '>')
-			|| (input[i] == '<' && input[i - 1] != '<')) && input[i - 1] != ' '
-		&& quotes == NOT_SET)
-		return (1);
-	return (0);
-}
-
-bool	do_copy_var(int quotes, char *input, int i)
-{
-	return ((input[i] == '$' && quotes != '\'' && input[i + 1] != ' ' && input[i
-			+ 1] != '\"' && input[i + 1] != '+' && input[i + 1] != ':'
-			&& input[i + 1] != '/' && input[i + 1] != '=' && input[i + 1] != '.'
-			&& input[i + 1] != ',' && input[i + 1] != '\0'));
-}
-
-static void	set_quotes(char *quotes, char word)
-{
-	if (*quotes == NOT_SET && (word == '\'' || word == '\"'))
-		*quotes = word;
-	else if (*quotes != NOT_SET && word == *quotes)
-		*quotes = NOT_SET;
-}
-
-int	copy_variable(char *name, t_data *minishell, int *j, char *result)
-{
-	if (!name)
-		return (0);
-	ft_strlcpy(result + *j, ft_get_var_value(name, minishell),
-		ft_strlen(ft_get_var_value(name, minishell)) + 1);
-	*j += ft_strlen(ft_get_var_value(name, minishell));
-	free(name);
-	return (1);
-}
 
 int	replace_var_loop(char *input, t_data *minishell, char *result, int i)
 {
@@ -83,62 +41,6 @@ int	replace_var_loop(char *input, t_data *minishell, char *result, int i)
 	return (1);
 }
 
-static void	check_for_spaces(char *input, int *length, int *i,
-		bool is_in_quotes)
-{
-	if (*i > 0 && input[*i] == '|' && input[*i - 1] != ' ' && !is_in_quotes)
-		(*length)++;
-	if (input[*i] == '|' && input[*i + 1] != ' ' && input[*i + 1] != '\0'
-		&& !is_in_quotes)
-		(*length)++;
-	if (input[*i] == '<' || input[*i] == '>')
-		(*length) += 2;
-	(*length) += 2;
-	(*i)++;
-}
-
-char	*ft_strchrs_mf(const char *str, const char *c)
-{
-	char	*ptr;
-	char	*chrs;
-
-	ptr = (char *)str;
-	while (*ptr)
-	{
-		chrs = (char *)c;
-		while (*chrs)
-		{
-			if (*ptr == *chrs)
-				return (ptr);
-			chrs++;
-		}
-		ptr++;
-	}
-	if (*ptr == '\0')
-		return (ptr);
-	return (NULL);
-}
-
-char	*get_var_name(char *input, int *i)
-{
-	char	*name;
-	char	*chrptr;
-
-	if (!input || !i)
-		return (NULL);
-	if (input[*i] == '?')
-	{
-		(*i)++;
-		return (ft_strdup("?"));
-	}
-	chrptr = input + *i;
-	name = ft_strndup(chrptr, ft_strchrs_mf(chrptr, " \"\'/:.,=+") - chrptr);
-	if (!name)
-		return (NULL);
-	*i += ft_strlen(name);
-	return (name);
-}
-
 int	count_length(char *input, t_data *minishell, int *length)
 {
 	bool	is_in_quotes;
@@ -152,7 +54,7 @@ int	count_length(char *input, t_data *minishell, int *length)
 		if (input[i] == '\'')
 			is_in_quotes = !is_in_quotes;
 		if (input[i] == '$' && !is_in_quotes && input[i + 1] != ' ' && input[i
-			+ 1] != '\"' && input[i + 1] != '\0')
+				+ 1] != '\"' && input[i + 1] != '\0')
 		{
 			i++;
 			name = get_var_name(input, &i);
@@ -187,10 +89,10 @@ char	*replace_var(char *input, t_data *minishell)
 	return (result);
 }
 
-void		set_last_exit_code(t_data *minishell)
+void	set_last_exit_code(t_data *minishell)
 {
-	t_env *envlst;
-	char *value;
+	t_env	*envlst;
+	char	*value;
 
 	envlst = minishell->envlist;
 	while (envlst)

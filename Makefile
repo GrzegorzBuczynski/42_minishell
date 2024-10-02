@@ -49,7 +49,9 @@ SRCS =	src/main.c \
 		src/parsing/parsing_utils4.c\
 		src/parsing/parsing.c \
 		src/utils/ft_strstr.c \
-		src/env/expand_var.c
+		src/env/expand_var.c \
+		src/env/expand_var_utils.c \
+		src/env/expand_var_utils2.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -98,13 +100,6 @@ re: fclean all
 
 # Ensure that 'all', 'clean', 'fclean', 're', and 'bonus' are not interpreted as file names
 .PHONY: all clean fclean re bonus
-
-# Test
-
-test: test.c
-	rm -f test
-	sleep 1
-	cc test.c -o test -I./inc -L./lib_ft -l:libft.a -lreadline -lm -g
 
 push:
 	git add .

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 11:20:40 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/23 17:20:22 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:36:57 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	func_logic(const char *s, char c, int *main_counter)
 	return (sub_counter);
 }
 
-
 /* 
 ** The ft_split() function allocates and returns an array of strings obtained by
 ** splitting 's' using the character 'c' as a delimiter. The array must be ended
@@ -73,6 +72,7 @@ static int	func_logic(const char *s, char c, int *main_counter)
 ** @return The array of new strings resulting from the split. NULL if the
 ** allocation fails.
  */
+
 char	**ft_split(char const *s, char c)
 {
 	char	**result;

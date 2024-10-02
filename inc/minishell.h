@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 18:22:51 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:52:00 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,16 @@ void				close_pipes(int **pipe_argv);
 void				setup_pipes(int **pipe_argv, int i, t_cmd *cmd);
 void				read_file_access(char *file);
 int					check_file(char *path);
+void				set_quotes(char *quotes, char word);
+bool				do_copy_var(int quotes, char *input, int i);
+int					replace_var_loop(char *input, t_data *minishell,
+						char *result, int i);
+int					add_space(int i, int quotes, char *input);
+int					add_another_space(int i, int quotes, char *input);
+int					copy_variable(char *name, t_data *minishell, int *j,
+						char *result);
+char				*get_var_name(char *input, int *i);
+void			check_for_spaces(char *input, int *length, int *i,
+						bool is_in_quotes);
 
 #endif
