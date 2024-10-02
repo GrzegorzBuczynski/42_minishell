@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:15:21 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/25 18:55:53 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:58:11 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int	ft_iswhitespace(char c)
 	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
 		|| c == '\r');
 }
-
-// void	ft_skip_whitespace(char **input)
-// {
-// 	while (ft_iswhitespace(**input))
-// 		(*input)++;
-// }
 
 void	ft_replace__trailing_whitespace_with_null(char **input)
 {
@@ -81,13 +75,3 @@ bool	is_input_valid(char *string)
 	}
 	return (true);
 }
-
-// int	main(void)
-// {
-// 	char *input = strdup("            |t34rvwerv\"dsacrawcer\"sdfsdf 'r4af44'  hhj   ");
-// 	int	i;
-
-// 	i = is_input_valid(input);
-// 	printf("%d\n", i);
-// 	return (0);
-// }

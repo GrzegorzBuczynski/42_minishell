@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 19:52:00 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:30:27 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define PROMPT "MDshell > "
 # define YES 1
 # define NO 0
-# define true 1
-# define false 0
+# define TUE 1
+# define FALSE 0
 # define ERROR -1
 # define NOT_SET -1
 # ifndef EXIT_SUCCESS
@@ -111,35 +111,25 @@ char				*ft_get_var_value(char *key, t_data *minishell);
 void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
-int					peek(char **ps, char *toks);
 void				panic(char *s, int status);
 int					get_token(char **ps);
-char				*get_word(char **ps);
 
 // execution
 t_cmd				*ft_init_cmd(int type);
 t_cmd				*redircmd(char *file, int mode, int fd);
-t_cmd				*pipecmd(t_cmd *left, t_cmd *right);
 t_cmd				*listcmd(t_cmd *left, t_cmd *right);
 t_cmd				*backcmd(t_cmd *subcmd);
-void				runcmd(struct s_cmd *cmd, t_data *minishell);
 void				parsecmd(t_data *minishell);
-t_cmd				*parseline(char **ps, char *es);
-t_cmd				*parseblock(char **ps, char *es);
 int					is_redirection(char *s);
 t_cmd				*get_redir_cmd(char **ps);
 int					is_pipe(char *s);
-t_cmd				*parseexec(char *str, t_cmd *exec_cmd);
 
 pid_t				fork1(void);
+void				runcmd(t_cmd *cmd, t_data *minishell);
 void				do_exec(t_cmd *cmd, t_data *minishell);
-void				do_list(t_cmd *cmd, t_data *minishell);
-void				do_back(t_cmd *cmd, t_data *minishell);
 int					run_builtin_cmd(char **argv, t_data *minishell);
-void				ft_expand_dollar(char **argv, t_data *minishell);
 void				do_redirect(t_cmd *cmd, t_data *minishell);
 int					ft_echo(char **argv);
-char				**get_key_and_value(char *argument);
 int					ft_unset(char **argv, t_data *minishell);
 int					ft_export(char *argv, t_data *minishell);
 int					ft_pwd(char **argv);
@@ -158,9 +148,6 @@ int					execute(t_data *minishell);
 // void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell);
 char				*ft_substring(const char *start, const char *end);
-char				**get_argv_for_single_cmd(char **ps);
-void				advance_to_end_of_token(char **s, char *es);
-
 void				init_cmd_args(t_cmd *cmd);
 void				add_argument(t_cmd *cmd, char *q, char *eq, int *argc);
 void				print_environment_sorted(t_env *node);
@@ -172,17 +159,10 @@ t_env				**collect_env_vars(t_env *node, size_t count);
 void				sort_env_vars(t_env **env_array, size_t count);
 void				do_redirect(t_cmd *cmd, t_data *minishell);
 void				remove_quotess(char **str);
-void				handle_quotes_dollar(char **argv, t_data *minishell);
 void				init_cmd_argv(t_cmd *cmd);
 
 int					is_builtin(t_cmd *cmd);
-char				*copy_without_quotes(char *s);
-bool				ft_is_inside_quotes(char *stack, char *needle, char token1,
-						char token2);
-char				**get_argv_blocks_in_quote(char **ps);
 char				**remove_argv_quotes(char **argv);
-char				**expand_variables(char **argv, t_data *minishell);
-bool				is_absolute_or_relative_path(const char *cmd);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*replace_var(char *input, t_data *minishell);
 void				set_last_exit_code(t_data *minishell);
@@ -203,7 +183,11 @@ int					add_another_space(int i, int quotes, char *input);
 int					copy_variable(char *name, t_data *minishell, int *j,
 						char *result);
 char				*get_var_name(char *input, int *i);
-void			check_for_spaces(char *input, int *length, int *i,
+void				check_for_spaces(char *input, int *length, int *i,
 						bool is_in_quotes);
+void				free_syntax_error(t_data *minishell);
+void				append_fork_cmd(t_data *minishell, t_cmd *ret_cmd);
+void				dequote_exec(t_data *minishell);
+void				add_last_fork(t_data *minishell);
 
 #endif

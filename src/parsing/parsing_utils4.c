@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 12:36:15 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 20:28:51 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,28 @@ void	add_argument(t_cmd *cmd, char *q, char *eq, int *argc)
 	if (*argc >= MAXARGS)
 		panic("too many args", 1);
 	cmd->argv[*argc] = NULL;
+}
+
+void	add_last_fork(t_data *minishell)
+{
+	t_cmd	*current;
+
+	if (minishell->fork_cmd)
+	{
+		current = ft_init_cmd(FORK);
+		current->exec_cmd = minishell->exec_cmd;
+		current->redir_cmd = minishell->redir_cmd;
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
+		append_fork_cmd(minishell, current);
+	}
+}
+
+void	dequote_exec(t_data *minishell)
+{
+	t_cmd	*exec_cmd;
+
+	exec_cmd = minishell->exec_cmd;
+	if (exec_cmd)
+		exec_cmd->argv = remove_argv_quotes(exec_cmd->argv);
 }

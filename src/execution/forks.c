@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 12:32:12 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 19:56:33 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ pid_t	fork1(void)
 		panic("fork", 1);
 	return (pid);
 }
-
 
 int	count_number_of_commands(t_cmd *cmd)
 {
@@ -52,7 +51,7 @@ void	wait_for_processes(t_data *minishell, pid_t last_pid)
 			i--;
 		}
 	}
-	else if(last_pid != 0)
+	else if (last_pid != 0)
 	{
 		waitpid(0, &status, 0);
 		minishell->exit_status = WEXITSTATUS(status);
@@ -66,7 +65,6 @@ int	fork_and_run_command(t_cmd *cmd, t_data *minishell, int i)
 	int	**pipe_argv;
 
 	pipe_argv = minishell->pipe_argv;
-	// cmd = minishell->commands[i];
 	pid = fork();
 	if (pid == 0)
 	{

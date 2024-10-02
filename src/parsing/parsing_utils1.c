@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 12:35:55 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 20:11:48 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,79 +93,3 @@ int	get_token(char **ps)
 	else
 		return ('a');
 }
-
-/*
-** Function skip whitespaces and moves *ps pointer to the next
-** character like in the tokens string.
-** Returns 1 if the character is in the toks string, 0 otherwise.
-*/
-// int	peek(char **ps, char *toks)
-// {
-// 	char	*s;
-
-// 	s = *ps;
-// 	while (s && *s && strchr(" \t\r\n\v", *s))
-// 		s++;
-// 	*ps = s;
-// 	return (*s && strchr(toks, *s));
-// }
-
-// void	advance_to_end_of_token(char **s, char *es)
-// {
-// 	while (*s < es && !strchr(" \t\r\n\v", **s) && !strchr("<|>&;()", **s))
-// 		(*s)++;
-// }
-
-
-
-// char	*get_block(char **ps)
-// {
-// 	char	*ret;
-// 	char	*s;
-// 	size_t	length;
-// 	char	*start;
-// 	char	quote;
-
-// 	s = *ps;
-// 	quote = *s;
-// 	length = 0;
-// 	start = s;
-// 	s++;
-// 	while (s && *s && *s != quote)
-// 		s++;
-// 	length = s - start + 1;
-// 	ret = malloc(length + 1);
-// 	if (ret == NULL)
-// 		return (NULL);
-// 	strncpy(ret, start, length);
-// 	ret[length] = '\0';
-// 	if (quote)
-// 		s++;
-// 	*ps = s;
-// 	return (ret);
-// }
-
-// char	*get_word(char **ps)
-// {
-// 	char	*ret;
-// 	char	*s;
-// 	size_t	length;
-// 	char	*start;
-
-// 	ft_skip_whitespace(ps);
-// 	s = *ps;
-// 	length = 0;
-// 	start = s;
-// 	while (s && *s && !ft_iswhitespace(*s))
-// 		s++;
-// 	length = s - start;
-// 	ret = malloc(length + 1);
-// 	if (ret == NULL)
-// 		return (NULL);
-// 	strncpy(ret, start, length);
-// 	ret[length] = '\0';
-// 	*ps = s;
-// 	return (ret);
-// }
-
-

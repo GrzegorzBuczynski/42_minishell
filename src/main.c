@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:32 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 20:15:48 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,16 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input)
 			add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
-		// if (!is_input_valid(minishell->input))
-		// {
-		// 	// set exit status according to what failed during validation
-		// 	free(minishell->input);
-		// 	minishell->exit_status = 0;
-		// 	set_last_exit_code(minishell);
-		// 	continue ;
-		// }
+		if (!is_input_valid(minishell->input))
+		{
+			free(minishell->input);
+			minishell->exit_status = 0;
+			set_last_exit_code(minishell);
+			continue ;
+		}
 		parsecmd(minishell);
 		execute(minishell);
 		set_last_exit_code(minishell);
-		// free
 		reset_minishell(minishell);
 	}
 }

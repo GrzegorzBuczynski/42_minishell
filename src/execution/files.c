@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:18:49 by ja                #+#    #+#             */
-/*   Updated: 2024/10/02 12:19:03 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 20:12:32 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ returns the status of the file
 */
 int	check_file(char *path)
 {
-	struct stat info;
-	int status;
+	struct stat	info;
+	int			status;
 
 	status = 0;
 	if (access(path, F_OK) != 0)

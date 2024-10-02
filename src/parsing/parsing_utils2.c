@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 21:37:10 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 20:09:43 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cmd	*redircmd(char *file, int mode, int fd)
 	ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = REDIR;
 	cmd->sub_cmd = NULL;
-	cmd->file = file; /// file is the name of the file to redirect to
+	cmd->file = file;
 	cmd->mode = mode;
 	cmd->fd = fd;
 	return (cmd);
@@ -49,8 +49,6 @@ t_cmd	*backcmd(t_cmd *subcmd)
 	return ((t_cmd *)cmd);
 }
 
-
-
 t_cmd	*inputcmd(char *file)
 {
 	t_cmd	*cmd;
@@ -58,7 +56,6 @@ t_cmd	*inputcmd(char *file)
 	cmd = ft_calloc(sizeof(*cmd), 1);
 	if (!cmd)
 		return (NULL);
-	// ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = REDIR;
 	cmd->sub_cmd = NULL;
 	cmd->file = file;
@@ -69,15 +66,18 @@ t_cmd	*inputcmd(char *file)
 
 int	handle_output_redirection(t_data *minishell, char *file, int mode)
 {
-	int flags = O_WRONLY | O_CREAT | mode; // Mode can be O_TRUNC or O_APPEND
-	int fd = open(file, flags, 0644);      // Open file with write permissions
+	int	flags;
+	int	fd;
+
+	flags = O_WRONLY | O_CREAT | mode;
+	fd = open(file, flags, 0644);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(file, STDERR_FILENO);
 		ft_putstr_fd(": Cannot open or create file\n", STDERR_FILENO);
-		minishell->exit_status = 1; // Update exit status
+		minishell->exit_status = 1;
 		return (-1);
 	}
-	return (fd); // Return file descriptor
+	return (fd);
 }

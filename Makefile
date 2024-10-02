@@ -26,15 +26,15 @@ SRCS =	src/main.c \
 		src/builtin/export_utils.c \
 		src/builtin/export.c \
 		src/builtin/unset.c \
-		src/utils/ft_is_inside_quotes.c \
 		src/execution/pipes.c \
 		src/execution/files.c \
 		src/execution/forks.c \
 		src/execution/exec.c \
+		src/execution/exec2.c \
 		src/execution/exec_utils.c \
 		src/execution/find_bin_cmd.c \
 		src/execution/find_bin_cmd_utils.c \
-		src/execution/expand_dollar.c \
+		src/execution/quotes_utils.c \
 		src/error/error.c \
 		src/env/env_utils.c \
 		src/env/env.c \

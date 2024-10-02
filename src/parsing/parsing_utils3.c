@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:30:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/29 19:32:42 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:30:40 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-	
+
 char	*ft_substring(const char *start, const char *end)
 {
 	size_t	length;
@@ -46,7 +46,7 @@ char	*get_string(char **ps)
 	ft_skip_whitespace(ps);
 	s = *ps;
 	start = s;
-	while (s && *s && !ft_iswhitespace(*s) ) //&& !is_redirection(*s)
+	while (s && *s && !ft_iswhitespace(*s))
 	{
 		if (*s == '\'' || *s == '\"')
 		{
@@ -64,4 +64,16 @@ char	*get_string(char **ps)
 	ret = ft_strndup(start, length);
 	*ps = s;
 	return (ret);
+}
+
+void	free_syntax_error(t_data *minishell)
+{
+	if (minishell->error)
+	{
+		minishell->exit_status = 1;
+		minishell->error = 0;
+		minishell->exec_cmd = NULL;
+		minishell->redir_cmd = NULL;
+		minishell->fork_cmd = NULL;
+	}
 }
