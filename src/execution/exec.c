@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 18:31:45 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:36:29 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	exec_exec_cmd(t_data *minishell)
 		{
 			last_pid = fork1();
 			if (last_pid == 0)
-				runcmd(minishell->commands[0], minishell);
+				runcmd(cmd, minishell);
 		}
 		wait_for_processes(minishell, last_pid);
 	}
