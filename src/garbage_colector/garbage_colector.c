@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_colector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:57:46 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/19 19:16:15 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:21:31 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 static void	del(void *to_free)
 {
 	free(to_free);
-	to_free = NULL;
 }
 
-void	*gc_collector(void *list, bool free)
+void	*gc_collector(void *content, bool free)
 {
 	static t_list	*to_free;
 
@@ -29,8 +28,8 @@ void	*gc_collector(void *list, bool free)
 	}
 	else
 	{
-		ft_lstadd_back(&to_free, ft_lstnew(list));
-		return (list);
+		ft_lstadd_back(&to_free, ft_lstnew(content));
+		return (content);
 	}
 }
 
