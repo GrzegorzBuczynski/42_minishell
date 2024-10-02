@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 18:21:24 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:30 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ char	*find_binary_path(t_cmd *cmd, char **paths)
 		free(full_path);
 		i++;
 	}
+	// free(full_path);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(cmd->argv[0], STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	exit(127);
 	return (NULL);
 }
 
