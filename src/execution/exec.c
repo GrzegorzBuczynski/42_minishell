@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 21:38:17 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 12:45:21 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 {
 	int	fd;
 
-	if(rcmd->mode == O_RDONLY)
+	if (rcmd->mode == O_RDONLY)
 		read_file_access(rcmd->file);
 	close(rcmd->fd);
 	fd = open(rcmd->file, rcmd->mode, 0644);
 	if (fd < 0)
-		panic("open");
+		panic("open", 1);
 	if (rcmd->sub_cmd)
 		runcmd(rcmd->sub_cmd, minishell);
 }
@@ -48,7 +48,19 @@ void	run_in_background_or_list(t_cmd *cmd, t_data *minishell)
 void	execute_binary(char *binary_path, t_cmd *cmd, t_data *minishell)
 {
 	char	**envp;
+	int		status;
 
+	if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
+	{
+		status = check_file(cmd->argv[0]);
+		if (status & 128)
+			print_error(cmd->argv[0], ": No such file or directory\n", 127);
+		if (status & 1)
+			print_error(cmd->argv[0], ": Is a directory\n", 126);
+		else if (status & 2)
+			print_error(cmd->argv[0], ": Permission denied\n", 126);
+		path = ft_strdup(cmd->argv[0]);
+	}
 	envp = environment_list_to_array(minishell->envlist);
 	execve(binary_path, cmd->argv, envp);
 	handle_exec_error("execve failed for: ", binary_path);

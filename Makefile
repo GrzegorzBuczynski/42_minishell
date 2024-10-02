@@ -28,6 +28,7 @@ SRCS =	src/main.c \
 		src/builtin/unset.c \
 		src/utils/ft_is_inside_quotes.c \
 		src/execution/pipes.c \
+		src/execution/files.c \
 		src/execution/forks.c \
 		src/execution/exec.c \
 		src/execution/exec_utils.c \

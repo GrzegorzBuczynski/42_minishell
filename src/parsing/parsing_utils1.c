@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 21:38:47 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 12:35:55 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_cmd	*get_redir_cmd(char **ps)
 	file = get_string(ps);
 	file = remove_quotes(file);
 	if (file == NULL)
-		panic("missing file for redirection");
+		panic("missing file for redirection", 1);
 	if (tok == '<')
 		ret_cmd = inputcmd(file);
 	else if (tok == '>')

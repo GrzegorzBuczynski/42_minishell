@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_panic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 15:06:21 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/21 21:59:26 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:34:52 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_panic(char *s)
+void	ft_panic(char *s, int status)
 {
-	ft_putendl_fd(s, 1);
-	exit(1);
+	perror(s);
+	exit(status);
 }

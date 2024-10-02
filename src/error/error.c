@@ -6,14 +6,15 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:06:48 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/30 21:01:55 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 12:31:01 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	panic(char *s)
+void	panic(char *s, int status)
 {
 	perror(s);
-	exit(1);
+	exit(status);
 }
+

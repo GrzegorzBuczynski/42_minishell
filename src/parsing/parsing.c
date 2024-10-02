@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/01 21:39:12 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 12:36:21 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	parsecmd(t_data *minishell)
 // 	minishell->commands = (t_cmd **)calloc(sizeof(t_cmd *) * (pipe_count + 2),
 // 			1);
 // 	if (minishell->commands == NULL)
-// 		panic("malloc");
+// 		panic("malloc", 1);
 // 	minishell->commands[pipe_count + 1] = NULL;
 // }
 

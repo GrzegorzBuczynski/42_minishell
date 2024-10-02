@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/01 21:39:07 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 12:33:22 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+# include <sys/stat.h>
 
 # define PROMPT "MDshell > "
 # define YES 1
@@ -111,7 +112,7 @@ void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 int					peek(char **ps, char *toks);
-void				panic(char *s);
+void				panic(char *s, int status);
 int					get_token(char **ps);
 char				*get_word(char **ps);
 
