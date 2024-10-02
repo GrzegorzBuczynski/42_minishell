@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 12:45:21 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 18:31:45 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,42 @@ void	run_in_background_or_list(t_cmd *cmd, t_data *minishell)
 	}
 }
 
-void	execute_binary(char *binary_path, t_cmd *cmd, t_data *minishell)
+void	print_error2(char *cmd, char *message, int status)
+{
+	write(2, "minishell: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, message, ft_strlen(message));
+	exit(status);
+}
+
+void	execute_binary(t_cmd *cmd, t_data *minishell)
 {
 	char	**envp;
 	int		status;
+	char	*path;
 
 	if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 	{
 		status = check_file(cmd->argv[0]);
 		if (status & 128)
-			print_error(cmd->argv[0], ": No such file or directory\n", 127);
+			print_error2(cmd->argv[0], ": No such file or directory\n", 127);
 		if (status & 1)
-			print_error(cmd->argv[0], ": Is a directory\n", 126);
+			print_error2(cmd->argv[0], ": Is a directory\n", 126);
 		else if (status & 2)
-			print_error(cmd->argv[0], ": Permission denied\n", 126);
+			print_error2(cmd->argv[0], ": Permission denied\n", 126);
 		path = ft_strdup(cmd->argv[0]);
 	}
+	else
+		path = find_executable_path(cmd);
 	envp = environment_list_to_array(minishell->envlist);
-	execve(binary_path, cmd->argv, envp);
-	handle_exec_error("execve failed for: ", binary_path);
+	execve(path, cmd->argv, envp);
 	free(envp);
-	exit(EXIT_FAILURE);
+	free(path);
+	panic("execve", EXIT_FAILURE);
 }
 
 void	do_exec(t_cmd *cmd, t_data *minishell)
 {
-	char	**paths;
-	char	*binary_path;
-
 	if (cmd->argv == NULL)
 		return ;
 	if (cmd->argv[0] == NULL)
@@ -81,10 +89,7 @@ void	do_exec(t_cmd *cmd, t_data *minishell)
 	if (run_builtin_cmd(cmd->argv, minishell))
 		exit(0);
 	// if(minishell->redir_cmd || minishell->pipe_cmd)
-	paths = retrieve_paths();
-	binary_path = find_executable_path(cmd, paths);
-	execute_binary(binary_path, cmd, minishell);
-	clean_up(binary_path, paths);
+	execute_binary(cmd, minishell);
 	exit(1);
 }
 

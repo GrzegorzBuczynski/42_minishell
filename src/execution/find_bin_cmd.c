@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/20 17:30:35 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:21:24 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,12 @@ char	**retrieve_paths(void)
 	return (paths);
 }
 
-char	*find_executable_path(t_cmd *ecmd, char **paths)
+char	*find_executable_path(t_cmd *ecmd)
 {
 	char	*binary_path;
+	char	**paths;
 
+	paths = retrieve_paths();
 	binary_path = find_binary_path((t_cmd *)ecmd, paths);
 	if (binary_path == NULL)
 	{
@@ -103,5 +105,6 @@ char	*find_executable_path(t_cmd *ecmd, char **paths)
 		clean_up(NULL, paths);
 		exit(1);
 	}
+	clean_up(NULL, paths);
 	return (binary_path);
 }

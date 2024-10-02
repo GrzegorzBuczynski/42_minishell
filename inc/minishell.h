@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 12:33:22 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/02 18:22:51 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <signal.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
-# include <sys/stat.h>
 
 # define PROMPT "MDshell > "
 # define YES 1
@@ -150,7 +150,7 @@ int					ft_exit(char **args);
 void				handle_exec_error(const char *msg, const char *arg);
 void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
-char				*find_executable_path(t_cmd *ecmd, char **paths);
+char				*find_executable_path(t_cmd *ecmd);
 char				**environment_list_to_array(t_env *environment);
 void				make_forks(t_cmd *cmd, t_data *minishell);
 void				create_pipes(t_cmd *cmd, t_data *minishell);
@@ -193,5 +193,6 @@ char				*remove_quotes(char *s);
 void				close_pipes(int **pipe_argv);
 void				setup_pipes(int **pipe_argv, int i, t_cmd *cmd);
 void				read_file_access(char *file);
+int					check_file(char *path);
 
 #endif
