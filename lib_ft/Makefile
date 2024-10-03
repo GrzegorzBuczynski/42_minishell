@@ -6,7 +6,7 @@
 #    By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/28 11:57:40 by ssuchane          #+#    #+#              #
-#    Updated: 2024/10/03 20:01:28 by ssuchane         ###   ########.fr        #
+#    Updated: 2024/10/03 20:04:44 by ssuchane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS :=	ft_append_argv.c \
 		ft_memmove.c \
 		ft_memset.c \
 		ft_panic.c \
+		ft_print_error.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c  \
