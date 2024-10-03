@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:30:12 by itykhono          #+#    #+#             */
-/*   Updated: 2024/10/03 19:39:37 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:27:18 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
  * @note If `num` is less than or equal to 0, the behavior is undefined.
  *       If `src` is NULL, the behavior is also undefined.
  */
-char	*ft_strncpy(char *dest, char *src, int num)
+char	*ft_strncpy(char *dest, const char *src, int num)
 {
 	int	i;
 

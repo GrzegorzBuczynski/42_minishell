@@ -6,25 +6,11 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:30:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:49:08 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:25:32 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-char	*ft_substring(const char *start, const char *end)
-{
-	size_t	length;
-	char	*result;
-
-	length = end - start;
-	result = malloc(length + 1);
-	if (result == NULL)
-		return (NULL);
-	strncpy(result, start, length);
-	result[length] = '\0';
-	return (result);
-}
 
 char	*skip_quotes(char *s, int quote)
 {

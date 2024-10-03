@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 19:50:00 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:26:35 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_cmd_args(t_cmd *cmd)
 
 void	add_argument(t_cmd *cmd, char *q, char *eq, int *argc)
 {
-	cmd->argv[*argc] = ft_substring(q, eq);
+	cmd->argv[*argc] = ft_substr2(q, eq);
 	(*argc)++;
 	if (*argc >= MAXARGS)
 		ft_panic("too many args", 1);

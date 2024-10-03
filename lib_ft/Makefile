@@ -6,7 +6,7 @@
 #    By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/28 11:57:40 by ssuchane          #+#    #+#              #
-#    Updated: 2024/10/03 20:04:44 by ssuchane         ###   ########.fr        #
+#    Updated: 2024/10/03 20:26:09 by ssuchane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRCS :=	ft_append_argv.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
+		ft_ispipe.c \
 		ft_isprint.c \
+		ft_isredirection.c \
 		ft_iswhitespace.c \
 		ft_itoa.c \
 		ft_lstadd_back.c \
@@ -42,6 +44,7 @@ SRCS :=	ft_append_argv.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c  \
 		ft_putstr_fd.c \
+		ft_skip_whitespace.c \
 		ft_split.c \
 		ft_strchr.c \
 		ft_strcmp.c \
@@ -60,6 +63,7 @@ SRCS :=	ft_append_argv.c \
 		ft_strrchr.c \
 		ft_strtrim.c \
 		ft_substr.c \
+		ft_substr2.c \
 		ft_toupper.c \
 		ft_tolower.c \
 		get_next_line.c	\

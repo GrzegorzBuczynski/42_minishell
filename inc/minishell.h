@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 19:47:53 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:26:23 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,12 @@ void				environment_new_node_end(t_env **head, char *key,
 void				init_environment(t_env **environment, char **env);
 void				environment_free_list(t_env *head);
 
-void				environment_free_list(t_env *head);
-
 void				minishell_free(t_data *minishell, int flag);
 
 // tester functions
 void				print_environment(t_env *node);
 
 //	new potential libft function
-char				*ft_strncpy(char *dest, char *src, int num);
-void				ft_skip_whitespace(char **s);
 char				*get_string(char **ps);
 int					md_cd(char **argv, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
@@ -110,32 +106,26 @@ void				ft_update_env_list(char *key, char *value, bool yes,
 char				*ft_get_var_value(char *key, t_data *minishell);
 void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
-void				ft_lstclear(t_list **lst, void (*del)(void *));
 int					get_token(char **ps);
 
 // execution
 t_cmd				*ft_init_cmd(int type);
 t_cmd				*redircmd(char *file, int mode, int fd);
-t_cmd				*listcmd(t_cmd *left, t_cmd *right);
-t_cmd				*backcmd(t_cmd *subcmd);
 void				parsecmd(t_data *minishell);
-int					is_redirection(char *s);
 t_cmd				*get_redir_cmd(char **ps);
-int					is_pipe(char *s);
 
 pid_t				fork1(void);
 void				runcmd(t_cmd *cmd, t_data *minishell);
 void				do_exec(t_cmd *cmd, t_data *minishell);
 int					run_builtin_cmd(char **argv, t_data *minishell);
-void				do_redirect(t_cmd *cmd, t_data *minishell);
 int					ft_echo(char **argv);
 int					ft_unset(char **argv, t_data *minishell);
 int					ft_export(char *argv, t_data *minishell);
 int					ft_pwd(char **argv);
+int					ft_exit(char **args);
 t_cmd				*here_doc_cmd(char *token);
 void				do_here_doc(t_cmd *cmd, t_data *minishell);
 void				take_input(t_cmd *cmd, char *token);
-int					ft_exit(char **args);
 void				handle_exec_error(const char *msg, const char *arg);
 void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
@@ -145,8 +135,7 @@ void				make_forks(t_cmd *cmd, t_data *minishell);
 void				create_pipes(t_cmd *cmd, t_data *minishell);
 int					execute(t_data *minishell);
 // void				alloc_mem_for_commands(t_data *minishell);
-void				free_global(t_data *minishell);
-char				*ft_substring(const char *start, const char *end);
+void				free_global(t_data *minishell); //unused
 void				init_cmd_args(t_cmd *cmd);
 void				add_argument(t_cmd *cmd, char *q, char *eq, int *argc);
 void				print_environment_sorted(t_env *node);

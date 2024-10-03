@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:51:49 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 20:04:57 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:27:37 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
+int					ft_ispipe(char *s);
 int					ft_isprint(int c);
+int					ft_isredirection(char *s);
 int					ft_iswhitespace(char c);
 char				*ft_itoa(int n);
 
@@ -69,6 +71,7 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
 
+void				ft_skip_whitespace(char **s);
 char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
 int					ft_strcmp(const char *s1, const char *s2);
@@ -81,13 +84,14 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*ft_strncpy(char *dest, char *src, int num);
+char				*ft_strncpy(char *dest, const char *src, int num);
 char				*ft_strndup(const char *s, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
 						size_t len);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr2(const char *start, const char *end);
 
 int					ft_tolower(int c);
 int					ft_toupper(int c);

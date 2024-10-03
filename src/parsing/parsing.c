@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:28:05 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:18:05 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_exec(char **ps, t_data *minishell)
 {
 	ft_skip_whitespace(ps);
-	if (!is_redirection(*ps) && !is_pipe(*ps))
+	if (!ft_isredirection(*ps) && !ft_ispipe(*ps))
 	{
 		if (minishell->exec_cmd == NULL)
 			minishell->exec_cmd = ft_init_cmd(EXEC);
@@ -32,7 +32,7 @@ void	parse_redir(char **ps, t_data *minishell)
 	current = NULL;
 	ret_cmd = NULL;
 	ft_skip_whitespace(ps);
-	if (is_redirection(*ps))
+	if (ft_isredirection(*ps))
 	{
 		ret_cmd = get_redir_cmd(ps);
 		if (minishell->redir_cmd == NULL)
@@ -71,7 +71,7 @@ void	parse_fork(char **ps, t_data *minishell)
 
 	exec_cmd = minishell->exec_cmd;
 	ft_skip_whitespace(ps);
-	if (is_pipe(*ps))
+	if (ft_ispipe(*ps))
 	{
 		*ps = *ps + 1;
 		ret_cmd = ft_init_cmd(FORK);

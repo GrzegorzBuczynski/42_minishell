@@ -6,37 +6,11 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 19:49:45 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:16:36 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-int	is_redirection(char *s)
-{
-	if (!strncmp(s, "<<", 2))
-		return ('-');
-	else if (!strncmp(s, ">>", 2))
-		return ('+');
-	else if (!strncmp(s, ">", 1))
-		return ('>');
-	else if (!strncmp(s, "<", 1))
-		return ('<');
-	return (0);
-}
-
-int	is_pipe(char *s)
-{
-	if (s && !strncmp(s, "|", 1))
-		return ('|');
-	return (0);
-}
-
-void	ft_skip_whitespace(char **s)
-{
-	while (*s && **s && ft_strchr(" \t\r\n\v", **s))
-		(*s)++;
-}
 
 t_cmd	*get_redir_cmd(char **ps)
 {
