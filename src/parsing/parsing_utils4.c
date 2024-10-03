@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:26:35 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:29:13 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,6 @@ t_cmd	*ft_init_cmd(int type)
 		ft_panic("malloc", 1);
 	cmd->type = type;
 	return ((t_cmd *)cmd);
-}
-
-void	init_cmd_args(t_cmd *cmd)
-{
-	cmd->argv = malloc(sizeof(char *) * 11);
-	if (!cmd->argv)
-		ft_panic("malloc", 1);
-	bzero(cmd->argv, 11 * sizeof(char *));
-}
-
-void	add_argument(t_cmd *cmd, char *q, char *eq, int *argc)
-{
-	cmd->argv[*argc] = ft_substr2(q, eq);
-	(*argc)++;
-	if (*argc >= MAXARGS)
-		ft_panic("too many args", 1);
-	cmd->argv[*argc] = NULL;
 }
 
 void	add_last_fork(t_data *minishell)

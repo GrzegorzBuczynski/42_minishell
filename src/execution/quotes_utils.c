@@ -6,26 +6,11 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:39:49 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:30:26 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-void	remove_quotess(char **str)
-{
-	int	len;
-
-	if (!str || !*str)
-		return ;
-	len = ft_strlen(*str);
-	if ((len >= 2 && (*str)[0] == '\'' && (*str)[len - 1] == '\'') || (len >= 2
-			&& (*str)[0] == '"' && (*str)[len - 1] == '"'))
-	{
-		ft_memmove(*str, *str + 1, len - 2);
-		(*str)[len - 2] = '\0';
-	}
-}
 
 char	*remove_quotes(char *s)
 {

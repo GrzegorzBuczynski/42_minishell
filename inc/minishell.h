@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 20:26:23 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:32:00 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,17 +136,13 @@ void				create_pipes(t_cmd *cmd, t_data *minishell);
 int					execute(t_data *minishell);
 // void				alloc_mem_for_commands(t_data *minishell);
 void				free_global(t_data *minishell); //unused
-void				init_cmd_args(t_cmd *cmd);
-void				add_argument(t_cmd *cmd, char *q, char *eq, int *argc);
 void				print_environment_sorted(t_env *node);
-void				sort_env_vars(t_env **env_array, size_t count);
 
 void				print_sorted_env_vars(t_env **env_array, size_t count);
-size_t				count_env_vars(t_env *node);
 t_env				**collect_env_vars(t_env *node, size_t count);
+size_t				count_env_vars(t_env *node);
 void				sort_env_vars(t_env **env_array, size_t count);
 void				do_redirect(t_cmd *cmd, t_data *minishell);
-void				remove_quotess(char **str);
 void				init_cmd_argv(t_cmd *cmd);
 
 int					is_builtin(t_cmd *cmd);
@@ -165,7 +161,7 @@ void				set_quotes(char *quotes, char word);
 bool				do_copy_var(int quotes, char *input, int i);
 int					replace_var_loop(char *input, t_data *minishell,
 						char *result, int i);
-int					add_space(int i, int quotes, char *input);
+int					add_space(int i, int quotes, char *input); // add to libft
 int					add_another_space(int i, int quotes, char *input);
 int					copy_variable(char *name, t_data *minishell, int *j,
 						char *result);
