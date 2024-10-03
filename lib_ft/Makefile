@@ -6,7 +6,7 @@
 #    By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/28 11:57:40 by ssuchane          #+#    #+#              #
-#    Updated: 2024/10/03 18:32:33 by ssuchane         ###   ########.fr        #
+#    Updated: 2024/10/03 20:01:28 by ssuchane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRCS :=	ft_append_argv.c \
 		ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
+		ft_is_string_numeric.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \

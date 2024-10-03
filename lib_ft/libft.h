@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:51:49 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 18:49:41 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:01:36 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void				ft_bzero(void *s, size_t n);
 
 void				*ft_calloc(size_t nmemb, size_t size);
 
+int					ft_is_string_numeric(char *str);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
