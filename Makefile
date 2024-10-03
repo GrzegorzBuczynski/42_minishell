@@ -35,7 +35,6 @@ SRCS =	src/main.c \
 		src/execution/find_bin_cmd.c \
 		src/execution/find_bin_cmd_utils.c \
 		src/execution/quotes_utils.c \
-		src/error/error.c \
 		src/env/env_utils.c \
 		src/env/env.c \
 		src/env/envlist_to_array.c \

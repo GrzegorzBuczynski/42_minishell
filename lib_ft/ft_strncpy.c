@@ -3,20 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:30:12 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/22 17:21:36 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:39:37 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* 
-** The strncpy() function copies at most num characters from the string src to
-** dest. If num is less than the length of src, a null character is not appended
-** to dest. If num is greater than the length of src, the destination is padded
-** with null characters.
+/**
+ * @brief Copies a string up to a specified number of characters.
+ *
+ * This function copies up to `num` characters from the string pointed to by 
+ * `src` to the string pointed to by `dest`. If the length of `src` is less 
+ * than `num`, the remainder of `dest` is filled with null bytes ('\0').
+ *
+ * @param dest A pointer to the destination string where the content is to be 
+ *             copied.
+ * @param src A pointer to the source string to be copied.
+ * @param num The maximum number of characters to copy from `src`.
+ *
+ * @return A pointer to the destination string `dest`.
+ *
+ * @note If `num` is less than or equal to 0, the behavior is undefined.
+ *       If `src` is NULL, the behavior is also undefined.
  */
 char	*ft_strncpy(char *dest, char *src, int num)
 {

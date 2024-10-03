@@ -5,30 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 20:44:56 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/19 19:15:50 by ssuchane         ###   ########.fr       */
+/*   Created: 2024/03/09 20:31:26 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/10/03 19:10:59 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+/**
+ * @brief Clears and frees a linked list.
+ *
+ * The function iterates through the linked list pointed to by `lst`, 
+ * calling the function pointed to by `del` on the content of each 
+ * element and then freeing each element from memory. After clearing 
+ * the list, it sets the pointer to the head of the list to `NULL`.
+ *
+ * @param lst A pointer to a pointer to the first element of the list. 
+ *            This allows modification of the head of the list.
+ * @param del A pointer to a function that takes a `void*` as an 
+ *            argument and is used to free the content of each element. 
+ *            This function must not be `NULL`.
+ * 
+ * @return None.
+ * 
+ * @note The function does not free the list itself; it only frees 
+ *       the individual elements and their contents.
+ * 
+ * @warning If either `lst` or `del` is `NULL`, the function does nothing 
+ *          and returns immediately.
+ */
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*next;
-	t_list	*curr;
+	t_list	*current;
 
-	if (!lst || !*lst || !del)
+	if (!lst || !del)
 		return ;
-	curr = *lst;
-	next = curr -> next;
-	while (curr && next)
+	current = *lst;
+	while (current != NULL)
 	{
-		del(curr -> content);
-		free(curr);
-		curr = next;
-		next = curr -> next;
+		next = current->next;
+		del(current->content);
+		free (current);
+		current = next;
 	}
-	del(curr -> content);
-	free(curr);
 	*lst = NULL;
 }

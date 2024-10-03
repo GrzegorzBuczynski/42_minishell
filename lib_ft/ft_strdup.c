@@ -3,32 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 13:02:29 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/03 17:49:01 by gbuczyns         ###   ########.fr       */
+/*   Created: 2024/02/28 16:58:56 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/10/03 19:36:26 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Allocates sufficient memory for a copy of the string s1, does the copy,
-	and returns a pointer to it. The pointer may subsequently be used as an 
-	argument to the function free(3). If insufficient memory is available,
-	NULL is returned and errno is set to ENOMEM.*/
+/**
+ * @brief Duplicates a string by allocating memory for a new copy.
+ *
+ * The function allocates sufficient memory to hold a copy of the 
+ * string pointed to by `s`, and then copies the content of `s` 
+ * into the newly allocated memory, including the null terminator. 
+ * If memory allocation fails, the function returns NULL.
+ *
+ * @param s A pointer to the null-terminated string to be duplicated. 
+ *          This string must not be NULL.
+ * 
+ * @return A pointer to the newly allocated string that is a duplicate 
+ *         of `s`, or NULL if memory allocation fails.
+ *
+ * @note The caller is responsible for freeing the memory allocated 
+ *       for the duplicated string to avoid memory leaks.
+ */
 char	*ft_strdup(const char *s)
 {
-	char	*newstr;
-	char	*start;
+	char			*ptr;
+	unsigned int	i;
 
-	newstr = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (!newstr)
+	ptr = (char *)malloc(ft_strlen(s) + 1);
+	if (!ptr)
 		return (NULL);
-	start = newstr;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		*newstr++ = *s++;
+		ptr[i] = s[i];
+		i++;
 	}
-	*newstr = '\0';
-	return (start);
+	ptr[i] = '\0';
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:37:05 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:49:45 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_cmd	*get_redir_cmd(char **ps)
 	file = get_string(ps);
 	file = remove_quotes(file);
 	if (file == NULL)
-		panic("missing file for redirection", 1);
+		ft_panic("missing file for redirection", 1);
 	if (tok == '<')
 		ret_cmd = inputcmd(file);
 	else if (tok == '>')

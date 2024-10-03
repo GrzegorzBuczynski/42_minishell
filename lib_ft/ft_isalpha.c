@@ -3,23 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 15:03:05 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/21 21:59:58 by gbuczyns         ###   ########.fr       */
+/*   Created: 2024/01/25 13:02:04 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/10/03 19:04:55 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
+#include "libft.h"
 
-	* The ft_isalpha() function checks whether the passed character
-	* is an alphabetic character.
+/**
+ * @brief Checks if a character is alphabetic.
+ *
+ * The function tests whether the input character `c` is an alphabetic letter,
+ * either lowercase (`a-z`) or uppercase (`A-Z`).
+ *
+ * @param c The character to be checked, passed as an integer. The value of
+ *          `c` must be representable as an unsigned char or be equal to EOF.
+ *
+ * @return Non-zero (true) if `c` is an alphabetic character,
+ *	and 0 (false) otherwise.
+ *
+ * @note This function behaves similarly to the standard `isalpha` function
+ *       in the C library, checking for both uppercase and lowercase letters.
+ *
+ * @warning Ensure that the value of `c` is within the valid range of
+ *          `unsigned char` or equal to EOF to avoid undefined behavior.
  */
-int	ft_isalpha(char someChar)
+int	ft_isalpha(int c)
 {
-	if ((someChar >= 'A' && someChar <= 'Z') || (someChar >= 'a'
-			&& someChar <= 'z'))
-		return (1);
-	else
-		return (0);
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }

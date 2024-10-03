@@ -3,17 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 14:18:32 by itykhono          #+#    #+#             */
-/*   Updated: 2024/09/21 18:07:15 by gbuczyns         ###   ########.fr       */
+/*   Created: 2024/01/25 13:22:20 by ssuchane          #+#    #+#             */
+/*   Updated: 2024/10/03 19:06:05 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(char s)
+#include "libft.h"
+
+/**
+ * @brief Checks if a character is a digit.
+ *
+ * The function tests whether the input character `c` is a decimal digit 
+ * (i.e., a character between '0' and '9').
+ *
+ * @param c The character to be checked, passed as an integer. The value of 
+ *          `c` should be representable as an unsigned char or EOF.
+ * 
+ * @return Non-zero (true) if `c` is a digit, and 0 (false) otherwise.
+ * 
+ * @note This function behaves similarly to the standard `isdigit` function 
+ *       in the C library, checking if the value is between '0' and '9'.
+ */
+int	ft_isdigit(int c)
 {
-	if (s >= '0' && s <= '9')
-		return (1);
-	else
-		return (0);
+	return (c >= '0' && c <= '9');
 }

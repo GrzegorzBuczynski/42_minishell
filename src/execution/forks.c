@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 19:56:33 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:48:21 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pid_t	fork1(void)
 
 	pid = fork();
 	if (pid == -1)
-		panic("fork", 1);
+		ft_panic("fork", 1);
 	return (pid);
 }
 

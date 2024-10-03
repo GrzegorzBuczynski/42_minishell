@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:38:28 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:49:35 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 	close(rcmd->fd);
 	fd = open(rcmd->file, rcmd->mode, 0644);
 	if (fd < 0)
-		panic("open", 1);
+		ft_panic("open", 1);
 	if (rcmd->sub_cmd)
 		runcmd(rcmd->sub_cmd, minishell);
 }
@@ -57,7 +57,7 @@ void	execute_binary(t_cmd *cmd, t_data *minishell)
 	execve(path, cmd->argv, envp);
 	free(envp);
 	free(path);
-	panic("execve", EXIT_FAILURE);
+	ft_panic("execve", EXIT_FAILURE);
 }
 
 void	do_exec(t_cmd *cmd, t_data *minishell)
