@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:41:04 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 22:20:52 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ void	minishell_loop(t_data *minishell)
 {
 	while (1)
 	{
-		minishell->input = readline(PROMPT);
+		minishell->input = gc_collector(readline(PROMPT), false, 1);
+		// minishell->input = gc_collector(get_next_line(STDIN_FILENO), false, 1);
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
 			gc_free((void *)1);
+			gc_free((void *)1);
+			gc_free((void *)1);
+
 			exit(0);
 		}
 		if (minishell->input)
@@ -85,15 +89,10 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	(void)env;
-	minishell = (t_data *)ft_calloc(sizeof(t_data), 1);
+	minishell = (t_data *)gc_calloc(sizeof(t_data), 1);
 	signal(SIGINT, handle_sigint);
 	init_minishell(minishell, env);
 	init_environment(&(minishell->envlist), minishell->envir);
 	minishell_loop(minishell);
-	// gc_calloc(1, 1);
-	// gc_free((void *)0);
-	// gc_free((void *)0);
-	// gc_free((void *)0);
-
 	return (0);
 }

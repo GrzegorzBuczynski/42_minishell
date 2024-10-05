@@ -105,6 +105,3 @@ push:
 	git add .
 	git commit -m "make push!"
 	git push
-
-valgrind:
-	valgrind --memcheck:leak-check=full  --track-origins=yes  --show-reachable=yes  --show-leak-kinds=all  --error-limit=no  --log-file=valgrind.log  --suppressions=.readline.supp ./minishell
