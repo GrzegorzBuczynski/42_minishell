@@ -38,6 +38,8 @@ SRCS =	src/main.c \
 		src/env/env_utils.c \
 		src/env/env.c \
 		src/env/envlist_to_array.c \
+		src/garbage_colector/gc_calloc.c \
+		src/garbage_colector/gc_free.c \
 		src/garbage_colector/garbage_colector.c \
 		src/garbage_colector/minishell_free.c \
 		src/parsing/argv_utils.c \
