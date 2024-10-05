@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:29:13 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:03:28 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*ft_init_cmd(int type)
 {
 	t_cmd	*cmd;
 
-	cmd = ft_calloc(sizeof(*cmd), 1);
+	cmd = gc_calloc(sizeof(*cmd), 1);
 	if (!cmd)
 		ft_panic("malloc", 1);
 	cmd->type = type;

@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/05 18:12:21 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:19:23 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,9 +177,11 @@ int					handle_variable_expansion(char *input, int *i,
 						t_data *minishell, int *length);
 
 void				*gc_collector(void *content, bool do_free, int lst_nr);
-int					gc_calloc_internal(int size, t_list **head, int lst_nr);
+int					gc_calloc_internal(void *content, t_list **head,
+						int lst_nr);
 void				*gc_free(void *ptr);
 void				*gc_calloc(size_t size, int lst_nr);
 int					gc_free_level(t_list **to_free, bool do_free, int lst_nr);
-int					gc_find_and_free_node_in_lst(void *ptr, t_list **head,	bool free);
+int					gc_find_and_free_node_in_lst(void *ptr, t_list **head,
+						bool free);
 #endif

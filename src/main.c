@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 20:15:48 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:17:39 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	minishell_loop(t_data *minishell)
 		}
 		parsecmd(minishell);
 		execute(minishell);
+		gc_free((void *)1);
 		set_last_exit_code(minishell);
 		reset_minishell(minishell);
 	}

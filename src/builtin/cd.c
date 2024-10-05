@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:15:20 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/27 14:23:48 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:52:49 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_change_pwd(t_data *minishell)
 {
 	char	*cwd;
 
-	cwd = gc_collector(getcwd(NULL, 0), false);
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (0);
 	return (ft_update_env_list("PWD", cwd, false, minishell), 0);

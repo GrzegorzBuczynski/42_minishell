@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:28:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 18:04:22 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 20:08:19 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@
 */
 void	*gc_free(void *ptr)
 {
-	if (ptr > 1000)
+	long	i;
+
+	i = (long)ptr;
+	if (i > 1000)
 		gc_collector(ptr, true, 0);
-	else if (ptr == 0)
+	else if (i == 0)
 		gc_collector(NULL, true, 0);
-	else if (ptr <= 1000)
-		gc_collector(ptr, true, (int)ptr);
+	else if (i <= 1000)
+		gc_collector(0, true, (long)ptr);
 	return (NULL);
 }
 
@@ -90,10 +93,21 @@ int	gc_find_and_free_node_in_lst(void *ptr, t_list **head, bool free)
 
 int	ft_free_lst_and_content(t_list **head)
 {
+	t_list	*current;
+	t_list	*previous;
+
 	if (!head || !*head)
 		return (FALSE);
-	while (*head)
-		gc_find_and_free_node_in_lst((*head)->content, head, TRUE);
+	previous = *head;
+	current = *head;
+	while (current)
+	{
+		current = current->next;
+		free(previous->content);
+		free(previous);
+		previous = current;
+	}
+	*head = NULL;
 	return (TRUE);
 }
 
@@ -113,7 +127,10 @@ int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
 		if (i == lst_nr)
 		{
 			if (previous)
+			{
 				previous->next = tmp->next;
+				tmp->next = NULL;
+			}
 			else
 				*to_free = tmp->next;
 			ft_free_lst_and_content(&tmp);
@@ -121,7 +138,7 @@ int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
 		}
 		previous = tmp;
 		tmp = tmp->next;
+		i++;
 	}
 	return (FALSE);
 }
-
