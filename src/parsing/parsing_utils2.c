@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 20:35:19 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:36:44 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmd	*inputcmd(char *file)
 {
 	t_cmd	*cmd;
 
-	cmd = ft_calloc(sizeof(*cmd), 1);
+	cmd = gc_calloc(sizeof(*cmd), 2);
 	if (!cmd)
 		return (NULL);
 	cmd->type = REDIR;

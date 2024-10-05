@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:21:24 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 19:48:10 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:36:15 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	create_pipes(t_cmd *cmd, t_data *minishell)
 		forks++;
 		current = current->sub_cmd;
 	}
-	minishell->pipe_argv = (int **)ft_calloc(sizeof(int *) * forks, 1);
+	minishell->pipe_argv = (int **)gc_calloc(sizeof(int *) * forks, 2);
 	if (minishell->pipe_argv == NULL)
 		ft_panic("malloc", 1);
 	while (pipes < forks - 1)
 	{
-		minishell->pipe_argv[pipes] = (int *)ft_calloc(2 * sizeof(int), 1);
+		minishell->pipe_argv[pipes] = (int *)gc_calloc(2 * sizeof(int), 2);
 		if (minishell->pipe_argv[pipes] == NULL)
 			ft_panic("malloc", 1);
 		if (pipe(minishell->pipe_argv[pipes]) == -1)

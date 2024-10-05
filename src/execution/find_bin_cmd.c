@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:10:53 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:51:40 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*find_binary_path(t_cmd *cmd, char **paths)
 			return (NULL);
 		if (access(full_path, X_OK) == 0)
 			return (full_path);
-		free(full_path);
+		// free(full_path);
 		i++;
 	}
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

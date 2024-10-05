@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:18:13 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:15:50 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:37:58 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static t_env	*ft_envlist_new(char *key, char *value)
 {
 	t_env	*new;
 
-	new = (t_env *)ft_calloc(1, sizeof(t_env));
+	new = (t_env *)gc_calloc(sizeof(t_env), 1);
 	if (!new)
 		return (NULL);
-	new->key = gc_collector(ft_strdup(key), false, 0);
+	new->key = gc_collector(ft_strdup(key), false, 1);
 	if (value)
-		new->value = gc_collector(ft_strdup(value), false, 0);
+		new->value = gc_collector(ft_strdup(value), false, 1);
 	new->next = NULL;
 	return (new);
 }

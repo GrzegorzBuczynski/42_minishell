@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:42:35 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 20:45:41 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:50:12 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	handle_variable_expansion(char *input, int *i, t_data *minishell,
 		*length += ft_strlen(ft_itoa(minishell->exit_status));
 	else
 		*length += ft_strlen(ft_get_var_value(name, minishell)) + 1;
-	free(name);
+	// free(name);
 	return (1);
 }

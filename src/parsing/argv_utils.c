@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:31:05 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:35:21 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:37:02 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_append_argv(char **argv, char *line)
 	i = 0;
 	while (argv && argv[i])
 		i++;
-	new_argv = ft_calloc(sizeof(char *) * (i + 2), 1);
+	new_argv = gc_calloc(sizeof(char *) * (i + 2), 2);
 	if (new_argv == NULL)
 		ft_panic("malloc", 1);
 	i = 0;
@@ -41,7 +41,7 @@ char	**ft_append_argv(char **argv, char *line)
 		new_argv[i] = argv[i];
 		i++;
 	}
-	new_argv[i] = gc_collector(ft_strdup(line), false, 0);
+	new_argv[i] = gc_collector(ft_strdup(line), false, 2);
 	new_argv[i + 1] = NULL;
 	return (new_argv);
 }

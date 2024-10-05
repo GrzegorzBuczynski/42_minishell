@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 17:49:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 19:27:11 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:37:27 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ int	gc_calloc_internal(void *content, t_list **head, int lst_nr)
 	int		i;
 	t_list	**debag;
 	t_list	*debag2;
+	t_list	*new_node;
 
-	i = 0;
+	i = 1;
 	if (!head)
 		return (FALSE);
 	tmp = *head;
-	if (!tmp)
-	{
-		ft_lstadd_back(head, ft_lstnew(NULL));
-		tmp = *head;
-	}
 	while (i <= lst_nr)
 	{
-		if (!tmp->next)
+		if (!tmp)
 		{
-			ft_lstadd_back(head, ft_lstnew(NULL));
+			new_node = ft_lstnew(NULL);
+			ft_lstadd_back(head, new_node);
+			tmp = *head;
 		}
 		if (i == lst_nr)
 		{
+			// if (!tmp)
+			// 	tmp = new_node;
 			ft_lstadd_back((t_list **)&(tmp->content), ft_lstnew(content));
-			debag = (t_list **)&(tmp->content),
+			debag = (t_list **)&(tmp->content);
 			debag2 = *debag;
 			(void)debag;
 			(void)debag2;

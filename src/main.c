@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 22:23:53 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:51:51 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ void	minishell_loop(t_data *minishell)
 	while (1)
 	{
 		// minishell->input = gc_collector(readline(PROMPT), false, 1);
+		ft_putstr_fd("temp prompt>", 1);
 		minishell->input = gc_collector(get_next_line(STDIN_FILENO), false, 1);
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
+			gc_free((void *)2);
 			gc_free((void *)1);
-			gc_free((void *)1);
-			// gc_free((void *)1);
-
 			exit(0);
 		}
 		// if (minishell->input)
@@ -59,15 +58,13 @@ void	minishell_loop(t_data *minishell)
 		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_input_valid(minishell->input))
 		{
-			// free(minishell->input);
+			gc_free((void *)2);
 			minishell->exit_status = 0;
 			set_last_exit_code(minishell);
 			continue ;
 		}
 		parsecmd(minishell);
 		execute(minishell);
-		gc_free((void *)2);
-		gc_free((void *)2);
 		gc_free((void *)2);
 		set_last_exit_code(minishell);
 		reset_minishell(minishell);

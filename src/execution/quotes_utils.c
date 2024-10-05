@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:36:33 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:51:46 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	rise_level(t_data *minishell)
 	if (new_level == NULL)
 		return ;
 	ft_update_env_list("SHLVL", new_level, YES, minishell);
-	free(new_level);
+	// free(new_level);
 }

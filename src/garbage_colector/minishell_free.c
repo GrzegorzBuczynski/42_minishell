@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:12:35 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/20 17:55:28 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:46:44 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	minishell_free(t_data *minishell, int flag)
+/* void	minishell_free(t_data *minishell, int flag)
 {
 	(void)flag;
 	(void)minishell;
@@ -80,3 +80,4 @@ void	free_global(t_data *minishell)
 		free(minishell->commands);
 	}
 }
+ */
