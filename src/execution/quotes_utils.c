@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:30:26 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:36:33 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*remove_quotes(char *s)
 	int		wait_for;
 	int		i;
 
-	result = (char *)ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	result = (char *)gc_calloc((ft_strlen(s) + 1)*sizeof(char), 1);
 	if (!result)
 		return (NULL);
 	wait_for = NOT_SET;

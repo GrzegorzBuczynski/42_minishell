@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:31:05 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 19:49:40 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:35:21 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_cmd_argv(t_cmd *cmd)
 {
 	if (cmd->argv == NULL)
 	{
-		cmd->argv = malloc(sizeof(char *));
+		cmd->argv = gc_calloc(sizeof(char *), 1);
 		cmd->argv[0] = ft_strdup("");
 	}
 }
@@ -41,7 +41,7 @@ char	**ft_append_argv(char **argv, char *line)
 		new_argv[i] = argv[i];
 		i++;
 	}
-	new_argv[i] = ft_strdup(line);
+	new_argv[i] = gc_collector(ft_strdup(line), false, 0);
 	new_argv[i + 1] = NULL;
 	return (new_argv);
 }

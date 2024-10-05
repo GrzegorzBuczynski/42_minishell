@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 19:56:43 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:10:53 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**get_paths(char *path_env)
 	while (path_env[++i] != '\0')
 		if (path_env[i] == ':')
 			paths_count++;
-	paths = malloc((paths_count + 1) * sizeof(char *));
+	paths = gc_calloc((paths_count + 1) * sizeof(char *), 1);
 	if (paths == NULL)
 		return (NULL);
 	paths = ft_split(path_env, ':');
@@ -42,7 +42,7 @@ char	*construct_full_path(const char *base_path, const char *cmd)
 	base_len = ft_strlen(base_path);
 	cmd_len = ft_strlen(cmd);
 	total_len = base_len + 1 + cmd_len + 1;
-	full_path = malloc(total_len);
+	full_path = gc_calloc(total_len, 1);
 	if (full_path == NULL)
 		return (NULL);
 	ft_strlcpy(full_path, base_path, total_len);

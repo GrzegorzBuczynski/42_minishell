@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:41:35 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 19:52:29 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:40:08 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	copy_variable(char *name, t_data *minishell, int *j, char *result)
 	ft_strlcpy(result + *j, ft_get_var_value(name, minishell),
 		ft_strlen(ft_get_var_value(name, minishell)) + 1);
 	*j += ft_strlen(ft_get_var_value(name, minishell));
-	free(name);
+	// free(name);
 	return (1);
 }

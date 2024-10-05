@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:18:13 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 18:55:39 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:15:50 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static t_env	*ft_envlist_new(char *key, char *value)
 	new = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->key = ft_strdup(key);
+	new->key = gc_collector(ft_strdup(key), false, 0);
 	if (value)
-		new->value = ft_strdup(value);
+		new->value = gc_collector(ft_strdup(value), false, 0);
 	new->next = NULL;
 	return (new);
 }

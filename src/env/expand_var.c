@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:37:33 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 20:44:18 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:40:13 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ char	*replace_var(char *input, t_data *minishell)
 	count_length(input, minishell, &length);
 	if (length <= 0)
 		return (NULL);
-	result = (char *)ft_calloc(length + 1, sizeof(char));
+	result = (char *)gc_calloc((length + 1)* sizeof(char), 0);
 	if (!result)
 		return (NULL);
 	if (!replace_var_loop(input, minishell, result, 0) || !result)
-		return (free(result), NULL);
+		return (NULL);
 	return (result);
 }
 
@@ -93,10 +93,10 @@ void	set_last_exit_code(t_data *minishell)
 	{
 		if (!ft_strcmp("?", envlst->key))
 		{
-			value = ft_itoa(minishell->exit_status);
+			value = gc_collector(ft_itoa(minishell->exit_status), false, 1);
 			if (value)
 			{
-				free(envlst->value);
+				// free(envlst->value);
 				envlst->value = value;
 			}
 			return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/23 18:42:42 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:39:19 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_environment_sorted(t_env *node)
 		return ;
 	sort_env_vars(env_array, count);
 	print_sorted_env_vars(env_array, count);
-	free(env_array);
+	// free(env_array);
 }
 
 void	print_sorted_env_vars(t_env **env_array, size_t count)
@@ -61,7 +61,7 @@ t_env	**collect_env_vars(t_env *node, size_t count)
 	t_env	**env_array;
 	size_t	i;
 
-	env_array = (t_env **)malloc(sizeof(t_env *) * count);
+	env_array = (t_env **)gc_calloc(sizeof(t_env *) * count, 0);
 	if (!env_array)
 		return (NULL);
 	i = 0;

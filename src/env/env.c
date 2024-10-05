@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:13:40 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/02 19:54:13 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:44:41 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ t_env	*environment_new_node(char *key, char *value)
 {
 	t_env	*new_node;
 
-	new_node = (t_env *)malloc(sizeof(t_env));
+	new_node = (t_env *)gc_calloc(sizeof(t_env), 0);
 	if (!new_node)
 		return (NULL);
-	new_node->key = ft_strdup(key);
+	new_node->key = gc_collector(ft_strdup(key), false, 0);
 	if (!value)
 		new_node->value = NULL;
 	else
-		new_node->value = ft_strdup(value);
+		new_node->value = gc_collector(ft_strdup(value), false, 0);
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -61,19 +61,19 @@ void	init_environment(t_env **environment, char **env)
 		delimiter_pos = ft_strchr(env[i], '=');
 		if (delimiter_pos != NULL)
 		{
-			key = ft_strndup(env[i], delimiter_pos - env[i]);
-			value = ft_strdup(delimiter_pos + 1);
+			key = gc_collector(ft_strndup(env[i], delimiter_pos - env[i]), false, 0);
+			value = gc_collector(ft_strdup(delimiter_pos + 1), false, 0);
 			environment_new_node_end(environment, key, value);
-			free(key);
-			free(value);
+			// free(key);
+			// free(value);
 		}
 		i++;
 	}
-	key = ft_strndup("?", 1);
-	value = ft_strdup("0");
+	key = gc_collector(ft_strndup("?", 1), false, 0);
+	value = gc_collector(ft_strdup("0"), false, 0);
 	environment_new_node_end(environment, key, value);
-	free(key);
-	free(value);
+	// free(key);
+	// free(value);
 }
 
 void	environment_free_list(t_env *head)
@@ -84,9 +84,11 @@ void	environment_free_list(t_env *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
+		(void)tmp;
+		(void)head;
+		// free(tmp->key);
+		// free(tmp->value);
+		// free(tmp);
 	}
 }
 

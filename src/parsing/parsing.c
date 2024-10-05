@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:18:05 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:31:24 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	parse_exec(char **ps, t_data *minishell)
 	{
 		if (minishell->exec_cmd == NULL)
 			minishell->exec_cmd = ft_init_cmd(EXEC);
-		minishell->exec_cmd->argv = ft_append_argv(minishell->exec_cmd->argv,
-				get_string(ps));
+		minishell->exec_cmd->argv = gc_collector(ft_append_argv(minishell->exec_cmd->argv,
+					get_string(ps)), false, 1);
 	}
 }
 

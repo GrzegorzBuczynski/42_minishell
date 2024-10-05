@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 19:17:39 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:41:04 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
+			gc_free((void *)1);
 			exit(0);
 		}
 		if (minishell->input)
@@ -54,14 +55,16 @@ void	minishell_loop(t_data *minishell)
 		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_input_valid(minishell->input))
 		{
-			free(minishell->input);
+			// free(minishell->input);
 			minishell->exit_status = 0;
 			set_last_exit_code(minishell);
 			continue ;
 		}
 		parsecmd(minishell);
 		execute(minishell);
-		gc_free((void *)1);
+		gc_free((void *)2);
+		gc_free((void *)2);
+		gc_free((void *)2);
 		set_last_exit_code(minishell);
 		reset_minishell(minishell);
 	}
@@ -87,5 +90,10 @@ int	main(int argc, char **argv, char **env)
 	init_minishell(minishell, env);
 	init_environment(&(minishell->envlist), minishell->envir);
 	minishell_loop(minishell);
+	// gc_calloc(1, 1);
+	// gc_free((void *)0);
+	// gc_free((void *)0);
+	// gc_free((void *)0);
+
 	return (0);
 }

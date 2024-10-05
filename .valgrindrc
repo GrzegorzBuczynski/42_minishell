@@ -1,0 +1,7 @@
+valgrind --memcheck:leak-check=full ./minishell
+valgrind --track-origins=yes ./minishell
+valgrind --show-reachable=yes ./minishell
+valgrind --show-leak-kinds=all ./minishell
+valgrind --error-limit=no ./minishell
+valgrind --log-file=valgrind.log ./minishell
+valgrind --suppressions=.readline.supp ./minishell

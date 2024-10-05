@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envlist_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:18:13 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/11 20:00:46 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:40:04 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*environment_create_key_value(t_env *node)
 		return (NULL);
 	temp = ft_strjoin(node->key, "=");
 	key_value = ft_strjoin(temp, node->value);
-	free(temp);
+	// free(temp);
 	return (key_value);
 }
 
@@ -53,7 +53,7 @@ int	environment_fill_array(t_env *environment, char **env_array)
 		if (!env_array[i])
 		{
 			while (i > 0)
-				free(env_array[--i]);
+				// free(env_array[--i]);
 			return (0);
 		}
 		i++;
@@ -71,12 +71,12 @@ char	**environment_list_to_array(t_env *environment)
 	list_size = environment_list_size(environment);
 	if (list_size == 0)
 		return (NULL);
-	env_array = (char **)malloc(sizeof(char *) * (list_size + 1));
+	env_array = (char **)gc_calloc(sizeof(char *) * (list_size + 1), 1);
 	if (!env_array)
 		return (NULL);
 	if (!environment_fill_array(environment, env_array))
 	{
-		free(env_array);
+		// free(env_array);
 		return (NULL);
 	}
 	return (env_array);

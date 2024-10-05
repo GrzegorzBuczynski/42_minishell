@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_cmd_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/19 18:36:54 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:40:26 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clean_up(char *binary_path, char **paths)
 
 	i = 0;
 	if (binary_path)
-		free(binary_path);
+		// free(binary_path);
 	if (paths)
 	{
 		while (paths[i] != NULL)
@@ -34,6 +34,6 @@ void	clean_up(char *binary_path, char **paths)
 			free(paths[i]);
 			i++;
 		}
-		free(paths);
+		// free(paths);
 	}
 }

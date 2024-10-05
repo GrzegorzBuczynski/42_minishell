@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/09/23 18:42:12 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:39:24 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	update_or_add_env_var(t_data *minishell, char *key, char *value)
 	{
 		if (ft_strcmp(key, env->key) == 0)
 		{
-			free(env->value);
+			// free(env->value);
 			env->value = ft_strdup(value);
 			if (!env->value)
 				return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:12:02 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 20:35:19 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ t_cmd	*redircmd(char *file, int mode, int fd)
 {
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(*cmd));
-	ft_memset(cmd, 0, sizeof(*cmd));
+	cmd = gc_calloc(sizeof(*cmd), 1);
 	cmd->type = REDIR;
 	cmd->sub_cmd = NULL;
 	cmd->file = file;

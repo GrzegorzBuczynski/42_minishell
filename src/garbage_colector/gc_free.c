@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:28:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 20:08:19 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:09:49 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,15 @@ int	gc_find_and_free_node_in_lst(void *ptr, t_list **head, bool free)
 	return (FALSE);
 }
 
-int	ft_free_lst_and_content(t_list **head)
+int	ft_free_lst_and_content(t_list *head)
 {
 	t_list	*current;
 	t_list	*previous;
 
-	if (!head || !*head)
+	if (!head)
 		return (FALSE);
-	previous = *head;
-	current = *head;
+	previous = head->content;
+	current = head->content;
 	while (current)
 	{
 		current = current->next;
@@ -107,7 +107,7 @@ int	ft_free_lst_and_content(t_list **head)
 		free(previous);
 		previous = current;
 	}
-	*head = NULL;
+	free(head);
 	return (TRUE);
 }
 
@@ -117,7 +117,7 @@ int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
 	t_list	*previous;
 	int		i;
 
-	i = 0;
+	i = 1;
 	previous = NULL;
 	if (!to_free || !do_free)
 		return (FALSE);
@@ -133,7 +133,7 @@ int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
 			}
 			else
 				*to_free = tmp->next;
-			ft_free_lst_and_content(&tmp);
+			ft_free_lst_and_content(tmp); //przekazuje sub list
 			return (TRUE);
 		}
 		previous = tmp;

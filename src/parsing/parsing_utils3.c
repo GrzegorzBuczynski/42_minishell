@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 19:30:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:25:32 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:20:06 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_string(char **ps)
 			s++;
 	}
 	length = s - start;
-	ret = ft_strndup(start, length);
+	ret = gc_collector(ft_strndup(start, length), false, 1);
 	*ps = s;
 	return (ret);
 }
