@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 20:32:00 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:12:21 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int					md_cd(char **argv, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
 						t_data *minishell);
 char				*ft_get_var_value(char *key, t_data *minishell);
-void				*gc_collector(void *list, bool free);
 void				ft_envlstadd_back(t_env *new, t_data *minishell);
 int					get_token(char **ps);
 
@@ -135,7 +134,7 @@ void				make_forks(t_cmd *cmd, t_data *minishell);
 void				create_pipes(t_cmd *cmd, t_data *minishell);
 int					execute(t_data *minishell);
 // void				alloc_mem_for_commands(t_data *minishell);
-void				free_global(t_data *minishell); //unused
+void	free_global(t_data *minishell); // unused
 void				print_environment_sorted(t_env *node);
 
 void				print_sorted_env_vars(t_env **env_array, size_t count);
@@ -161,7 +160,7 @@ void				set_quotes(char *quotes, char word);
 bool				do_copy_var(int quotes, char *input, int i);
 int					replace_var_loop(char *input, t_data *minishell,
 						char *result, int i);
-int					add_space(int i, int quotes, char *input); // add to libft
+int	add_space(int i, int quotes, char *input); // add to libft
 int					add_another_space(int i, int quotes, char *input);
 int					copy_variable(char *name, t_data *minishell, int *j,
 						char *result);
@@ -176,4 +175,11 @@ void				rise_level(t_data *minishell);
 bool				toggle_quotes_state(bool is_in_quotes, char current_char);
 int					handle_variable_expansion(char *input, int *i,
 						t_data *minishell, int *length);
+
+void				*gc_collector(void *content, bool do_free, int lst_nr);
+int					gc_calloc_internal(int size, t_list **head, int lst_nr);
+void				*gc_free(void *ptr);
+void				*gc_calloc(size_t size, int lst_nr);
+int					gc_free_level(t_list **to_free, bool do_free, int lst_nr);
+int					gc_find_and_free_node_in_lst(void *ptr, t_list **head,	bool free);
 #endif

@@ -6,31 +6,28 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:57:46 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/02 19:21:31 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:05:34 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	del(void *to_free)
-{
-	free(to_free);
-}
 
-void	*gc_collector(void *content, bool free)
+
+
+void	*gc_collector(void *content, bool do_free, int lst_nr)
 {
 	static t_list	*to_free;
+	t_list			*set_lst_head;
 
-	if (free)
+	if (do_free)
 	{
-		ft_lstclear(&to_free, del);
+		gc_find_and_free_node_in_lst(content, &to_free, do_free);
+		gc_free_level(&to_free, do_free, lst_nr);
 		return (NULL);
 	}
 	else
-	{
-		ft_lstadd_back(&to_free, ft_lstnew(content));
-		return (content);
-	}
+		return (gc_calloc_internal(content, &to_free, lst_nr));
 }
 
 void	ft_clear_envlist(t_data *minishell)
