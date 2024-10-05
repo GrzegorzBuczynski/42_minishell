@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 22:20:52 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 22:23:53 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	minishell_loop(t_data *minishell)
 {
 	while (1)
 	{
-		minishell->input = gc_collector(readline(PROMPT), false, 1);
-		// minishell->input = gc_collector(get_next_line(STDIN_FILENO), false, 1);
+		// minishell->input = gc_collector(readline(PROMPT), false, 1);
+		minishell->input = gc_collector(get_next_line(STDIN_FILENO), false, 1);
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
 			gc_free((void *)1);
 			gc_free((void *)1);
-			gc_free((void *)1);
+			// gc_free((void *)1);
 
 			exit(0);
 		}
-		if (minishell->input)
-			add_history(minishell->input);
+		// if (minishell->input)
+			// add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_input_valid(minishell->input))
 		{

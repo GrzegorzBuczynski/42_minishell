@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:37:33 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/05 21:40:13 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/05 22:25:11 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	set_last_exit_code(t_data *minishell)
 	{
 		if (!ft_strcmp("?", envlst->key))
 		{
-			value = gc_collector(ft_itoa(minishell->exit_status), false, 1);
+			value = gc_collector(ft_itoa(minishell->exit_status), false, 0);
 			if (value)
 			{
 				// free(envlst->value);
