@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 15:55:36 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:42:49 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ char	*find_binary_path(t_cmd *cmd, char **paths)
 	return (NULL);
 }
 
-char	**retrieve_paths(void)
+char	**retrieve_paths(t_data *minishell)
 {
 	char	*path_env;
 	char	**paths;
 
-	path_env = getenv("PATH");
+	path_env = ft_get_var_value("PATH", minishell);
 	if (path_env == NULL)
 	{
 		handle_exec_error("PATH environment variable not found", "");
@@ -95,12 +95,12 @@ char	**retrieve_paths(void)
 	return (paths);
 }
 
-char	*find_executable_path(t_cmd *ecmd)
+char	*find_executable_path(t_cmd *ecmd, t_data *minishell)
 {
 	char	*binary_path;
 	char	**paths;
 
-	paths = retrieve_paths();
+	paths = retrieve_paths(minishell);
 	binary_path = find_binary_path((t_cmd *)ecmd, paths);
 	if (binary_path == NULL)
 	{

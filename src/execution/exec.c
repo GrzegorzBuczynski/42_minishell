@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 02:07:07 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 18:07:04 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	execute_binary(t_cmd *cmd, t_data *minishell)
 		path = ft_strdup(cmd->argv[0]);
 	}
 	else
-		path = find_executable_path(cmd);
+		path = find_executable_path(cmd, minishell);
 	envp = environment_list_to_array(minishell->envlist);
 	execve(path, cmd->argv, envp);
 	gc_free((void *)2);

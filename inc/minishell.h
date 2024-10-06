@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 16:37:10 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:43:04 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ t_cmd				*here_doc_cmd(char *token);
 void				do_here_doc(t_cmd *cmd, t_data *minishell);
 void				take_input(t_cmd *cmd, char *token);
 void				handle_exec_error(const char *msg, const char *arg);
-char				**retrieve_paths(void);
-char				*find_executable_path(t_cmd *ecmd);
+char				**retrieve_paths(t_data *minishell);
+char				*find_executable_path(t_cmd *ecmd, t_data *minishell);
 char				**environment_list_to_array(t_env *environment);
 void				make_forks(t_cmd *cmd, t_data *minishell);
 void				create_pipes(t_cmd *cmd, t_data *minishell);
