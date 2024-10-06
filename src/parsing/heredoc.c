@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 23:49:30 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 23:58:42 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	take_input(t_cmd *cmd, char *token)
 		else
 		{
 			add_history(line);
-			cmd->argv[0] = ft_strjoin(cmd->argv[0], line);
-			cmd->argv[0] = ft_strjoin(cmd->argv[0], "\n");
+			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], line), false, 2);
+			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], "\n"), false, 2);
 		}
 	}
 }

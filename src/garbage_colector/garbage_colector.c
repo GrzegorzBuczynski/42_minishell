@@ -6,11 +6,17 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:57:46 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 00:05:17 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/07 00:02:19 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	gc_free_all(void)
+{
+	gc_free((void *)2);
+	gc_free((void *)1);
+}
 
 void	*gc_collector(void *content, bool do_free, int lst_nr)
 {

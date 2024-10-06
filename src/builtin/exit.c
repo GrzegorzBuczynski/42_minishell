@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 16:42:12 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:03:35 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_exit(char **args)
 	if (args[1] && args[2])
 	{
 		ft_print_error("bash error: too many arguments\n");
+		gc_free_all();
 		exit(1);
 	}
 	if (args[1])
@@ -34,11 +35,13 @@ int	ft_exit(char **args)
 		if (!ft_is_string_numeric(args[1]))
 		{
 			ft_print_error("bash error: numeric argument required\n");
+			gc_free_all();
 			exit(2);
 		}
 		exit_code = ft_atoi(args[1]);
 		exit_code = get_exit_code(exit_code);
 	}
 	ft_putstr_fd("exit\n", 2);
+	gc_free_all();
 	exit(exit_code);
 }

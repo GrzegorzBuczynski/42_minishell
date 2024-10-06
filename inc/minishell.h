@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 19:30:42 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:02:43 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,5 @@ int					ft_free_lst_and_content(t_list *head);
 void				clean_and_set_exit_code(t_data *minishell);
 void				init_signals(void);
 void				sig_kill(int signum);
+void				gc_free_all(void);
 #endif

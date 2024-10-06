@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 19:03:45 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:04:46 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// void	handle_sigint(int sig)
-// {
-// 	(void)sig;
-// 	write(STDOUT_FILENO, "\n", 1);
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
-// }
 
 static void	reset_minishell(t_data *minishell)
 {
@@ -40,8 +31,7 @@ void	minishell_loop(t_data *minishell)
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
-			gc_free((void *)2);
-			gc_free((void *)1);
+			gc_free_all();
 			exit(0);
 		}
 		if (minishell->input)
