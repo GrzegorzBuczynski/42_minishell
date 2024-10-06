@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 18:07:04 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 23:12:49 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	do_redirect(t_cmd *rcmd, t_data *minishell)
 		ft_panic("open", 1);
 	if (rcmd->sub_cmd)
 		runcmd(rcmd->sub_cmd, minishell);
+	else
+		runcmd(rcmd->exec_cmd, minishell);
 }
 
 void	print_error2(char *cmd, char *message, int status)

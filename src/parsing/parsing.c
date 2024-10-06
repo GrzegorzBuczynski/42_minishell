@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:30:16 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 02:04:11 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 23:09:39 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	parse_exec(char **ps, t_data *minishell)
 			minishell->exec_cmd = ft_init_cmd(EXEC);
 		minishell->exec_cmd->argv = ft_append_argv(minishell->exec_cmd->argv,
 				get_string(ps));
+		if (minishell->redir_cmd)
+			minishell->redir_cmd->exec_cmd = minishell->exec_cmd;
 	}
 }
 
@@ -35,6 +37,7 @@ void	parse_redir(char **ps, t_data *minishell)
 	if (ft_isredirection(*ps))
 	{
 		ret_cmd = get_redir_cmd(ps);
+		ret_cmd->exec_cmd = minishell->exec_cmd;
 		if (minishell->redir_cmd == NULL)
 			minishell->redir_cmd = ret_cmd;
 		else

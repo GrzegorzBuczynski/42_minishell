@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 19:07:07 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 23:10:30 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	exec_with_redirects(t_data *minishell)
 		if (last_pid == 0)
 		{
 			runcmd(minishell->redir_cmd, minishell);
-			runcmd(minishell->exec_cmd, minishell);
 		}
 		wait_for_processes(minishell, last_pid);
 		init_signals();

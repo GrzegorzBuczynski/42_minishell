@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 15:56:20 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 23:45:10 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static int	is_matching_token(char *line, char *token)
 {
 	if (strcmp(line, token) == 0)
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -33,6 +31,12 @@ void	take_input(t_cmd *cmd, char *token)
 			break ;
 		if (is_matching_token(line, token))
 			break ;
+		else
+		{
+			add_history(line);
+			cmd->argv[0] = ft_strjoin(cmd->argv[0], line);
+			cmd->argv[0] = ft_strjoin(cmd->argv[0], "\n");
+		}
 	}
 }
 
@@ -53,23 +57,28 @@ void	do_here_doc(t_cmd *cmd, t_data *minishell)
 	pipe(p);
 	if (fork1() == 0)
 	{
-		dup2(p[1], 1);
+		// dup2(p[1], 1);
 		close(p[1]);
 		close(p[0]);
 		printf("%s", cmd->argv[0]);
 		exit(0);
 	}
+	close(p[1]); // Rodzic zamyka stronę do zapisu
+	wait(0);
 	if (fork1() == 0)
 	{
 		dup2(p[0], 0);
 		close(p[1]);
 		close(p[0]);
-		runcmd(cmd->sub_cmd, minishell);
+		if (cmd->sub_cmd)
+			runcmd(cmd->sub_cmd, minishell);
+		else
+			runcmd(cmd->exec_cmd, minishell);
 		exit(0);
 	}
-	close(p[1]);
+	// close(p[1]);
 	close(p[0]);
 	wait(0);
-	wait(0);
+	// wait(0);
 	exit(0);
 }
