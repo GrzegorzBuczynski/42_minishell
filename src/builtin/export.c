@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 19:15:38 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:27:25 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,21 @@ int	process_export_argument(char *argv, t_data *minishell)
 	char	*value;
 	char	*equals_sign;
 
-	if (!find_sign(argv, '='))
-		;
-	else
-	{
-		equals_sign = strchr(argv, '=');
-		if (equals_sign != NULL)
-		{
-			*equals_sign = '\0';
-			value = equals_sign + 1;
-		}
-		else
-			value = NULL;
-	}
 	key = argv;
+	value = NULL;
+	equals_sign = strchr(argv, '=');
+	if (equals_sign)
+	{
+		*equals_sign = '\0';
+		value = equals_sign + 1;
+	}
 	if (!validate_key(key))
 	{
 		ft_putstr_fd("minishell: not a valid identifier\n", 2);
 		minishell->exit_status = 1;
 		return (0);
 	}
-	if (!update_or_add_env_var(minishell, key, value))
-		return (0);
-	return (1);
+	return (update_or_add_env_var(minishell, key, value));
 }
 
 int	ft_export(char *argv, t_data *minishell)
