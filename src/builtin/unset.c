@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/05 21:39:35 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:05:50 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	find_and_remove_env(t_env **env_list, const char *key)
 				prev->next = env->next;
 			else
 				*env_list = env->next;
-			// free(env->key);
-			// free(env->value);
-			// free(env);
 		}
 		prev = env;
 		env = env->next;

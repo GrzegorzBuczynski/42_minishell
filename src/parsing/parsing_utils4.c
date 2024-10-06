@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 19:03:28 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:11:02 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ void	dequote_exec(t_data *minishell)
 	exec_cmd = minishell->exec_cmd;
 	if (exec_cmd)
 		exec_cmd->argv = remove_argv_quotes(exec_cmd->argv);
+}
+
+void	clean_and_set_exit_code(t_data *minishell)
+{
+	gc_free((void *)2);
+	minishell->exit_status = 0;
+	set_last_exit_code(minishell);
 }

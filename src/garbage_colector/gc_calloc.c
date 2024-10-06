@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 17:49:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 16:02:47 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:05:33 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,36 @@ int	gc_calloc_internal(void *content, t_list **head, int lst_nr)
 	return (FALSE);
 }
 
+void	remove_node(t_list **to_free, t_list *previous, t_list *current)
+{
+	if (previous)
+	{
+		previous->next = current->next;
+		current->next = NULL;
+	}
+	else
+	{
+		*to_free = current->next;
+	}
+	ft_free_lst_and_content(current);
+}
+
 int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
 {
 	t_list	*tmp;
 	t_list	*previous;
 	int		i;
 
-	i = 1;
-	previous = NULL;
 	if (!to_free || !do_free)
 		return (FALSE);
 	tmp = *to_free;
+	previous = NULL;
+	i = 1;
 	while (tmp)
 	{
 		if (i == lst_nr)
 		{
-			if (previous)
-			{
-				previous->next = tmp->next;
-				tmp->next = NULL;
-			}
-			else
-				*to_free = tmp->next;
-			ft_free_lst_and_content(tmp);
+			remove_node(to_free, previous, tmp);
 			return (TRUE);
 		}
 		previous = tmp;

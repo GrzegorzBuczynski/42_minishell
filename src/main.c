@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 15:47:05 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:10:38 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	minishell_loop(t_data *minishell)
 		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_input_valid(minishell->input))
 		{
-			gc_free((void *)2);
-			minishell->exit_status = 0;
-			set_last_exit_code(minishell);
+			clean_and_set_exit_code(minishell);
 			continue ;
 		}
 		parsecmd(minishell);
