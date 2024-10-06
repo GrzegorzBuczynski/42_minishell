@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:04:01 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/09/25 19:06:17 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:10:31 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	run_builtin_cmd(char **argv, t_data *minishell)
 	(void)minishell;
 	ret = 0;
 	if (ft_strcmp(argv[0], "cd") == 0)
-		ret = md_cd(argv, minishell);
+		ret = ft_cd(argv, minishell);
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		ret = ft_echo(argv);
 	else if (ft_strcmp(argv[0], "env") == 0)

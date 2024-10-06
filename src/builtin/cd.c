@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:15:20 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 18:52:49 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:10:23 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_cd_err_msg(char *err_msg)
 	return (1);
 }
 
-int	md_cd(char **argv, t_data *minishell)
+int	ft_cd(char **argv, t_data *minishell)
 {
 	int	i;
 

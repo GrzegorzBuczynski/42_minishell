@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 17:43:04 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:10:36 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void				print_environment(t_env *node);
 
 //	new potential libft function
 char				*get_string(char **ps);
-int					md_cd(char **argv, t_data *minishell);
+int					ft_cd(char **argv, t_data *minishell);
 void				ft_update_env_list(char *key, char *value, bool yes,
 						t_data *minishell);
 char				*ft_get_var_value(char *key, t_data *minishell);
