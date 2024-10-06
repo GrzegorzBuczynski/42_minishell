@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 23:45:10 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 23:49:30 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ void	do_here_doc(t_cmd *cmd, t_data *minishell)
 	pipe(p);
 	if (fork1() == 0)
 	{
-		// dup2(p[1], 1);
+		dup2(p[1], 1);
 		close(p[1]);
 		close(p[0]);
 		printf("%s", cmd->argv[0]);
 		exit(0);
 	}
-	close(p[1]); // Rodzic zamyka stronę do zapisu
-	wait(0);
 	if (fork1() == 0)
 	{
 		dup2(p[0], 0);
@@ -76,9 +74,9 @@ void	do_here_doc(t_cmd *cmd, t_data *minishell)
 			runcmd(cmd->exec_cmd, minishell);
 		exit(0);
 	}
-	// close(p[1]);
+	close(p[1]);
 	close(p[0]);
 	wait(0);
-	// wait(0);
+	wait(0);
 	exit(0);
 }
