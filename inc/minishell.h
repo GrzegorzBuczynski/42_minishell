@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 18:10:36 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:00:54 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,4 +180,6 @@ int					gc_find_and_free_node_in_lst(void *ptr, t_list **head,
 						bool free);
 int					ft_free_lst_and_content(t_list *head);
 void				clean_and_set_exit_code(t_data *minishell);
+void				init_signals(void);
+void				sig_kill(int signum);
 #endif

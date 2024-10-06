@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:59:52 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 19:48:21 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:05:43 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	fork_and_run_command(t_cmd *cmd, t_data *minishell, int i)
 	int	**pipe_argv;
 
 	pipe_argv = minishell->pipe_argv;
+	signal(SIGINT, sig_kill);
+	signal(SIGQUIT, sig_kill);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -102,4 +104,5 @@ void	make_forks(t_cmd *cmd, t_data *minishell)
 	}
 	close_pipes(minishell->pipe_argv);
 	wait_for_processes(minishell, last_pid);
+	init_signals();
 }

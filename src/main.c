@@ -6,20 +6,20 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 16:10:38 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:03:45 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	handle_sigint(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+// void	handle_sigint(int sig)
+// {
+// 	(void)sig;
+// 	write(STDOUT_FILENO, "\n", 1);
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// }
 
 static void	reset_minishell(t_data *minishell)
 {
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)env;
 	minishell = (t_data *)gc_calloc(sizeof(t_data), 1);
-	signal(SIGINT, handle_sigint);
+	init_signals();
 	init_minishell(minishell, env);
 	init_environment(&(minishell->envlist), minishell->envir);
 	minishell_loop(minishell);

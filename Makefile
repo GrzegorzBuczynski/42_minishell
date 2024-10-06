@@ -17,6 +17,7 @@ OBJ_DIR = obj/
 #src/cmd/cmd.c \
 # Source files
 SRCS =	src/main.c \
+		src/signals.c \
 		src/validate_input.c \
 		src/builtin/cd.c \
 		src/builtin/builtin_utils.c \

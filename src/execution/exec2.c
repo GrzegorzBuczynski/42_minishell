@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:23:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 00:58:27 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 19:07:07 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	exec_with_redirects(t_data *minishell)
 
 	if (minishell->redir_cmd)
 	{
+		signal(SIGINT, sig_kill);
+		signal(SIGQUIT, sig_kill);
 		last_pid = fork1();
 		if (last_pid == 0)
 		{
@@ -53,6 +55,7 @@ int	exec_with_redirects(t_data *minishell)
 			runcmd(minishell->exec_cmd, minishell);
 		}
 		wait_for_processes(minishell, last_pid);
+		init_signals();
 		return (1);
 	}
 	return (0);
@@ -73,11 +76,14 @@ int	exec_exec_cmd(t_data *minishell)
 		}
 		else
 		{
+			signal(SIGINT, sig_kill);
+			signal(SIGQUIT, sig_kill);
 			last_pid = fork1();
 			if (last_pid == 0)
 				runcmd(cmd, minishell);
 		}
 		wait_for_processes(minishell, last_pid);
+		init_signals();
 	}
 	return (0);
 }
