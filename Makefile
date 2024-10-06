@@ -103,6 +103,7 @@ re: fclean all
 .PHONY: all clean fclean re bonus
 
 push:
+	make fclean
 	git add .
 	git commit -m "make push!"
 	git push
