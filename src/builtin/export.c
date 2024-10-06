@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 17:08:14 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 19:15:38 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	find_sign(char *argv, char sign)
 	return (0);
 }
 
-
 int	process_export_argument(char *argv, t_data *minishell)
 {
 	char	*key;
@@ -77,15 +76,18 @@ int	process_export_argument(char *argv, t_data *minishell)
 	char	*equals_sign;
 
 	if (!find_sign(argv, '='))
-		return (1);
-	equals_sign = strchr(argv, '=');
-	if (equals_sign != NULL)
-	{
-		*equals_sign = '\0';
-		value = equals_sign + 1;
-	}
+		;
 	else
-		value = NULL;
+	{
+		equals_sign = strchr(argv, '=');
+		if (equals_sign != NULL)
+		{
+			*equals_sign = '\0';
+			value = equals_sign + 1;
+		}
+		else
+			value = NULL;
+	}
 	key = argv;
 	if (!validate_key(key))
 	{
