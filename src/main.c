@@ -6,7 +6,7 @@
 /*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 01:51:51 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 02:09:15 by ja               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	minishell_loop(t_data *minishell)
 	while (1)
 	{
 		// minishell->input = gc_collector(readline(PROMPT), false, 1);
-		ft_putstr_fd("temp prompt>", 1);
-		minishell->input = gc_collector(get_next_line(STDIN_FILENO), false, 1);
+		ft_putstr_fd("temp prompt> ", 1);
+		minishell->input = gc_collector(get_next_line(STDIN_FILENO), false,
+		1);
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
@@ -54,7 +55,7 @@ void	minishell_loop(t_data *minishell)
 			exit(0);
 		}
 		// if (minishell->input)
-			// add_history(minishell->input);
+		// 	add_history(minishell->input);
 		minishell->input = replace_var(minishell->input, minishell);
 		if (!is_input_valid(minishell->input))
 		{
