@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:13:40 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 00:33:20 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 15:52:17 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,16 @@ void	init_environment(t_env **environment, char **env)
 		delimiter_pos = ft_strchr(env[i], '=');
 		if (delimiter_pos != NULL)
 		{
-			key = gc_collector(ft_strndup(env[i], delimiter_pos - env[i]), false, 1);
+			key = gc_collector(ft_strndup(env[i], delimiter_pos - env[i]),
+					false, 1);
 			value = gc_collector(ft_strdup(delimiter_pos + 1), false, 1);
 			environment_new_node_end(environment, key, value);
-			// free(key);
-			// free(value);
 		}
 		i++;
 	}
 	key = gc_collector(ft_strndup("?", 1), false, 1);
 	value = gc_collector(ft_strdup("0"), false, 1);
 	environment_new_node_end(environment, key, value);
-	// free(key);
-	// free(value);
-}
-
-void	environment_free_list(t_env *head)
-{
-	t_env	*tmp;
-
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		(void)tmp;
-		(void)head;
-		// free(tmp->key);
-		// free(tmp->value);
-		// free(tmp);
-	}
 }
 
 void	print_environment(t_env *node)

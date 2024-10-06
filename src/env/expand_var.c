@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:37:33 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 00:46:02 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 15:49:38 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*replace_var(char *input, t_data *minishell)
 	count_length(input, minishell, &length);
 	if (length <= 0)
 		return (NULL);
-	result = (char *)gc_calloc((length + 1)* sizeof(char), 1);
+	result = (char *)gc_calloc((length + 1) * sizeof(char), 1);
 	if (!result)
 		return (NULL);
 	if (!replace_var_loop(input, minishell, result, 0) || !result)
@@ -96,7 +96,6 @@ void	set_last_exit_code(t_data *minishell)
 			value = gc_collector(ft_itoa(minishell->exit_status), false, 1);
 			if (value)
 			{
-				// free(envlst->value);
 				envlst->value = value;
 			}
 			return ;

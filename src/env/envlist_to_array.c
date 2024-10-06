@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:18:13 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:40:04 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 15:51:02 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*environment_create_key_value(t_env *node)
 		return (NULL);
 	temp = ft_strjoin(node->key, "=");
 	key_value = ft_strjoin(temp, node->value);
-	// free(temp);
 	return (key_value);
 }
 
@@ -52,9 +51,8 @@ int	environment_fill_array(t_env *environment, char **env_array)
 		env_array[i] = environment_create_key_value(current);
 		if (!env_array[i])
 		{
-			while (i > 0)
-				// free(env_array[--i]);
-			return (0);
+			if (i > 0)
+				return (0);
 		}
 		i++;
 		current = current->next;
@@ -76,7 +74,6 @@ char	**environment_list_to_array(t_env *environment)
 		return (NULL);
 	if (!environment_fill_array(environment, env_array))
 	{
-		// free(env_array);
 		return (NULL);
 	}
 	return (env_array);

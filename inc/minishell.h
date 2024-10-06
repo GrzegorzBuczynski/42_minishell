@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:40:11 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/05 20:23:13 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 15:59:48 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ t_env				*environment_new_node(char *key, char *value);
 void				environment_new_node_end(t_env **head, char *key,
 						char *value);
 void				init_environment(t_env **environment, char **env);
-void				environment_free_list(t_env *head);
-
-void				minishell_free(t_data *minishell, int flag);
 
 // tester functions
 void				print_environment(t_env *node);
@@ -126,7 +123,6 @@ t_cmd				*here_doc_cmd(char *token);
 void				do_here_doc(t_cmd *cmd, t_data *minishell);
 void				take_input(t_cmd *cmd, char *token);
 void				handle_exec_error(const char *msg, const char *arg);
-void				clean_up(char *binary_path, char **paths);
 char				**retrieve_paths(void);
 char				*find_executable_path(t_cmd *ecmd);
 char				**environment_list_to_array(t_env *environment);
@@ -184,4 +180,5 @@ void				*gc_calloc(size_t size, int lst_nr);
 int					gc_free_level(t_list **to_free, bool do_free, int lst_nr);
 int					gc_find_and_free_node_in_lst(void *ptr, t_list **head,
 						bool free);
+int					ft_free_lst_and_content(t_list *head);
 #endif

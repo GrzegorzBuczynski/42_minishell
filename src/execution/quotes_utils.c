@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:27:50 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 23:51:46 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 15:53:54 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*remove_quotes(char *s)
 	int		wait_for;
 	int		i;
 
-	result = (char *)gc_calloc((ft_strlen(s) + 1)*sizeof(char), 1);
+	result = (char *)gc_calloc((ft_strlen(s) + 1) * sizeof(char), 1);
 	if (!result)
 		return (NULL);
 	wait_for = NOT_SET;
@@ -68,5 +68,4 @@ void	rise_level(t_data *minishell)
 	if (new_level == NULL)
 		return ;
 	ft_update_env_list("SHLVL", new_level, YES, minishell);
-	// free(new_level);
 }

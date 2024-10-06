@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/05 21:39:19 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 15:57:16 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	print_environment_sorted(t_env *node)
 		return ;
 	sort_env_vars(env_array, count);
 	print_sorted_env_vars(env_array, count);
-	// free(env_array);
 }
 
 void	print_sorted_env_vars(t_env **env_array, size_t count)

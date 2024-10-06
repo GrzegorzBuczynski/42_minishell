@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:28:14 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:09:49 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:02:40 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,36 +109,4 @@ int	ft_free_lst_and_content(t_list *head)
 	}
 	free(head);
 	return (TRUE);
-}
-
-int	gc_free_level(t_list **to_free, bool do_free, int lst_nr)
-{
-	t_list	*tmp;
-	t_list	*previous;
-	int		i;
-
-	i = 1;
-	previous = NULL;
-	if (!to_free || !do_free)
-		return (FALSE);
-	tmp = *to_free;
-	while (tmp)
-	{
-		if (i == lst_nr)
-		{
-			if (previous)
-			{
-				previous->next = tmp->next;
-				tmp->next = NULL;
-			}
-			else
-				*to_free = tmp->next;
-			ft_free_lst_and_content(tmp); //przekazuje sub list
-			return (TRUE);
-		}
-		previous = tmp;
-		tmp = tmp->next;
-		i++;
-	}
-	return (FALSE);
 }

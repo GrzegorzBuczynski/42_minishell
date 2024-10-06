@@ -3,19 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 15:51:34 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 02:10:10 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 15:47:05 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// ------------------------------TO DO------------------------------
-// 1) Validate input (quotes etc)
-// 2) momory leaks
-// 3) exit codes
-// 4) move opening files to parsing
-// 5) change commands to list
 
 #include "../inc/minishell.h"
 
@@ -44,9 +37,6 @@ void	minishell_loop(t_data *minishell)
 	while (1)
 	{
 		minishell->input = gc_collector(readline(PROMPT), false, 1);
-		/* 	ft_putstr_fd("temp prompt> ", 1);
-			minishell->input = gc_collector(get_next_line(STDIN_FILENO), false,
-			1); */
 		if (minishell->input == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);

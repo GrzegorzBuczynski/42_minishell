@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:33:18 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 23:51:40 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/06 15:55:36 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*find_binary_path(t_cmd *cmd, char **paths)
 			return (NULL);
 		if (access(full_path, X_OK) == 0)
 			return (full_path);
-		// free(full_path);
 		i++;
 	}
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -106,9 +105,7 @@ char	*find_executable_path(t_cmd *ecmd)
 	if (binary_path == NULL)
 	{
 		handle_exec_error("command not found: ", ecmd->argv[0]);
-		clean_up(NULL, paths);
 		exit(1);
 	}
-	clean_up(NULL, paths);
 	return (binary_path);
 }

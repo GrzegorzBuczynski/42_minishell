@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/05 21:40:54 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 15:56:20 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	is_matching_token(char *line, char *token)
 {
 	if (strcmp(line, token) == 0)
 	{
-		// free(line);
 		return (1);
 	}
 	return (0);
@@ -34,9 +33,7 @@ void	take_input(t_cmd *cmd, char *token)
 			break ;
 		if (is_matching_token(line, token))
 			break ;
-		// free(line);
 	}
-	// free(token);
 }
 
 t_cmd	*here_doc_cmd(char *token)
