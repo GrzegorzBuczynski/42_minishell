@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 16:06:10 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:08:14 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,38 @@ int	validate_key(const char *key)
 	return (1);
 }
 
+int	find_sign(char *argv, char sign)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] == sign)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+
 int	process_export_argument(char *argv, t_data *minishell)
 {
 	char	*key;
 	char	*value;
 	char	*equals_sign;
 
+	if (!find_sign(argv, '='))
+		return (1);
 	equals_sign = strchr(argv, '=');
 	if (equals_sign != NULL)
 	{
 		*equals_sign = '\0';
-		key = argv;
 		value = equals_sign + 1;
 	}
 	else
-	{
-		key = argv;
 		value = NULL;
-	}
+	key = argv;
 	if (!validate_key(key))
 	{
 		ft_putstr_fd("minishell: not a valid identifier\n", 2);

@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/03 20:05:46 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:42:12 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	ft_exit(char **args)
 		exit_code = ft_atoi(args[1]);
 		exit_code = get_exit_code(exit_code);
 	}
+	ft_putstr_fd("exit\n", 2);
 	exit(exit_code);
 }
