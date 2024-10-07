@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:23:52 by ssuchane          #+#    #+#             */
-/*   Updated: 2024/10/06 19:27:25 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:37:00 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	process_export_argument(char *argv, t_data *minishell)
 
 	key = argv;
 	value = NULL;
-	equals_sign = strchr(argv, '=');
+	equals_sign = ft_strchr(argv, '=');
 	if (equals_sign)
 	{
 		*equals_sign = '\0';

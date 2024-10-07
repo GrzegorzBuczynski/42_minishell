@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:31:05 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 01:37:02 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/07 18:43:43 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	init_cmd_argv(t_cmd *cmd)
 	}
 }
 
-/*
-** Append a line to the argv array
-*/
 char	**ft_append_argv(char **argv, char *line)
 {
 	char	**new_argv;

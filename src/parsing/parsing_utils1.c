@@ -6,7 +6,7 @@
 /*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:27:53 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/03 20:16:36 by ssuchane         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:46:45 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ t_cmd	*get_redir_cmd(char **ps)
 int	get_token(char **ps)
 {
 	ft_skip_whitespace(ps);
-	if (!strncmp(*ps, "<<", 2))
+	if (!ft_strncmp(*ps, "<<", 2))
 		return (*ps += 2, '-');
-	if (!strncmp(*ps, ">>", 2))
+	if (!ft_strncmp(*ps, ">>", 2))
 		return (*ps += 2, '+');
-	if (!strncmp(*ps, ">", 1))
+	if (!ft_strncmp(*ps, ">", 1))
 		return (*ps += 1, '>');
-	if (!strncmp(*ps, "<", 1))
+	if (!ft_strncmp(*ps, "<", 1))
 		return (*ps += 1, '<');
-	if (!strncmp(*ps, "|", 1))
+	if (!ft_strncmp(*ps, "|", 1))
 		return (*ps += 1, '|');
 	return ('a');
 }

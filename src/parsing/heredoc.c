@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ja <ja@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/06 23:58:42 by ja               ###   ########.fr       */
+/*   Updated: 2024/10/07 18:44:32 by ssuchane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_matching_token(char *line, char *token)
 {
-	if (strcmp(line, token) == 0)
+	if (ft_strcmp(line, token) == 0)
 		return (1);
 	return (0);
 }
@@ -34,8 +34,10 @@ void	take_input(t_cmd *cmd, char *token)
 		else
 		{
 			add_history(line);
-			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], line), false, 2);
-			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], "\n"), false, 2);
+			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], line), false,
+					2);
+			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], "\n"), false,
+					2);
 		}
 	}
 }
