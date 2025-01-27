@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssuchane <ssuchane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2024/10/07 18:44:32 by ssuchane         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:50:11 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	is_matching_token(char *line, char *token)
 {
+
 	if (ft_strcmp(line, token) == 0)
 		return (1);
 	return (0);
@@ -26,14 +27,23 @@ void	take_input(t_cmd *cmd, char *token)
 	init_cmd_argv(cmd);
 	while (1)
 	{
-		line = readline("> ");
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		// line = readline("> ");
 		if (line == NULL)
 			break ;
+		int i = 0;
+		while (line[i])
+		{
+			if (line[i] == '\n')
+				line[i] = '\0';
+			i++;
+		}
 		if (is_matching_token(line, token))
 			break ;
 		else
 		{
-			add_history(line);
+			// add_history(line);
 			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], line), false,
 					2);
 			cmd->argv[0] = gc_collector(ft_strjoin(cmd->argv[0], "\n"), false,
@@ -63,6 +73,7 @@ void	do_here_doc(t_cmd *cmd, t_data *minishell)
 		close(p[1]);
 		close(p[0]);
 		printf("%s", cmd->argv[0]);
+		gc_free_all();
 		exit(0);
 	}
 	if (fork1() == 0)
