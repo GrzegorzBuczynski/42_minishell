@@ -42,7 +42,6 @@ SRCS =	src/main.c \
 		src/garbage_colector/gc_calloc.c \
 		src/garbage_colector/gc_free.c \
 		src/garbage_colector/garbage_colector.c \
-		src/garbage_colector/minishell_free.c \
 		src/parsing/argv_utils.c \
 		src/parsing/heredoc.c \
 		src/parsing/parsing_utils1.c\
