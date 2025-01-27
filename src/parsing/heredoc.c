@@ -6,7 +6,7 @@
 /*   By: gbuczyns <gbuczyns@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:03:45 by gbuczyns          #+#    #+#             */
-/*   Updated: 2025/01/27 19:50:11 by gbuczyns         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:55:48 by gbuczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	take_input(t_cmd *cmd, char *token)
 			i++;
 		}
 		if (is_matching_token(line, token))
-			break ;
+			{ gc_free(line);
+				break ;}
 		else
 		{
 			// add_history(line);
@@ -85,6 +86,7 @@ void	do_here_doc(t_cmd *cmd, t_data *minishell)
 			runcmd(cmd->sub_cmd, minishell);
 		else
 			runcmd(cmd->exec_cmd, minishell);
+		gc_free_all();
 		exit(0);
 	}
 	close(p[1]);
